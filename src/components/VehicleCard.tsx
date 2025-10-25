@@ -11,70 +11,77 @@ interface VehicleCardProps {
 export function VehicleCard({ vehicle, onClick }: VehicleCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -12, transition: { duration: 0.3 } }}
       className="group cursor-pointer"
       onClick={onClick}
     >
-      <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-border">
-        <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+      <div className="bg-card rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-accent/5 transition-all duration-500 border border-border/50 hover:border-accent/20 backdrop-blur-sm">
+        <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-muted to-muted/50">
           <img 
             src={vehicle.image} 
             alt={vehicle.name}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           
           {vehicle.isNew && (
-            <Badge className="absolute top-4 right-4 bg-accent text-white border-0">
+            <Badge className="absolute top-5 right-5 bg-gradient-to-r from-accent to-purple-500 text-white border-0 shadow-lg px-3 py-1">
               NEW
             </Badge>
           )}
+
+          {vehicle.isFeatured && (
+            <div className="absolute top-5 left-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-3 py-1">
+              <span className="text-xs text-white font-semibold tracking-wide">★ FEATURED</span>
+            </div>
+          )}
         </div>
 
-        <div className="p-6">
-          <div className="flex items-start justify-between mb-3">
+        <div className="p-7">
+          <div className="flex items-start justify-between mb-4">
             <div>
-              <h3 className="text-2xl font-semibold text-foreground group-hover:text-accent transition-colors">
+              <h3 className="text-2xl font-bold text-foreground group-hover:text-accent transition-colors duration-300">
                 {vehicle.name}
               </h3>
-              <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium" style={{ fontFamily: 'Orbitron' }}>
+              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold mt-1" style={{ fontFamily: 'Orbitron' }}>
                 {vehicle.brand} • {vehicle.year}
               </p>
             </div>
           </div>
 
-          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+          <p className="text-muted-foreground text-sm mb-5 line-clamp-2 leading-relaxed">
             {vehicle.description}
           </p>
 
-          <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <Engine size={18} weight="duotone" className="text-accent" />
-              <span>{vehicle.specs.horsepower}hp</span>
+          <div className="flex items-center gap-5 mb-5 text-sm">
+            <div className="flex items-center gap-1.5">
+              <Engine size={20} weight="duotone" className="text-accent" />
+              <span className="text-foreground font-medium">{vehicle.specs.horsepower}hp</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Lightning size={18} weight="duotone" className="text-accent" />
-              <span>{vehicle.specs.acceleration}</span>
+            <div className="flex items-center gap-1.5">
+              <Lightning size={20} weight="duotone" className="text-accent" />
+              <span className="text-foreground font-medium">{vehicle.specs.acceleration}</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Gauge size={18} weight="duotone" className="text-accent" />
-              <span>{vehicle.specs.topSpeed}</span>
+            <div className="flex items-center gap-1.5">
+              <Gauge size={20} weight="duotone" className="text-accent" />
+              <span className="text-foreground font-medium">{vehicle.specs.topSpeed}</span>
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-4 border-t border-border">
+          <div className="flex items-center justify-between pt-5 border-t border-border/50">
             <div>
-              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Starting at</p>
-              <p className="text-2xl font-bold text-foreground">
+              <p className="text-xs text-muted-foreground uppercase tracking-widest mb-1 font-medium">Starting at</p>
+              <p className="text-2xl font-bold bg-gradient-to-r from-foreground to-accent bg-clip-text text-transparent">
                 ${vehicle.price.toLocaleString()}
               </p>
             </div>
-            <div className="text-accent font-semibold group-hover:translate-x-1 transition-transform">
-              View Details →
+            <div className="flex items-center gap-2 text-accent font-semibold group-hover:gap-3 transition-all duration-300">
+              <span>View Details</span>
+              <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Label } from './ui/label'
-import { Funnel } from '@phosphor-icons/react'
+import { Funnel, Sparkle } from '@phosphor-icons/react'
 
 interface FilterBarProps {
   selectedType: string
@@ -11,17 +11,23 @@ interface FilterBarProps {
 
 export function FilterBar({ selectedType, onTypeChange, selectedSort, onSortChange }: FilterBarProps) {
   return (
-    <div className="bg-card border border-border rounded-xl p-6 mb-8">
-      <div className="flex items-center gap-2 mb-4">
-        <Funnel size={24} weight="duotone" className="text-accent" />
-        <h3 className="text-lg font-semibold">Filter & Sort</h3>
+    <div className="bg-gradient-to-br from-card to-muted/30 border border-border/50 rounded-2xl p-8 mb-12 backdrop-blur-sm shadow-sm">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="p-2.5 bg-accent/10 rounded-xl">
+          <Funnel size={24} weight="duotone" className="text-accent" />
+        </div>
+        <div>
+          <h3 className="text-xl font-bold text-foreground">Filter & Sort</h3>
+          <p className="text-sm text-muted-foreground">Find your perfect vehicle</p>
+        </div>
+        <Sparkle size={20} weight="fill" className="text-accent/40 ml-auto" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <Label className="text-sm mb-2 block">Vehicle Type</Label>
+          <Label className="text-sm mb-3 block font-semibold text-foreground">Vehicle Type</Label>
           <Select value={selectedType} onValueChange={onTypeChange}>
-            <SelectTrigger>
+            <SelectTrigger className="h-12 rounded-xl border-border/50 hover:border-accent/30 transition-colors bg-background">
               <SelectValue placeholder="All Types" />
             </SelectTrigger>
             <SelectContent>
@@ -36,9 +42,9 @@ export function FilterBar({ selectedType, onTypeChange, selectedSort, onSortChan
         </div>
 
         <div>
-          <Label className="text-sm mb-2 block">Sort By</Label>
+          <Label className="text-sm mb-3 block font-semibold text-foreground">Sort By</Label>
           <Select value={selectedSort} onValueChange={onSortChange}>
-            <SelectTrigger>
+            <SelectTrigger className="h-12 rounded-xl border-border/50 hover:border-accent/30 transition-colors bg-background">
               <SelectValue placeholder="Featured" />
             </SelectTrigger>
             <SelectContent>
