@@ -3,20 +3,62 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Label } from '@/components/ui/label'
 import { CATEGORIES, SAMPLE_LISTINGS } from '@/lib/data'
-import { Category, Listing } from '@/lib/types'
+import { Category, Listing, SearchFilters } from '@/lib/types'
 import { useListings } from '@/lib/listings'
 import { Car, Motorcycle, Truck, Van, Wrench, MagnifyingGlass, TrendUp, Calculator, ChartBar, Bell } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel'
 
 interface HomePageProps {
   onNavigate: (page: string, params?: Record<string, string>) => void
 }
 
+const BRANDS = ['Tesla', 'BMW', 'Mercedes-Benz', 'Audi', 'Toyota', 'Honda', 'Ford', 'Chevrolet', 'Ducati', 'Harley-Davidson']
+const FUEL_TYPES = ['Gasoline', 'Diesel', 'Electric', 'Hybrid', 'Plug-in Hybrid']
+
+const PROMO_SLIDES = [
+  {
+    id: 1,
+    image: 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&auto=format',
+    title: 'Premium Selection',
+    description: 'Discover luxury vehicles from top brands'
+  },
+  {
+    id: 2,
+    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&auto=format',
+    title: 'Best Deals',
+    description: 'Find incredible offers on quality vehicles'
+  },
+  {
+    id: 3,
+    image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1200&auto=format',
+    title: 'Trusted Sellers',
+    description: 'Buy with confidence from verified dealers'
+  }
+]
+
 export function HomePage({ onNavigate }: HomePageProps) {
-  const [searchQuery, setSearchQuery] = useState('')
-  const { listings } = useListings()
+  const [filters, setFilters] = useState<SearchFilters>({
+    category: 'cars',
+    brand: '',
+    fuelType: '',
+    minPrice: undefined,
+    maxPrice: undefined,
+    mileageMax: undefined,
+    yearFrom: undefined,
+    yearTo: undefined
+  })
   
+  const { listings } = useListings()
   const allListings = [...SAMPLE_LISTINGS, ...listings]
   const featuredListings = allListings.filter(l => l.isFeatured).slice(0, 6)
 
@@ -29,51 +71,177 @@ export function HomePage({ onNavigate }: HomePageProps) {
   }
 
   const handleSearch = () => {
-    if (searchQuery.trim()) {
-      onNavigate('category', { category: 'cars', search: searchQuery })
+    const params: Record<string, string> = {
+      category: filters.category || 'cars'
     }
+    
+    if (filters.brand) params.brand = filters.brand
+    if (filters.fuelType) params.fuelType = filters.fuelType
+    if (filters.minPrice) params.minPrice = filters.minPrice.toString()
+    if (filters.maxPrice) params.maxPrice = filters.maxPrice.toString()
+    if (filters.mileageMax) params.mileageMax = filters.mileageMax.toString()
+    if (filters.yearFrom) params.yearFrom = filters.yearFrom.toString()
+    if (filters.yearTo) params.yearTo = filters.yearTo.toString()
+    
+    onNavigate('category', params)
   }
 
   return (
     <div>
-      <section className="relative bg-gradient-to-br from-primary via-purple-900 to-blue-900 text-primary-foreground py-24 md:py-32 px-4">
+      <section className="relative bg-gradient-to-br from-primary via-purple-900 to-blue-900 text-primary-foreground py-16 md:py-24 px-4">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE0YzMuMzE0IDAgNiAyLjY4NiA2IDZzLTIuNjg2IDYtNiA2LTYtMi42ODYtNi02IDIuNjg2LTYgNi02ek0yNCA0NGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-40" />
         
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <motion.h1 
+        <div className="max-w-6xl mx-auto relative z-10">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-bold mb-6 tracking-tight"
+            className="text-center mb-12"
           >
-            Find Your Perfect Vehicle
-          </motion.h1>
-          <motion.p 
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+              Find Your Perfect Vehicle
+            </h1>
+            <p className="text-lg md:text-xl text-primary-foreground/80">
+              Browse thousands of cars, motorcycles, trucks, RVs, and parts from trusted sellers
+            </p>
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto"
           >
-            Browse thousands of cars, motorcycles, trucks, RVs, and parts from trusted sellers
-          </motion.p>
+            <Card className="bg-white/95 backdrop-blur">
+              <CardContent className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="brand" className="text-foreground">Brand</Label>
+                    <Select value={filters.brand} onValueChange={(value) => setFilters({ ...filters, brand: value })}>
+                      <SelectTrigger id="brand">
+                        <SelectValue placeholder="Select brand" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="">All Brands</SelectItem>
+                        {BRANDS.map(brand => (
+                          <SelectItem key={brand} value={brand}>{brand}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex gap-2 max-w-2xl mx-auto"
-          >
-            <Input
-              placeholder="Search for make, model, or keyword..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              className="bg-white/10 border-white/20 text-white placeholder:text-white/60 h-12"
-            />
-            <Button onClick={handleSearch} size="lg" className="gap-2 bg-white text-primary hover:bg-white/90">
-              <MagnifyingGlass size={20} weight="bold" />
-              Search
-            </Button>
+                  <div className="space-y-2">
+                    <Label htmlFor="category" className="text-foreground">Category</Label>
+                    <Select value={filters.category} onValueChange={(value) => setFilters({ ...filters, category: value as Category })}>
+                      <SelectTrigger id="category">
+                        <SelectValue placeholder="Select category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {CATEGORIES.map(cat => (
+                          <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="fuel" className="text-foreground">Fuel Type</Label>
+                    <Select value={filters.fuelType} onValueChange={(value) => setFilters({ ...filters, fuelType: value })}>
+                      <SelectTrigger id="fuel">
+                        <SelectValue placeholder="Select fuel type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="">All Types</SelectItem>
+                        {FUEL_TYPES.map(fuel => (
+                          <SelectItem key={fuel} value={fuel}>{fuel}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div className="space-y-2">
+                    <Label className="text-foreground">Price Range</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        type="number"
+                        placeholder="Min"
+                        value={filters.minPrice || ''}
+                        onChange={(e) => setFilters({ ...filters, minPrice: e.target.value ? Number(e.target.value) : undefined })}
+                      />
+                      <Input
+                        type="number"
+                        placeholder="Max"
+                        value={filters.maxPrice || ''}
+                        onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value ? Number(e.target.value) : undefined })}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="mileage" className="text-foreground">Max Mileage (km)</Label>
+                    <Input
+                      id="mileage"
+                      type="number"
+                      placeholder="e.g. 50000"
+                      value={filters.mileageMax || ''}
+                      onChange={(e) => setFilters({ ...filters, mileageMax: e.target.value ? Number(e.target.value) : undefined })}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="text-foreground">Year Range</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        type="number"
+                        placeholder="From"
+                        value={filters.yearFrom || ''}
+                        onChange={(e) => setFilters({ ...filters, yearFrom: e.target.value ? Number(e.target.value) : undefined })}
+                      />
+                      <Input
+                        type="number"
+                        placeholder="To"
+                        value={filters.yearTo || ''}
+                        onChange={(e) => setFilters({ ...filters, yearTo: e.target.value ? Number(e.target.value) : undefined })}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <Button onClick={handleSearch} size="lg" className="w-full gap-2">
+                  <MagnifyingGlass size={20} weight="bold" />
+                  Search Vehicles
+                </Button>
+              </CardContent>
+            </Card>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="py-12 px-4 md:px-6 lg:px-8 bg-muted/30">
+        <div className="max-w-7xl mx-auto">
+          <Carousel className="w-full" opts={{ loop: true }}>
+            <CarouselContent>
+              {PROMO_SLIDES.map((slide) => (
+                <CarouselItem key={slide.id}>
+                  <div className="relative h-[400px] rounded-xl overflow-hidden">
+                    <img
+                      src={slide.image}
+                      alt={slide.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                      <div className="p-8 text-white">
+                        <h3 className="text-3xl md:text-4xl font-bold mb-2">{slide.title}</h3>
+                        <p className="text-lg md:text-xl text-white/90">{slide.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
         </div>
       </section>
 

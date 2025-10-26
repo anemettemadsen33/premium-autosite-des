@@ -51,7 +51,7 @@ function App() {
       case 'saved-searches':
         return <SavedSearchesPage onNavigate={navigate} />
       case 'category':
-        return <CategoryPage category={route.params?.category as Category} onNavigate={navigate} />
+        return <CategoryPage category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':
         return <ListingDetailPage listingId={route.params?.id || ''} onNavigate={navigate} />
       case 'login':

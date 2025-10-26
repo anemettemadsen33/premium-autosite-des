@@ -13,18 +13,18 @@ Multi-category automotive marketplace with user authentication, listing manageme
 ## Essential Features
 
 ### Homepage with Category Selection
-- **Functionality**: Hero with search bar, category cards (Cars, Motorcycles, Trucks, RVs, Parts), featured listings, quick stats
-- **Purpose**: Provide immediate access to all listing categories and featured content
+- **Functionality**: Hero with advanced search form (brand, category, fuel type, price range, mileage, year range), promotional carousel, category cards (Cars, Motorcycles, Trucks, RVs, Parts), featured listings, helpful tools section
+- **Purpose**: Provide immediate access to all listing categories, advanced search capabilities, and promotional content
 - **Trigger**: Landing on site or clicking logo
-- **Progression**: View hero → Select category OR search → Browse featured listings → Navigate to category/listing
-- **Success criteria**: Categories are clear, search is prominent, featured listings are attractive, mobile responsive
+- **Progression**: View hero → Fill search filters → Click "Search Vehicles" → Redirect to category page with filters → OR Browse carousel → View category cards → Select category → OR Browse featured listings → Navigate to listing
+- **Success criteria**: Search form is comprehensive with all filter options, filters are passed via URL parameters to category page, carousel auto-rotates through promotional slides with manual navigation, categories are clear, featured listings are attractive, mobile responsive
 
 ### Dynamic Category Pages (/sales/:category)
-- **Functionality**: Category-specific listing browser with dynamic filters (brand, model, price, year, km, location), search, sorting, pagination
+- **Functionality**: Category-specific listing browser with dynamic filters (brand, model, price range, year range, mileage, fuel type, transmission, location), search, sorting, pagination. Accepts URL parameters from homepage search to pre-populate filters
 - **Purpose**: Enable users to browse and find listings within a specific category with powerful filtering
-- **Trigger**: Clicking category card or navigating to category route
-- **Progression**: View category → Apply filters → Search keywords → Sort results → Browse listings → Click for details
-- **Success criteria**: Filters are category-appropriate, search is instant, results update smoothly, empty states guide users, mobile filters collapse
+- **Trigger**: Clicking category card, navigating to category route, or submitting homepage search form
+- **Progression**: View category → Apply filters (or view pre-applied filters from search) → Search keywords → Sort results → Browse listings → Click for details
+- **Success criteria**: Filters are category-appropriate, URL parameters correctly initialize filters, search is instant, results update smoothly, empty states guide users, mobile filters collapse
 
 ### Listing Detail Page
 - **Functionality**: Full listing view with image gallery, complete specifications, seller info, contact button, favorite button, share options

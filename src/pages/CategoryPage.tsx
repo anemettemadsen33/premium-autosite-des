@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -13,18 +13,43 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 interface CategoryPageProps {
   category: Category
+  params?: Record<string, string>
   onNavigate: (page: string, params?: Record<string, string>) => void
 }
 
-export function CategoryPage({ category, onNavigate }: CategoryPageProps) {
+export function CategoryPage({ category, params, onNavigate }: CategoryPageProps) {
   const { listings } = useListings()
   const [showFilters, setShowFilters] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedBrand, setSelectedBrand] = useState<string>('')
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 200000])
+  const [yearRange, setYearRange] = useState<[number, number]>([1990, new Date().getFullYear()])
+  const [maxMileage, setMaxMileage] = useState<number | undefined>(undefined)
   const [selectedFuel, setSelectedFuel] = useState<string>('')
   const [selectedTransmission, setSelectedTransmission] = useState<string>('')
   const [sortBy, setSortBy] = useState<string>('newest')
+
+  useEffect(() => {
+    if (params) {
+      if (params.brand) setSelectedBrand(params.brand)
+      if (params.fuelType) setSelectedFuel(params.fuelType)
+      if (params.minPrice || params.maxPrice) {
+        setPriceRange([
+          params.minPrice ? Number(params.minPrice) : 0,
+          params.maxPrice ? Number(params.maxPrice) : 200000
+        ])
+      }
+      if (params.yearFrom || params.yearTo) {
+        setYearRange([
+          params.yearFrom ? Number(params.yearFrom) : 1990,
+          params.yearTo ? Number(params.yearTo) : new Date().getFullYear()
+        ])
+      }
+      if (params.mileageMax) {
+        setMaxMileage(Number(params.mileageMax))
+      }
+    }
+  }, [params])
 
   const allListings = [...SAMPLE_LISTINGS, ...listings]
   
@@ -46,6 +71,20 @@ export function CategoryPage({ category, onNavigate }: CategoryPageProps) {
     }
 
     filtered = filtered.filter(l => l.price >= priceRange[0] && l.price <= priceRange[1])
+
+    if (yearRange) {
+      filtered = filtered.filter(l => {
+        if (!l.year) return false
+        return l.year >= yearRange[0] && l.year <= yearRange[1]
+      })
+    }
+
+    if (maxMileage !== undefined) {
+      filtered = filtered.filter(l => {
+        if (!l.mileage) return false
+        return l.mileage <= maxMileage
+      })
+    }
 
     if (selectedFuel) {
       filtered = filtered.filter(l => l.fuelType === selectedFuel)
@@ -70,12 +109,14 @@ export function CategoryPage({ category, onNavigate }: CategoryPageProps) {
     }
 
     return filtered
-  }, [allListings, category, searchQuery, selectedBrand, priceRange, selectedFuel, selectedTransmission, sortBy])
+  }, [allListings, category, searchQuery, selectedBrand, priceRange, yearRange, maxMileage, selectedFuel, selectedTransmission, sortBy])
 
   const clearFilters = () => {
     setSearchQuery('')
     setSelectedBrand('')
     setPriceRange([0, 200000])
+    setYearRange([1990, new Date().getFullYear()])
+    setMaxMileage(undefined)
     setSelectedFuel('')
     setSelectedTransmission('')
     setSortBy('newest')
@@ -144,6 +185,30 @@ export function CategoryPage({ category, onNavigate }: CategoryPageProps) {
 
                 {category !== 'parts' && (
                   <>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">
+                        Year Range: {yearRange[0]} - {yearRange[1]}
+                      </label>
+                      <Slider
+                        value={yearRange}
+                        onValueChange={(value) => setYearRange(value as [number, number])}
+                        min={1990}
+                        max={new Date().getFullYear()}
+                        step={1}
+                        className="mt-2"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">Max Mileage (km)</label>
+                      <Input
+                        type="number"
+                        placeholder="Any mileage"
+                        value={maxMileage || ''}
+                        onChange={(e) => setMaxMileage(e.target.value ? Number(e.target.value) : undefined)}
+                      />
+                    </div>
+
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Fuel Type</label>
                       <Select value={selectedFuel} onValueChange={setSelectedFuel}>
