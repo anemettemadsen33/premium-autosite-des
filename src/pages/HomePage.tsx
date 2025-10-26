@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { CATEGORIES, SAMPLE_LISTINGS } from '@/lib/data'
 import { Category, Listing } from '@/lib/types'
 import { useListings } from '@/lib/listings'
-import { Car, Motorcycle, Truck, Van, Wrench, MagnifyingGlass, TrendUp } from '@phosphor-icons/react'
+import { Car, Motorcycle, Truck, Van, Wrench, MagnifyingGlass, TrendUp, Calculator, ChartBar, Bell } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 
 interface HomePageProps {
@@ -133,6 +133,47 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </div>
         </section>
       )}
+
+      <section className="py-16 px-4 md:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Helpful Tools</h2>
+            <p className="text-muted-foreground text-lg">Make smarter buying decisions with our suite of tools</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all" onClick={() => onNavigate('calculators')}>
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Calculator size={32} weight="duotone" className="text-white" />
+                </div>
+                <h3 className="font-bold text-xl mb-2">Financial Calculators</h3>
+                <p className="text-muted-foreground">Calculate monthly payments and estimate trade-in values</p>
+              </CardContent>
+            </Card>
+
+            <Card className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all" onClick={() => onNavigate('comparison')}>
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <ChartBar size={32} weight="duotone" className="text-white" />
+                </div>
+                <h3 className="font-bold text-xl mb-2">Compare Vehicles</h3>
+                <p className="text-muted-foreground">Side-by-side comparison of up to 3 vehicles</p>
+              </CardContent>
+            </Card>
+
+            <Card className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all" onClick={() => onNavigate('saved-searches')}>
+              <CardContent className="p-8 text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Bell size={32} weight="duotone" className="text-white" />
+                </div>
+                <h3 className="font-bold text-xl mb-2">Saved Searches</h3>
+                <p className="text-muted-foreground">Get alerts when new vehicles match your criteria</p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

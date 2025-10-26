@@ -89,6 +89,27 @@ Multi-category automotive marketplace with user authentication, listing manageme
 - **Progression**: View overview → Select region/timeframe filters → Browse trends → Explore popular models → Analyze pricing data → Navigate to related actions
 - **Success criteria**: Data visualizations are clear, filters work properly, metrics are relevant, insights are actionable
 
+### Vehicle Comparison Tool
+- **Functionality**: Compare up to 3 vehicles side-by-side with detailed specifications, pricing, images, and key features in table format
+- **Purpose**: Help buyers make informed decisions by directly comparing vehicles of interest
+- **Trigger**: Clicking "Compare" button on vehicle cards or accessing comparison page from user menu
+- **Progression**: Add vehicles to comparison (via button or modal) → View side-by-side comparison table → Review specifications → Navigate to individual listings
+- **Success criteria**: Up to 3 vehicles can be compared, comparison persists, easy to add/remove vehicles, table is responsive and readable
+
+### Financial Calculators
+- **Functionality**: Two calculators - Financing calculator (monthly payments, total interest, loan terms) and Trade-in estimator (vehicle value based on age, mileage, condition)
+- **Purpose**: Help buyers plan purchases and understand financing options
+- **Trigger**: Clicking "Calculators" in main navigation
+- **Progression**: Select calculator tab → Enter vehicle/loan details → View real-time calculations → Adjust parameters → Apply results to purchase decisions
+- **Success criteria**: Calculations are accurate, inputs are validated, results update in real-time, mobile responsive
+
+### Saved Searches & Alerts
+- **Functionality**: Save search filter combinations with custom names, enable/disable email alerts for new matching listings, manage multiple saved searches
+- **Purpose**: Help users track vehicles matching specific criteria without repeated manual searches
+- **Trigger**: Saving search from category page filters or accessing via user menu
+- **Progression**: Configure filters → Save search with name → Enable alerts → Receive notifications for new matches → Run saved search anytime
+- **Success criteria**: Searches persist across sessions, alerts can be toggled, easy to manage and delete searches
+
 ### Search Functionality
 - **Functionality**: Global search bar with category filter, keyword matching across listings, instant results
 - **Purpose**: Help users quickly find specific listings across all categories
@@ -130,6 +151,12 @@ Multi-category automotive marketplace with user authentication, listing manageme
 - **Company vs Individual forms** - Show appropriate fields for each entity type
 - **Finance eligibility** - Validate income and employment requirements
 - **Multi-region compliance** - Handle different ID types, tax numbers, and regulatory requirements
+- **No vehicles in comparison** - Show empty state with CTA to browse listings
+- **Comparison with less than 3 vehicles** - Show "add vehicle" placeholder card
+- **Calculator invalid inputs** - Validate numeric inputs and show helpful error messages
+- **Trade-in value ranges** - Display estimated ranges rather than exact values
+- **Saved search with no results** - Indicate no current matches but alerts are active
+- **Duplicate saved searches** - Prevent identical filter combinations or allow with warning
 
 ## Design Direction
 
@@ -223,6 +250,10 @@ Key animation patterns:
   - **PurchaseModal**: Comprehensive purchase/finance application with region and entity type selection
   - **MarketInsightsCharts**: Data visualization for market trends and pricing
   - **RegionSelector**: US/EU region toggle with localized formatting
+  - **CompareButton**: Add/remove vehicles from comparison with floating summary button
+  - **FinancingCalculator**: Interactive loan payment calculator with breakdown
+  - **TradeInEstimator**: Vehicle value estimator based on condition and mileage
+  - **SavedSearchCard**: Display saved search with filter summary and alert toggle
   
 - **States**:
   - Buttons: Default, Hover, Active (scale 0.98), Focus (ring), Disabled, Loading
@@ -257,6 +288,10 @@ Key animation patterns:
   - Fire (popular/hot items)
   - Globe (region selection)
   - Briefcase (company forms)
+  - ChartBar (comparison)
+  - Calculator (financial tools)
+  - MagnifyingGlass (saved searches)
+  - Bell/BellSlash (alerts)
   
 - **Spacing**:
   - Page container: max-w-7xl mx-auto px-4 md:px-6 lg:px-8

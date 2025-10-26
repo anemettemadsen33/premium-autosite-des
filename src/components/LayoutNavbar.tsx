@@ -4,7 +4,8 @@ import { useAuth } from '@/lib/auth'
 import { useTheme } from '@/lib/theme'
 import { 
   List, X, User, SignIn, SignOut, Moon, Sun, 
-  Heart, ChatCircle, Plus, GridFour, Article, ChartLine
+  Heart, ChatCircle, Plus, GridFour, Article, ChartLine,
+  Calculator, MagnifyingGlass, ChartBar
 } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -28,6 +29,7 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'market-insights', label: 'Market Insights' },
+    { id: 'calculators', label: 'Calculators' },
     { id: 'about', label: 'About' },
   ]
 
@@ -125,6 +127,15 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
                       <DropdownMenuItem onClick={() => handleNavigate('messages')}>
                         <ChatCircle size={16} weight="duotone" className="mr-2" />
                         Messages
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => handleNavigate('saved-searches')}>
+                        <MagnifyingGlass size={16} weight="duotone" className="mr-2" />
+                        Saved Searches
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleNavigate('comparison')}>
+                        <ChartBar size={16} weight="duotone" className="mr-2" />
+                        Compare
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={handleLogout}>

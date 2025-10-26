@@ -3,6 +3,7 @@ import { AuthProvider } from '@/lib/auth'
 import { ThemeProvider } from '@/lib/theme'
 import { LayoutNavbar } from '@/components/LayoutNavbar'
 import { LayoutFooter } from '@/components/LayoutFooter'
+import { CompareFloatingButton } from '@/components/CompareButton'
 import { HomePage } from '@/pages/HomePage'
 import { CategoryPage } from '@/pages/CategoryPage'
 import { ListingDetailPage } from '@/pages/ListingDetailPage'
@@ -18,6 +19,9 @@ import { TermsPage } from '@/pages/TermsPage'
 import { PrivacyPage } from '@/pages/PrivacyPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { MarketInsightsPage } from '@/pages/MarketInsightsPage'
+import { ComparisonPage } from '@/pages/ComparisonPage'
+import { CalculatorsPage } from '@/pages/CalculatorsPage'
+import { SavedSearchesPage } from '@/pages/SavedSearchesPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
 
@@ -40,6 +44,12 @@ function App() {
         return <HomePage onNavigate={navigate} />
       case 'market-insights':
         return <MarketInsightsPage onNavigate={navigate} />
+      case 'comparison':
+        return <ComparisonPage onNavigate={navigate} />
+      case 'calculators':
+        return <CalculatorsPage onNavigate={navigate} />
+      case 'saved-searches':
+        return <SavedSearchesPage onNavigate={navigate} />
       case 'category':
         return <CategoryPage category={route.params?.category as Category} onNavigate={navigate} />
       case 'listing':
@@ -80,6 +90,8 @@ function App() {
           </main>
 
           <LayoutFooter onNavigate={navigate} />
+
+          <CompareFloatingButton onNavigate={navigate} />
 
           <Toaster />
         </div>

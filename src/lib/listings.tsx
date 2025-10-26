@@ -1,5 +1,10 @@
 import { useKV } from '@github/spark/hooks'
 import { Listing } from './types'
+import { SAMPLE_LISTINGS } from './data'
+
+export function getAllListings(): Listing[] {
+  return SAMPLE_LISTINGS
+}
 
 export function useListings() {
   const [listings, setListings] = useKV<Record<string, Listing>>('listings', {})
