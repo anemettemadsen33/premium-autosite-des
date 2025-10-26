@@ -229,7 +229,7 @@ export function ImportFeedWizard({ onComplete, onCancel }: ImportFeedWizardProps
                 <div key={field} className="grid grid-cols-2 gap-4 items-center">
                   <Label className="capitalize">{field}</Label>
                   <Select 
-                    value={Object.keys(fieldMapping).find(k => fieldMapping[k] === field) || ''}
+                    value={Object.keys(fieldMapping).find(k => fieldMapping[k] === field)}
                     onValueChange={(value) => setFieldMapping({ ...fieldMapping, [value]: field })}
                   >
                     <SelectTrigger>
@@ -255,7 +255,7 @@ export function ImportFeedWizard({ onComplete, onCancel }: ImportFeedWizardProps
                 <div key={field} className="grid grid-cols-2 gap-4 items-center">
                   <Label className="capitalize text-muted-foreground">{field}</Label>
                   <Select 
-                    value={Object.keys(fieldMapping).find(k => fieldMapping[k] === field) || ''}
+                    value={Object.keys(fieldMapping).find(k => fieldMapping[k] === field)}
                     onValueChange={(value) => setFieldMapping({ ...fieldMapping, [value]: field })}
                   >
                     <SelectTrigger>
