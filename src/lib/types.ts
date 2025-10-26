@@ -81,3 +81,6 @@ export interface SearchFilters {
   location?: string
   query?: string
 }
+
+export type Vehicle = any
+export type Announcement = any
