@@ -5,7 +5,7 @@ import { LayoutNavbar } from '@/components/LayoutNavbar'
 import { LayoutFooter } from '@/components/LayoutFooter'
 import { CompareFloatingButton } from '@/components/CompareButton'
 import { HomePage } from '@/pages/HomePage'
-import { CategoryPage } from '@/pages/CategoryPage'
+import { CategoryPageEnhanced } from '@/pages/CategoryPageEnhanced'
 import { ListingDetailPage } from '@/pages/ListingDetailPage'
 import { LoginPage } from '@/pages/LoginPage'
 import { RegisterPage } from '@/pages/RegisterPage'
@@ -51,7 +51,7 @@ function App() {
       case 'saved-searches':
         return <SavedSearchesPage onNavigate={navigate} />
       case 'category':
-        return <CategoryPage category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
+        return <CategoryPageEnhanced category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':
         return <ListingDetailPage listingId={route.params?.id || ''} onNavigate={navigate} />
       case 'login':
