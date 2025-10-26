@@ -107,16 +107,21 @@ export function Virtual360Viewer({ images, title }: Virtual360ViewerProps) {
   const toggleFullscreen = async () => {
     if (!containerRef.current) return
 
-    if (!isFullscreen) {
-      if (containerRef.current.requestFullscreen) {
-        await containerRef.current.requestFullscreen()
+    try {
+      if (!isFullscreen) {
+        if (containerRef.current.requestFullscreen) {
+          await containerRef.current.requestFullscreen()
+          setIsFullscreen(true)
+        }
+      } else {
+        if (document.exitFullscreen && document.fullscreenElement) {
+          await document.exitFullscreen()
+          setIsFullscreen(false)
+        }
       }
-    } else {
-      if (document.exitFullscreen) {
-        await document.exitFullscreen()
-      }
+    } catch (error) {
+      console.error('Fullscreen error:', error)
     }
-    setIsFullscreen(!isFullscreen)
   }
 
   const resetView = () => {
