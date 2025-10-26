@@ -4,6 +4,9 @@ import { ThemeProvider } from '@/lib/theme'
 import { LayoutNavbar } from '@/components/LayoutNavbar'
 import { LayoutFooter } from '@/components/LayoutFooter'
 import { CompareFloatingButton } from '@/components/CompareButton'
+import { LiveChatSupport } from '@/components/LiveChatSupport'
+import { QuickActionsPanel } from '@/components/QuickActionsPanel'
+import { KeyboardShortcuts } from '@/components/KeyboardShortcuts'
 import { HomePage } from '@/pages/HomePage'
 import { CategoryPageEnhanced } from '@/pages/CategoryPageEnhanced'
 import { ListingDetailPage } from '@/pages/ListingDetailPage'
@@ -25,6 +28,8 @@ import { SavedSearchesPage } from '@/pages/SavedSearchesPage'
 import { AuctionsPage } from '@/pages/AuctionsPage'
 import { AnalyticsDashboardPage } from '@/pages/AnalyticsDashboardPage'
 import { WatchlistPage } from '@/pages/WatchlistPage'
+import { PerformanceMonitorPage } from '@/pages/PerformanceMonitorPage'
+import { HelpCenterPage } from '@/pages/HelpCenterPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
 
@@ -59,6 +64,10 @@ function App() {
         return <AnalyticsDashboardPage onNavigate={navigate} />
       case 'watchlist':
         return <WatchlistPage onNavigate={navigate} />
+      case 'performance':
+        return <PerformanceMonitorPage onNavigate={navigate} />
+      case 'help-center':
+        return <HelpCenterPage onNavigate={navigate} />
       case 'category':
         return <CategoryPageEnhanced category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':
@@ -101,6 +110,9 @@ function App() {
           <LayoutFooter onNavigate={navigate} />
 
           <CompareFloatingButton onNavigate={navigate} />
+          <QuickActionsPanel onNavigate={navigate} />
+          <LiveChatSupport />
+          <KeyboardShortcuts onNavigate={navigate} />
 
           <Toaster />
         </div>

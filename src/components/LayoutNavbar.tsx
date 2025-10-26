@@ -5,7 +5,7 @@ import { useTheme } from '@/lib/theme'
 import { 
   List, X, User, SignIn, SignOut, Moon, Sun, 
   Heart, ChatCircle, Plus, GridFour, Article, ChartLine,
-  Calculator, MagnifyingGlass, ChartBar
+  Calculator, MagnifyingGlass, ChartBar, Question, Gauge
 } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -15,6 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { NotificationPanel } from '@/components/NotificationPanel'
 
 interface LayoutNavbarProps {
   currentPage: string
@@ -30,6 +31,7 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
     { id: 'home', label: 'Home' },
     { id: 'market-insights', label: 'Market Insights' },
     { id: 'calculators', label: 'Calculators' },
+    { id: 'help-center', label: 'Help' },
     { id: 'about', label: 'About' },
   ]
 
@@ -79,11 +81,14 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
             </div>
 
             <div className="hidden md:flex items-center gap-2">
+              <NotificationPanel onNavigate={onNavigate} />
+              
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={toggleTheme}
                 className="gap-2"
+                data-theme-toggle
               >
                 {theme === 'light' ? (
                   <Moon size={18} weight="duotone" />
@@ -136,6 +141,10 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
                       <DropdownMenuItem onClick={() => handleNavigate('comparison')}>
                         <ChartBar size={16} weight="duotone" className="mr-2" />
                         Compare
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleNavigate('performance')}>
+                        <Gauge size={16} weight="duotone" className="mr-2" />
+                        Performance
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={handleLogout}>
