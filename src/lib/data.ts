@@ -839,5 +839,5 @@ export const TRANSMISSIONS = ['Automatic', 'Manual', 'CVT', 'Semi-Automatic']
 export const CONDITIONS = ['New', 'Used', 'Certified Pre-Owned']
 export const BODY_TYPES = ['Sedan', 'SUV', 'Coupe', 'Convertible', 'Wagon', 'Hatchback', 'Pickup', 'Van']
 
-export const MOCK_VEHICLES: any[] = []
-export const MOCK_ANNOUNCEMENTS: any[] = []
+export const MOCK_VEHICLES: Vehicle[] = []
+export const MOCK_ANNOUNCEMENTS: Announcement[] = []

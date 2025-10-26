@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-export function useUrlState<T extends Record<string, any>>(
+export function useUrlState<T extends Record<string, string | number | boolean | undefined>>(
   initialState: T,
   onChange?: (state: T) => void
 ): [T, (updates: Partial<T>) => void, () => void] {
@@ -15,11 +15,11 @@ export function useUrlState<T extends Record<string, any>>(
         const initialValue = initialState[key as keyof T]
         
         if (typeof initialValue === 'number') {
-          parsed[key as keyof T] = Number(value) as any
+          parsed[key as keyof T] = Number(value) as T[keyof T]
         } else if (typeof initialValue === 'boolean') {
-          parsed[key as keyof T] = (value === 'true') as any
+          parsed[key as keyof T] = (value === 'true') as T[keyof T]
         } else {
-          parsed[key as keyof T] = value as any
+          parsed[key as keyof T] = value as T[keyof T]
         }
       }
     })

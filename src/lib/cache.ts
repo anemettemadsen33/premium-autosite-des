@@ -63,7 +63,7 @@ class Cache<T> {
   }
 }
 
-const globalCache = new Cache<any>()
+const globalCache = new Cache<unknown>()
 
 export function useCache<T>(
   key: string,
@@ -103,11 +103,11 @@ export function useCache<T>(
   return { data, isLoading, refetch: fetch }
 }
 
-export function invalidateCache(keyOrPredicate: string | ((key: string, data: any) => boolean)) {
+export function invalidateCache(keyOrPredicate: string | ((key: string, data: unknown) => boolean)) {
   if (typeof keyOrPredicate === 'string') {
     globalCache.delete(keyOrPredicate)
   } else {
-    globalCache.invalidate(keyOrPredicate)
+    globalCache.invalidate(keyOrPredicate as (key: string, data: unknown) => boolean)
   }
 }
 
