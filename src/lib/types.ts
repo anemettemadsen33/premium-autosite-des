@@ -1,56 +1,83 @@
-export interface Vehicle {
+export type Category = 'cars' | 'motorcycles' | 'trucks' | 'rvs' | 'parts'
+
+export type ListingStatus = 'draft' | 'active' | 'pending' | 'sold'
+
+export interface User {
   id: string
-  name: string
-  brand: string
-  type: 'sedan' | 'suv' | 'coupe' | 'sports' | 'electric'
-  year: number
-  price: number
-  image: string
-  images: string[]
-  description: string
-  specs: {
-    engine: string
-    horsepower: number
-    torque: string
-    transmission: string
-    acceleration: string
-    topSpeed: string
-    fuelEconomy: string
-  }
-  features: string[]
-  colors: VehicleColor[]
-  isNew?: boolean
-  isFeatured?: boolean
-}
-
-export interface VehicleColor {
-  name: string
-  hex: string
-  image?: string
-}
-
-export interface VehicleConfiguration {
-  vehicleId: string
-  color: string
-  wheels?: string
-  interior?: string
-}
-
-export interface ContactFormData {
-  name: string
   email: string
-  phone: string
-  message: string
-  vehicleId?: string
+  name: string
+  phone?: string
+  avatar?: string
+  createdAt: string
 }
 
-export interface Announcement {
+export interface Listing {
   id: string
+  userId: string
+  category: Category
+  status: ListingStatus
   title: string
-  category: 'new-arrival' | 'promotion' | 'event' | 'news' | 'service'
-  date: string
-  image: string
-  excerpt: string
+  description: string
+  price: number
+  location: string
+  images: string[]
+  createdAt: string
+  updatedAt: string
+  views: number
+  isFeatured?: boolean
+  
+  brand?: string
+  model?: string
+  year?: number
+  mileage?: number
+  fuelType?: string
+  transmission?: string
+  condition?: 'new' | 'used' | 'certified'
+  bodyType?: string
+  engineSize?: string
+  color?: string
+  
+  partType?: string
+  partCondition?: 'new' | 'used' | 'refurbished'
+  compatibility?: string
+}
+
+export interface Message {
+  id: string
+  listingId: string
+  senderId: string
+  receiverId: string
   content: string
-  isPinned?: boolean
+  createdAt: string
+  read: boolean
+}
+
+export interface Conversation {
+  id: string
+  listingId: string
+  participantIds: [string, string]
+  lastMessage: Message
+  unreadCount: number
+}
+
+export interface Favorite {
+  userId: string
+  listingId: string
+  createdAt: string
+}
+
+export interface SearchFilters {
+  category?: Category
+  minPrice?: number
+  maxPrice?: number
+  brand?: string
+  model?: string
+  yearFrom?: number
+  yearTo?: number
+  mileageMax?: number
+  fuelType?: string
+  transmission?: string
+  condition?: string
+  location?: string
+  query?: string
 }

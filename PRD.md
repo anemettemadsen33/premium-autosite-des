@@ -1,213 +1,249 @@
-# AUTOSITE - Premium Automotive Showcase
+# AUTOSITE - Automotive Marketplace Platform
 
-A sophisticated automotive showcase platform featuring premium vehicles with comprehensive information, financing options, service packages, and expert consultation.
+A comprehensive automotive marketplace platform enabling users to browse, search, list, and manage vehicle listings across multiple categories (cars, motorcycles, trucks, RVs, parts) with full user account management, favorites, messaging, and dynamic filtering.
 
 **Experience Qualities**:
-1. **Luxurious** - High-end design language with refined animations and premium visual treatments that evoke the sophistication of luxury vehicles
-2. **Trustworthy** - Professional presentation with transparent information and clear communication that builds confidence in purchasing decisions
-3. **Intuitive** - Seamless navigation and effortless user flows that make browsing and inquiring about vehicles feel natural and enjoyable
+1. **Empowering** - Users have complete control to browse, list, manage, and communicate about vehicles with intuitive tools and clear workflows
+2. **Trustworthy** - Professional presentation with user authentication, persistent data, and transparent processes that build confidence in transactions
+3. **Efficient** - Fast navigation, smart filtering, instant search, and streamlined workflows that respect users' time
 
-**Complexity Level**: Light Application (multiple features with basic state)
-Multi-page automotive showcase with vehicle browsing, filtering, detailed views, contact forms, financing calculator, and service information - using client-side navigation and form handling.
+**Complexity Level**: Complex Application (advanced functionality, accounts)
+Multi-category automotive marketplace with user authentication, listing management (CRUD), favorites system, messaging, dynamic filtering, responsive design, dark mode, persistent storage, and SEO pages.
 
 ## Essential Features
 
-### Homepage with Vehicle Collection
-- **Functionality**: Hero section with call-to-action, filterable vehicle grid with type and sort options, featured vehicle highlights
-- **Purpose**: Showcase premium vehicle collection and provide easy discovery of available inventory
-- **Trigger**: Landing on homepage or navigating to home
-- **Progression**: View hero → Scroll to collection → Apply filters → Browse vehicles → Click for details
-- **Success criteria**: Vehicles load instantly, filters work smoothly, cards are visually appealing, responsive on all devices
+### Homepage with Category Selection
+- **Functionality**: Hero with search bar, category cards (Cars, Motorcycles, Trucks, RVs, Parts), featured listings, quick stats
+- **Purpose**: Provide immediate access to all listing categories and featured content
+- **Trigger**: Landing on site or clicking logo
+- **Progression**: View hero → Select category OR search → Browse featured listings → Navigate to category/listing
+- **Success criteria**: Categories are clear, search is prominent, featured listings are attractive, mobile responsive
 
-### Inventory Listing Page
-- **Functionality**: Dedicated full-page inventory browser with advanced filtering sidebar, search functionality, price range slider, multiple view modes (grid/list), and comprehensive sorting options
-- **Purpose**: Provide powerful browsing and discovery tools for users to find their ideal vehicle from the complete collection
-- **Trigger**: Clicking "Inventory" in navigation or "Browse All" CTAs
-- **Progression**: Navigate to inventory → View all vehicles → Apply filters (type, brand, year, price, new/featured) → Search by keyword → Toggle view mode → Sort results → Click vehicle for details
-- **Success criteria**: Sidebar filters are sticky and accessible, search is instant, filters update count dynamically, empty states are helpful, view modes switch smoothly, mobile responsive with collapsible filters
+### Dynamic Category Pages (/sales/:category)
+- **Functionality**: Category-specific listing browser with dynamic filters (brand, model, price, year, km, location), search, sorting, pagination
+- **Purpose**: Enable users to browse and find listings within a specific category with powerful filtering
+- **Trigger**: Clicking category card or navigating to category route
+- **Progression**: View category → Apply filters → Search keywords → Sort results → Browse listings → Click for details
+- **Success criteria**: Filters are category-appropriate, search is instant, results update smoothly, empty states guide users, mobile filters collapse
 
-### Vehicle Detail Modal
-- **Functionality**: Full-screen modal with image gallery, comprehensive specifications, features list, color options, Buy Now/Finance buttons, and contact CTAs
-- **Purpose**: Provide all necessary information for purchase consideration in an immersive format with direct purchase/financing options
-- **Trigger**: Clicking on any vehicle card
-- **Progression**: Click vehicle → Modal opens with gallery → Review specs → View features → Choose Buy Now or Finance → Fill purchase form OR Contact about vehicle
-- **Success criteria**: Modal animates smoothly, all data displays correctly, images are high quality, easy to close and navigate, purchase CTAs are prominent
+### Listing Detail Page
+- **Functionality**: Full listing view with image gallery, complete specifications, seller info, contact button, favorite button, share options
+- **Purpose**: Provide comprehensive listing information and enable contact with seller
+- **Trigger**: Clicking listing card
+- **Progression**: View images → Review specs → Check seller info → Contact seller OR Add to favorites
+- **Success criteria**: Images load properly, all specs display, contact is clear, favorites work instantly
 
-### Purchase & Finance Forms
-- **Functionality**: Comprehensive modal forms with tabs for Individual/Company buyers, complete with all necessary fields for identity verification, employment/business information, financing terms selection, and terms agreement
-- **Purpose**: Capture complete buyer information for processing purchases and financing applications for both individual and corporate customers
-- **Trigger**: Clicking "Buy Now" or "Finance" buttons in vehicle detail modal
-- **Progression**: Select Buy/Finance → Choose Individual/Company tab → Fill personal/company details → Provide ID information → (Finance only) Select payment term → Accept terms → Submit
-- **Success criteria**: Forms validate all required fields, entity type switching works smoothly, finance calculator shows accurate monthly payments, submission provides clear confirmation, data is properly structured for processing
+### User Authentication (Login/Register/Reset)
+- **Functionality**: Email/password authentication with validation, password reset flow, persistent sessions using useKV
+- **Purpose**: Enable user accounts for listing management, favorites, and messaging
+- **Trigger**: Clicking Login/Register buttons or accessing protected pages
+- **Progression**: Enter credentials → Validate → Create session → Redirect to dashboard/previous page
+- **Success criteria**: Validation is clear, errors are helpful, sessions persist, redirects work properly
 
-### About Page
-- **Functionality**: Company story, team profiles, core values, statistics, and brand messaging
-- **Purpose**: Build trust and establish credibility through transparency about company history and values
-- **Trigger**: Clicking "About" in navigation
-- **Progression**: Navigate to page → Read story → View team → Review values → CTA to collection
-- **Success criteria**: Content is engaging, images load properly, animations enhance storytelling, mobile responsive
+### User Dashboard
+- **Functionality**: Overview of user's listings, favorites count, messages count, quick actions, account stats
+- **Purpose**: Central hub for managing user's marketplace activity
+- **Trigger**: Logging in or clicking Dashboard link
+- **Progression**: View overview → Navigate to listings/favorites/messages → Take actions
+- **Success criteria**: Stats are accurate, navigation is clear, actions are accessible
 
-### Services Page
-- **Functionality**: Service offerings grid, process workflow, benefits list, booking CTA
-- **Purpose**: Communicate comprehensive automotive services beyond vehicle sales
-- **Trigger**: Clicking "Services" in navigation
-- **Progression**: View services → Understand process → Review benefits → Schedule service
-- **Success criteria**: Services are clearly differentiated, pricing is transparent, booking flow is clear
+### My Listings Management
+- **Functionality**: View, edit, delete user's own listings with status indicators (active/pending/sold), quick stats
+- **Purpose**: Enable users to manage their posted listings
+- **Trigger**: Clicking "My Listings" in dashboard
+- **Progression**: View listings → Edit listing → Update details → Save OR Delete listing → Confirm
+- **Success criteria**: CRUD operations work properly, changes persist, confirmations prevent accidents
 
-### Financing Page
-- **Functionality**: Interactive payment calculator with sliders, financing options comparison, requirements checklist, application CTA
-- **Purpose**: Help users understand financing options and calculate affordability
-- **Trigger**: Clicking "Financing" in navigation
-- **Progression**: Adjust calculator → View monthly payment → Compare options → Apply for financing
-- **Success criteria**: Calculator updates in real-time, calculations are accurate, options are clearly explained
+### Favorites System
+- **Functionality**: Save/remove listings to favorites, view all favorited listings, quick contact from favorites
+- **Purpose**: Allow users to bookmark listings of interest for later review
+- **Trigger**: Clicking heart icon on listing or navigating to Favorites page
+- **Progression**: Click favorite → Item saved → View favorites page → Browse saved → Contact OR Remove
+- **Success criteria**: Favorites persist, heart icon state updates, removal is instant
 
-### Contact Page
-- **Functionality**: Multi-field contact form with department selection, location information, FAQ section, embedded map
-- **Purpose**: Provide multiple channels for customer communication and answer common questions
-- **Trigger**: Clicking "Contact" in navigation or contact CTAs
-- **Progression**: View contact info → Fill form or call → Submit message → Receive confirmation
-- **Success criteria**: Form validates properly, success message displays, all contact methods are clear
+### Messaging System
+- **Functionality**: Send messages to sellers, view conversations, message list, basic inbox/sent organization
+- **Purpose**: Enable communication between buyers and sellers
+- **Trigger**: Clicking "Contact Seller" on listing detail
+- **Progression**: Click contact → Compose message → Send → View in messages → Receive replies
+- **Success criteria**: Messages send successfully, conversations are organized, notifications are clear
 
-### Navigation System
-- **Functionality**: Fixed header with responsive navigation, mobile menu drawer, smooth page transitions
-- **Purpose**: Enable easy navigation between all pages and sections
-- **Trigger**: Page load and navigation clicks
-- **Progression**: Click nav item → Page changes → Scroll to top → Content loads
-- **Success criteria**: Navigation is always accessible, current page is indicated, mobile menu works smoothly
+### Add Listing Form
+- **Functionality**: Multi-step form with category selection, dynamic fields based on category, image upload, validation, preview
+- **Purpose**: Enable users to create new listings with all required information
+- **Trigger**: Clicking "Add Listing" button (requires authentication)
+- **Progression**: Select category → Fill details → Upload images → Preview → Submit → View confirmation
+- **Success criteria**: Fields adapt to category, validation prevents errors, images upload successfully, submission creates listing
+
+### Search Functionality
+- **Functionality**: Global search bar with category filter, keyword matching across listings, instant results
+- **Purpose**: Help users quickly find specific listings across all categories
+- **Trigger**: Typing in search bar
+- **Progression**: Enter keywords → Select category filter → View results → Click listing
+- **Success criteria**: Search is fast, results are relevant, filters work properly
+
+### SEO Pages
+- **Functionality**: About, Terms & Conditions, Privacy Policy, 404 error page with helpful content
+- **Purpose**: Provide legal information, build trust, handle errors gracefully
+- **Trigger**: Footer links, broken URLs
+- **Progression**: Navigate to page → Read content → Return to site
+- **Success criteria**: Content is clear, pages are accessible, 404 redirects work
+
+### Dark Mode Toggle
+- **Functionality**: Toggle between light and dark themes with persistent preference
+- **Purpose**: Improve usability in different lighting conditions and user preference
+- **Trigger**: Clicking theme toggle button
+- **Progression**: Click toggle → Theme switches → Preference saves → Persists on reload
+- **Success criteria**: Toggle is accessible, transition is smooth, preference persists
 
 ## Edge Case Handling
 
-- **No vehicles in filtered category** - Show friendly empty state with message and reset filters option
-- **Form submission errors** - Display clear error messages with guidance on how to fix
-- **Large images loading slowly** - Show skeleton loaders and optimize image sizes
-- **Mobile navigation overflow** - Collapse menu into drawer on smaller screens
-- **Calculator edge cases** - Prevent invalid inputs (negative values, extreme ranges)
-- **Modal on small screens** - Full-screen modal with proper scroll behavior
-- **Browser back button** - Handle navigation state properly
-- **Missing vehicle data** - Graceful fallbacks for optional fields
+- **No listings in category** - Show empty state with CTA to add first listing
+- **Search with no results** - Suggest adjusting filters or browsing all categories
+- **Unauthenticated access to protected pages** - Redirect to login with return URL
+- **Form validation errors** - Clear inline messages with correction guidance
+- **Image upload failures** - Show error with retry option, validate file types/sizes
+- **Duplicate favorites** - Prevent and show already favorited state
+- **Message send failures** - Retry mechanism with error notification
+- **Deleted listing in favorites** - Handle gracefully with "no longer available" message
+- **Mobile filters overflow** - Collapse into drawer with clear open/close
+- **Long listing titles/descriptions** - Truncate with expand option
+- **Browser back button** - Properly handle navigation history
+- **Session expiry** - Detect and prompt re-login
+- **Missing required fields** - Prevent submission and highlight fields
+- **Price/number input validation** - Accept only valid numeric input
 
 ## Design Direction
 
-The design should feel premium and sophisticated - like a high-end automotive showroom translated to digital. It should balance elegance with functionality, using refined typography, generous spacing, and purposeful animations to create an immersive luxury experience. The interface should feel modern and cutting-edge while maintaining approachability for all users. Minimal but impactful design that lets the vehicles shine while providing all necessary information and tools.
+The design should feel modern and approachable - like a contemporary marketplace platform that's professional yet accessible. It should balance visual appeal with functionality, using clear typography, organized layouts, and purposeful animations. The interface should feel trustworthy and efficient while maintaining a pleasant browsing experience. Clean, functional design that puts listings front and center while providing powerful tools for discovery and management.
 
 ## Color Selection
 
-**Analogous with Accent** - Using deep purples and blues with vibrant accent highlights to evoke luxury, technology, and trust.
+**Analogous with Accent** - Using blues and purples with vibrant highlights to evoke trust, professionalism, and modern technology.
 
-- **Primary Color**: Deep Navy (oklch(0.22 0.02 260)) - Communicates sophistication, trust, and premium quality. Used for headers and primary UI elements.
+- **Primary Color**: Deep Blue (oklch(0.22 0.02 260)) - Communicates trust, stability, and professionalism. Used for headers and primary UI elements.
 - **Secondary Colors**: 
-  - Soft Purple (oklch(0.65 0.19 270)) - Accent color for highlights, CTAs, and interactive elements
-  - Light Neutral (oklch(0.96 0.005 280)) - Backgrounds and muted elements for clean, spacious feel
-- **Accent Color**: Vibrant Purple (oklch(0.65 0.19 270)) - Attention-grabbing for important actions, featured badges, and interactive states
+  - Soft Purple (oklch(0.65 0.19 270)) - Accent color for CTAs, highlights, and interactive elements
+  - Light Neutral (oklch(0.96 0.005 280)) - Backgrounds and muted elements for clean, organized feel
+- **Accent Color**: Vibrant Purple (oklch(0.65 0.19 270)) - Attention-grabbing for actions, badges, and interactive states
 - **Foreground/Background Pairings**:
-  - Background (Soft White oklch(0.99 0.003 280)): Dark Navy text (oklch(0.20 0.01 260)) - Ratio 14.2:1 ✓
-  - Card (Pure White oklch(1 0 0)): Dark Navy text (oklch(0.20 0.01 260)) - Ratio 15.8:1 ✓
-  - Primary (Deep Navy oklch(0.22 0.02 260)): White text (oklch(0.99 0 0)) - Ratio 12.1:1 ✓
-  - Secondary (Light Gray oklch(0.96 0.005 280)): Dark Navy text (oklch(0.22 0.02 260)) - Ratio 8.9:1 ✓
-  - Accent (Vibrant Purple oklch(0.65 0.19 270)): White text (oklch(1 0 0)) - Ratio 4.8:1 ✓
-  - Muted (Light Gray oklch(0.96 0.005 280)): Muted text (oklch(0.52 0.01 260)) - Ratio 5.1:1 ✓
+  - Background Light (oklch(0.99 0.003 280)): Dark text (oklch(0.20 0.01 260)) - Ratio 14.2:1 ✓
+  - Background Dark (oklch(0.15 0.01 260)): Light text (oklch(0.99 0 0)) - Ratio 13.5:1 ✓
+  - Card Light (oklch(1 0 0)): Dark text (oklch(0.20 0.01 260)) - Ratio 15.8:1 ✓
+  - Card Dark (oklch(0.18 0.01 260)): Light text (oklch(0.99 0 0)) - Ratio 12.8:1 ✓
+  - Primary (oklch(0.22 0.02 260)): White text (oklch(0.99 0 0)) - Ratio 12.1:1 ✓
+  - Accent (oklch(0.65 0.19 270)): White text (oklch(1 0 0)) - Ratio 4.8:1 ✓
 
 ## Font Selection
 
-Typography should convey modern luxury and precision - clean, highly legible sans-serifs that work beautifully at all sizes with excellent hierarchy for complex information.
+Typography should convey modern professionalism and clarity - clean sans-serifs with excellent legibility for dense information like specifications and listings.
 
-**Primary Font**: Inter (All text) - Versatile, meticulously crafted sans-serif with excellent legibility and wide range of weights
-**Display Font**: Orbitron (Optional branding) - Modern, tech-inspired for special headings
+**Primary Font**: Inter (All text) - Versatile, highly legible sans-serif ideal for UI and content
+**Optional Display**: For branding only if needed
 
 - **Typographic Hierarchy**:
-  - H1 (Hero Titles): Inter Bold/72px/tight (-0.02em) letter spacing
-  - H2 (Page Titles): Inter Bold/56px/tight (-0.01em) letter spacing
-  - H3 (Section Headers): Inter SemiBold/40px/tight tracking
-  - H4 (Card Titles): Inter SemiBold/24px/normal letter spacing
-  - Body (Descriptions): Inter Regular/18px/relaxed (1.6) line height
-  - Small (Metadata): Inter Regular/16px/normal line height
-  - Caption (Labels): Inter Medium/14px/normal letter spacing
-  - Button Text: Inter SemiBold/16px/normal letter spacing
+  - H1 (Page Titles): Inter Bold/48px/tight (-0.01em)
+  - H2 (Section Headers): Inter SemiBold/32px/tight
+  - H3 (Card Headers): Inter SemiBold/24px/normal
+  - H4 (Subsections): Inter Medium/20px/normal
+  - Body (Content): Inter Regular/16px/relaxed (1.6) line height
+  - Small (Metadata): Inter Regular/14px/normal
+  - Tiny (Labels): Inter Medium/12px/wide (0.02em)
+  - Button: Inter SemiBold/14px/normal
 
 ## Animations
 
-Animations should feel premium and refined - smooth transitions that enhance the experience without drawing attention away from content. Movement should feel sophisticated and purposeful.
+Animations should feel snappy and functional - providing feedback and guiding attention without delaying user actions.
 
-- **Purposeful Meaning**: Animations guide users through the experience (page transitions, modal reveals), provide feedback (button interactions, form submissions), and create hierarchy (staggered content reveals, scroll animations)
-- **Hierarchy of Movement**: Hero elements get dramatic reveals (800ms), page content fades in with stagger (200-400ms), micro-interactions are snappy (150ms), ambient animations are subtle and slow (2-8s)
+- **Purposeful Meaning**: Animations provide immediate feedback (button clicks, form submissions), guide navigation (page transitions, modal opens), and indicate state changes (favorites toggle, theme switch)
+- **Hierarchy of Movement**: Critical interactions are instant (favorites, filters), page transitions are smooth (300ms), modals have presence (250ms), micro-interactions are subtle (150ms)
 
 Key animation patterns:
-- **Page Transitions**: Fade and subtle slide (400ms ease-out)
-- **Hero Reveal**: Sequential fade-up with delays (600-1000ms)
-- **Modal Entry**: Scale from 0.96 with backdrop fade (300ms)
-- **Card Hover**: Subtle lift with border glow (200ms ease-out)
-- **Button Press**: Scale to 0.98 (100ms) with color shift
-- **Filter Apply**: Content fade-out/in (250ms)
-- **Form Success**: Check animation with toast slide-in
-- **Scroll Reveals**: Content fades up as enters viewport
-- **Image Gallery**: Smooth carousel transitions (400ms)
-- **Calculator Updates**: Number count-up animation (300ms)
+- **Page Transitions**: Quick fade (200ms)
+- **Modal Entry**: Scale from 0.95 with backdrop (250ms)
+- **Card Hover**: Subtle lift with border (150ms)
+- **Button Click**: Scale to 0.98 (100ms)
+- **Favorite Toggle**: Heart fill animation (200ms)
+- **Filter Apply**: Instant with list update fade
+- **Form Submit**: Button state + success toast
+- **Theme Toggle**: Smooth color transition (300ms)
+- **Mobile Menu**: Slide from side (250ms)
+- **Image Gallery**: Smooth carousel (300ms)
 
 ## Component Selection
 
 - **Components**:
-  - **Card**: Vehicle previews, service offerings, team members - with hover states and shadows
-  - **Button**: Primary (gradient), Secondary (outline), variants for different contexts
-  - **Input**: Text fields with floating labels, validation states
-  - **Textarea**: Multi-line message fields with character counter
-  - **Select**: Dropdown menus for filters and form fields
-  - **Slider**: Interactive range inputs for financing calculator
-  - **Dialog**: Full-screen vehicle detail modals with galleries
-  - **Badge**: "New", "Featured" indicators with gradient backgrounds
-  - **Separator**: Dividers between content sections
-  - **Label**: Form field labels with required indicators
-  - **Toast (Sonner)**: Success/error notifications with animations
-  - **Carousel**: Image galleries in vehicle details (via embla-carousel-react)
-
-- **Customizations**:
-  - **VehicleCard**: Custom card with image, specs preview, price, hover effects
-  - **FilterBar**: Responsive filter controls with type buttons and sort dropdown
-  - **Hero**: Full-screen hero section with animated gradient text
-  - **Navbar**: Fixed navigation with active page indicator and mobile menu
-  - **ContactModal**: Specialized modal for vehicle inquiries with pre-filled details
-  - **VehicleDetailModal**: Full-featured modal with gallery, comprehensive specs, and Buy Now/Finance CTAs
-  - **PurchaseModal**: Dual-form modal with Individual/Company tabs, complete purchase and financing workflows
-  - **StatCard**: Animated statistics with count-up effects
-  - **ProcessStep**: Numbered workflow visualization
+  - **Card**: Listing cards, category cards, dashboard widgets
+  - **Button**: Various actions and CTAs with appropriate variants
+  - **Input**: Search, filters, forms with validation states
+  - **Textarea**: Message composition, listing descriptions
+  - **Select**: Dropdowns for filters, category selection, sorting
+  - **Checkbox**: Filter options, form agreements
+  - **Dialog**: Listing detail view, confirmations, image lightbox
+  - **Badge**: Category labels, status indicators (New, Featured, Sold)
+  - **Avatar**: User profile images
+  - **Tabs**: User dashboard sections, form entity type selection
+  - **Separator**: Content section dividers
+  - **Label**: Form field labels
+  - **Toast (Sonner)**: Success/error notifications
+  - **Carousel**: Image galleries in listing details
+  - **Switch**: Dark mode toggle, settings
+  - **Dropdown Menu**: User account menu
+  - **Scroll Area**: Long content lists
+  
+- **Custom Components**:
+  - **ListingCard**: Listing preview with image, title, price, location, favorite button
+  - **CategoryCard**: Large category selector with icon and count
+  - **SearchBar**: Global search with category filter
+  - **FilterSidebar**: Collapsible filter panel with dynamic fields
+  - **ImageUploader**: Multi-image upload with preview and reorder
+  - **UserNav**: Account dropdown with menu
+  - **ThemeToggle**: Dark/light mode switcher
+  - **MessageThread**: Conversation view with messages
+  - **ListingForm**: Multi-step dynamic form for adding listings
+  - **FavoriteButton**: Toggleable heart with persist
   
 - **States**:
-  - Buttons: Default (gradient/solid), Hover (enhanced gradient), Active (scale 0.98), Focus (ring), Disabled (muted)
-  - Inputs: Default (border-input), Focus (border-accent + ring), Error (border-destructive), Success (border-accent)
-  - Cards: Default (border subtle), Hover (border-accent + shadow-lg + lift), Selected (border-accent)
-  - Nav Items: Default (muted), Active (accent with underline indicator), Hover (foreground)
-
+  - Buttons: Default, Hover, Active (scale 0.98), Focus (ring), Disabled, Loading
+  - Inputs: Default, Focus (border-accent), Error (border-destructive), Disabled
+  - Cards: Default, Hover (lift + border), Active/Selected
+  - Favorite: Inactive (outline), Active (filled heart)
+  - Listing Status: Draft, Active, Pending, Sold
+  
 - **Icon Selection** (Phosphor Icons):
-  - Sparkle for premium badges and highlights
-  - ArrowDown for scroll indicators
-  - X for close buttons
-  - List for mobile menu
-  - Phone, Envelope, MapPin for contact info
-  - Trophy, Shield, Users, Target for value props
-  - Wrench, Star, GasPump for services
-  - CreditCard, Calculator, ChartLine for financing
-  - CheckCircle for completed states and features
-  - Clock for hours and time-based info
-  - ChatCircle for messaging/contact
-  - ShoppingCart for buy now actions
-  - Briefcase for company/business
-  - User for individual person
-  - Calendar for test drives and scheduling
-
+  - Car, Motorcycle, Truck, Van (category icons)
+  - MagnifyingGlass (search)
+  - Heart/HeartStraight (favorites)
+  - User/UserCircle (account)
+  - List, X (menu toggle)
+  - ChatCircle/ChatDots (messages)
+  - Plus/PlusCircle (add listing)
+  - Pencil/PencilSimple (edit)
+  - Trash (delete)
+  - Eye (view)
+  - MapPin (location)
+  - Tag (price)
+  - Calendar (date)
+  - Gauge (mileage)
+  - Moon/Sun (theme toggle)
+  - SignOut (logout)
+  - Funnel (filters)
+  - Share (share listing)
+  - Image/Images (gallery)
+  
 - **Spacing**:
-  - Page container: max-w-7xl mx-auto px-6 md:px-12 lg:px-24
-  - Section spacing: py-20
-  - Hero height: h-screen or h-[60vh]
-  - Card padding: p-6 md:p-8
-  - Grid gaps: gap-8 md:gap-12
-  - Content spacing: space-y-6 md:space-y-8
-  - Form field spacing: space-y-4
-
+  - Page container: max-w-7xl mx-auto px-4 md:px-6 lg:px-8
+  - Section spacing: py-12 md:py-16
+  - Card padding: p-4 md:p-6
+  - Grid gaps: gap-4 md:gap-6
+  - Form spacing: space-y-4
+  - Dashboard layout: grid with gaps
+  
 - **Mobile**:
-  - Single column layouts on mobile
-  - Collapsible mobile navigation drawer
-  - Touch-optimized button sizes (min 44px)
-  - Responsive typography scaling
-  - Full-screen modals on small screens
-  - Stacked form fields
-  - Simplified hero sections
-  - Mobile-first responsive breakpoints (sm: 640px, md: 768px, lg: 1024px, xl: 1280px)
+  - Responsive grid (1 col mobile, 2-4 cols desktop)
+  - Collapsible filter drawer on mobile
+  - Fixed bottom nav for key actions (optional)
+  - Touch-optimized (min 44px targets)
+  - Mobile-friendly forms (single column)
+  - Responsive nav with drawer
+  - Mobile-first breakpoints
