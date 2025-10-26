@@ -82,11 +82,12 @@ export function KeyboardShortcuts({ onNavigate }: KeyboardShortcutsProps) {
           e.preventDefault()
           onNavigate('add-listing')
           break
-        case 't':
+        case 't': {
           e.preventDefault()
           const themeToggle = document.querySelector('[data-theme-toggle]') as HTMLButtonElement
           themeToggle?.click()
           break
+        }
       }
     }
 
