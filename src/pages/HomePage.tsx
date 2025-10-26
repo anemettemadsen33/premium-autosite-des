@@ -95,20 +95,20 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div>
-      <section className="relative bg-gradient-to-br from-primary via-purple-900 to-blue-900 text-primary-foreground py-16 md:py-24 px-4">
+      <section className="relative bg-gradient-to-br from-[#7F00FF] via-[#9D00FF] to-[#E100FF] text-white py-16 md:py-24 px-4">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE0YzMuMzE0IDAgNiAyLjY4NiA2IDZzLTIuNjg2IDYtNiA2LTYtMi42ODYtNi02IDIuNjg2LTYgNi02ek0yNCA0NGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-40" />
         
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
               Find Your Perfect Vehicle
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80">
-              Browse thousands of cars, motorcycles, trucks, RVs, and parts from trusted sellers
+            <p className="text-lg md:text-xl text-white/90">
+              Browse thousands of cars, motorcycles, trucks, and more from trusted sellers
             </p>
           </motion.div>
 
@@ -165,16 +165,16 @@ export function HomePage({ onNavigate }: HomePageProps) {
               return (
                 <Card
                   key={category.id}
-                  className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all"
+                  className="cursor-pointer group hover:border-[#7F00FF] hover:shadow-lg transition-all duration-300"
                   onClick={() => onNavigate('category', { category: category.id })}
                 >
                   <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-accent to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#7F00FF] to-[#E100FF] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                       <Icon size={32} weight="duotone" className="text-white" />
                     </div>
-                    <h3 className="font-semibold mb-1">{category.name}</h3>
-                    <p className="text-sm text-muted-foreground mb-2">{category.description}</p>
-                    <Badge variant="secondary">{count} listings</Badge>
+                    <h3 className="font-semibold mb-1 text-[#2E2E2E]">{category.name}</h3>
+                    <p className="text-sm text-[#9CA3AF] mb-2">{category.description}</p>
+                    <Badge className="bg-[#7F00FF]/10 text-[#7F00FF] border border-[#7F00FF]/20 hover:bg-[#7F00FF]/20">{count} listings</Badge>
                   </CardContent>
                 </Card>
               )
@@ -182,24 +182,33 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </div>
 
           <div className="text-center mt-8">
-            <Button variant="outline" size="lg" onClick={() => onNavigate('categories')}>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={() => onNavigate('categories')}
+              className="border-[#CBD5E1] hover:border-[#7F00FF] hover:bg-[#7F00FF]/5 transition-colors"
+            >
               View All Main Categories
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-r from-accent/10 via-purple-500/10 to-blue-500/10">
+      <section className="py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-r from-[#7F00FF]/10 via-[#B800FF]/10 to-[#E100FF]/10">
         <div className="max-w-7xl mx-auto text-center">
-          <Badge className="mb-4" variant="secondary">
+          <Badge className="mb-4 bg-gradient-to-r from-[#7F00FF] to-[#E100FF] text-white border-none hover:shadow-lg">
             <Sparkle className="mr-1" weight="fill" size={16} />
             New Features
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Advanced AI-Powered Tools</h2>
-          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#2E2E2E]">Advanced AI-Powered Tools</h2>
+          <p className="text-[#9CA3AF] text-lg mb-8 max-w-2xl mx-auto">
             Discover our cutting-edge features including VIN scanning, video uploads, smart cost calculator, and AI-powered auto-tagging
           </p>
-          <Button size="lg" onClick={() => onNavigate('advanced-tools')} className="gap-2">
+          <Button 
+            size="lg" 
+            onClick={() => onNavigate('advanced-tools')} 
+            className="gap-2 bg-gradient-to-r from-[#7F00FF] to-[#E100FF] hover:from-[#7F00FF]/90 hover:to-[#E100FF]/90 text-white shadow-lg hover:shadow-xl transition-all"
+          >
             <Sparkle weight="fill" />
             Explore Advanced Tools
           </Button>
@@ -238,33 +247,33 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all" onClick={() => onNavigate('calculators')}>
+            <Card className="cursor-pointer group hover:border-[#4F46E5] hover:shadow-lg transition-all duration-300" onClick={() => onNavigate('calculators')}>
               <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#4F46E5] to-[#7F00FF] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Calculator size={32} weight="duotone" className="text-white" />
                 </div>
-                <h3 className="font-bold text-xl mb-2">Financial Calculators</h3>
-                <p className="text-muted-foreground">Calculate monthly payments and estimate trade-in values</p>
+                <h3 className="font-bold text-xl mb-2 text-[#2E2E2E]">Financial Calculators</h3>
+                <p className="text-[#9CA3AF]">Calculate monthly payments and estimate trade-in values</p>
               </CardContent>
             </Card>
 
-            <Card className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all" onClick={() => onNavigate('comparison')}>
+            <Card className="cursor-pointer group hover:border-[#7F00FF] hover:shadow-lg transition-all duration-300" onClick={() => onNavigate('comparison')}>
               <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#7F00FF] to-[#E100FF] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <ChartBar size={32} weight="duotone" className="text-white" />
                 </div>
-                <h3 className="font-bold text-xl mb-2">Compare Vehicles</h3>
-                <p className="text-muted-foreground">Side-by-side comparison of up to 3 vehicles</p>
+                <h3 className="font-bold text-xl mb-2 text-[#2E2E2E]">Compare Vehicles</h3>
+                <p className="text-[#9CA3AF]">Side-by-side comparison of up to 3 vehicles</p>
               </CardContent>
             </Card>
 
-            <Card className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all" onClick={() => onNavigate('saved-searches')}>
+            <Card className="cursor-pointer group hover:border-[#4F46E5] hover:shadow-lg transition-all duration-300" onClick={() => onNavigate('saved-searches')}>
               <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-[#4F46E5] to-[#7F00FF] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Bell size={32} weight="duotone" className="text-white" />
                 </div>
-                <h3 className="font-bold text-xl mb-2">Saved Searches</h3>
-                <p className="text-muted-foreground">Get alerts when new vehicles match your criteria</p>
+                <h3 className="font-bold text-xl mb-2 text-[#2E2E2E]">Saved Searches</h3>
+                <p className="text-[#9CA3AF]">Get alerts when new vehicles match your criteria</p>
               </CardContent>
             </Card>
           </div>
@@ -276,7 +285,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
 function ListingCard({ listing, onClick }: { listing: Listing; onClick: () => void }) {
   return (
-    <Card className="cursor-pointer group hover:border-accent hover:shadow-lg transition-all overflow-hidden" onClick={onClick}>
+    <Card className="cursor-pointer group hover:border-[#7F00FF] hover:shadow-lg transition-all duration-300 overflow-hidden" onClick={onClick}>
       <div className="aspect-video relative overflow-hidden bg-muted">
         {listing.images[0] && (
           <img
@@ -286,17 +295,17 @@ function ListingCard({ listing, onClick }: { listing: Listing; onClick: () => vo
           />
         )}
         {listing.isFeatured && (
-          <Badge className="absolute top-2 left-2 bg-gradient-to-r from-accent to-purple-600">
+          <Badge className="absolute top-2 left-2 bg-gradient-to-r from-[#7F00FF] to-[#E100FF] text-white border-none shadow-md">
             Featured
           </Badge>
         )}
       </div>
       <CardContent className="p-4">
-        <h3 className="font-semibold text-lg mb-2 line-clamp-1">{listing.title}</h3>
-        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">{listing.description}</p>
+        <h3 className="font-semibold text-lg mb-2 line-clamp-1 text-[#2E2E2E]">{listing.title}</h3>
+        <p className="text-sm text-[#9CA3AF] mb-3 line-clamp-2">{listing.description}</p>
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-accent">${listing.price.toLocaleString()}</span>
-          <span className="text-sm text-muted-foreground">{listing.location}</span>
+          <span className="text-2xl font-bold bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent">${listing.price.toLocaleString()}</span>
+          <span className="text-sm text-[#9CA3AF]">{listing.location}</span>
         </div>
       </CardContent>
     </Card>

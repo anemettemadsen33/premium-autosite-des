@@ -54,7 +54,7 @@ const CONDITIONS = ['New', 'Used', 'Certified Pre-Owned']
 
 export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBarProps) {
   const [filters, setFilters] = useState<EnhancedSearchFilters>({
-    mainCategory: 'Car',
+    mainCategory: null,
     subCategory: null,
     query: '',
     brand: '',
@@ -98,7 +98,7 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
 
   const handleReset = () => {
     setFilters({
-      mainCategory: 'Car',
+      mainCategory: null,
       subCategory: null,
       query: '',
       brand: '',
@@ -123,22 +123,26 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
   }
 
   return (
-    <Card className={`bg-white/95 backdrop-blur shadow-2xl ${className}`}>
-      <CardContent className="p-6">
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+    <Card className={`bg-[#F9FAFB] border-[#CBD5E1] shadow-2xl ${className}`}>
+      <CardContent className="p-5">
+        <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5">
             <div className="md:col-span-3">
-              <Label htmlFor="main-category" className="text-sm font-medium mb-2 block">
+              <Label htmlFor="main-category" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                 Vehicle Type
               </Label>
               <Select 
-                value={filters.mainCategory || undefined}
-                onValueChange={(value) => updateFilter('mainCategory', value as MainCategory)}
+                value={filters.mainCategory || 'all-types'}
+                onValueChange={(value) => updateFilter('mainCategory', value === 'all-types' ? null : value as MainCategory)}
               >
-                <SelectTrigger id="main-category" className="w-full">
-                  <SelectValue placeholder="Select type" />
+                <SelectTrigger 
+                  id="main-category" 
+                  className="w-full h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] transition-colors"
+                >
+                  <SelectValue placeholder="All Types" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="all-types">All Types</SelectItem>
                   {MAIN_CATEGORIES.map(cat => (
                     <SelectItem key={cat.code} value={cat.code}>
                       {cat.label}
@@ -149,7 +153,7 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
             </div>
 
             <div className="md:col-span-3">
-              <Label htmlFor="sub-category" className="text-sm font-medium mb-2 block">
+              <Label htmlFor="sub-category" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                 Subcategory
               </Label>
               <Select 
@@ -157,11 +161,14 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                 onValueChange={(value) => updateFilter('subCategory', value === 'all-subcats' ? null : value)}
                 disabled={!filters.mainCategory}
               >
-                <SelectTrigger id="sub-category" className="w-full">
-                  <SelectValue placeholder="All subcategories" />
+                <SelectTrigger 
+                  id="sub-category" 
+                  className="w-full h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] transition-colors disabled:opacity-50"
+                >
+                  <SelectValue placeholder="All Subcategories" />
                 </SelectTrigger>
                 <SelectContent className="max-h-[300px]">
-                  <SelectItem value="all-subcats">All subcategories</SelectItem>
+                  <SelectItem value="all-subcats">All Subcategories</SelectItem>
                   {subCategories.map(sub => (
                     <SelectItem key={sub.code} value={sub.code}>
                       {sub.label}
@@ -171,14 +178,14 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
               </Select>
             </div>
 
-            <div className="md:col-span-6 relative">
-              <Label htmlFor="search-query" className="text-sm font-medium mb-2 block">
+            <div className="md:col-span-4 relative">
+              <Label htmlFor="search-query" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                 Search Keywords
               </Label>
               <div className="relative">
                 <MagnifyingGlass 
                   size={18} 
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF] pointer-events-none"
                 />
                 <Input
                   id="search-query"
@@ -187,9 +194,27 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                   value={filters.query}
                   onChange={(e) => updateFilter('query', e.target.value)}
                   onKeyPress={handleKeyPress}
-                  className="pl-10 pr-4"
+                  className="pl-10 pr-4 h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                 />
               </div>
+            </div>
+
+            <div className="md:col-span-2 flex items-end gap-2">
+              <Button
+                type="button"
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                variant="outline"
+                className="flex-1 h-10 border-[#CBD5E1] hover:border-[#4F46E5] hover:bg-[#4F46E5]/5 transition-colors relative"
+              >
+                <SlidersHorizontal size={18} weight="bold" />
+                {activeFiltersCount > 0 && (
+                  <Badge 
+                    className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center bg-[#7F00FF] text-white text-[10px] border-2 border-[#F9FAFB]"
+                  >
+                    {activeFiltersCount}
+                  </Badge>
+                )}
+              </Button>
             </div>
           </div>
 
@@ -202,23 +227,23 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                 transition={{ duration: 0.3 }}
                 className="overflow-hidden"
               >
-                <Separator className="my-4" />
+                <Separator className="my-3 bg-[#CBD5E1]" />
                 
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                <div className="space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2.5">
                     <div>
-                      <Label htmlFor="brand" className="text-sm font-medium mb-2 block">
+                      <Label htmlFor="brand" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Brand
                       </Label>
                       <Select 
                         value={filters.brand || 'all-brands'}
                         onValueChange={(value) => updateFilter('brand', value === 'all-brands' ? '' : value)}
                       >
-                        <SelectTrigger id="brand">
-                          <SelectValue placeholder="All brands" />
+                        <SelectTrigger id="brand" className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] transition-colors">
+                          <SelectValue placeholder="All Brands" />
                         </SelectTrigger>
                         <SelectContent className="max-h-[300px]">
-                          <SelectItem value="all-brands">All brands</SelectItem>
+                          <SelectItem value="all-brands">All Brands</SelectItem>
                           {BRANDS.map(brand => (
                             <SelectItem key={brand} value={brand}>{brand}</SelectItem>
                           ))}
@@ -227,7 +252,7 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                     </div>
 
                     <div>
-                      <Label htmlFor="model" className="text-sm font-medium mb-2 block">
+                      <Label htmlFor="model" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Model
                       </Label>
                       <Input
@@ -237,18 +262,19 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                         value={filters.model}
                         onChange={(e) => updateFilter('model', e.target.value)}
                         onKeyPress={handleKeyPress}
+                        className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="condition" className="text-sm font-medium mb-2 block">
+                      <Label htmlFor="condition" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Condition
                       </Label>
                       <Select 
                         value={filters.condition || 'all-conditions'}
                         onValueChange={(value) => updateFilter('condition', value === 'all-conditions' ? '' : value)}
                       >
-                        <SelectTrigger id="condition">
+                        <SelectTrigger id="condition" className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] transition-colors">
                           <SelectValue placeholder="Any" />
                         </SelectTrigger>
                         <SelectContent>
@@ -261,7 +287,7 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                     </div>
 
                     <div>
-                      <Label htmlFor="location" className="text-sm font-medium mb-2 block">
+                      <Label htmlFor="location" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Location
                       </Label>
                       <Input
@@ -271,13 +297,14 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                         value={filters.location}
                         onChange={(e) => updateFilter('location', e.target.value)}
                         onKeyPress={handleKeyPress}
+                        className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
                     <div>
-                      <Label className="text-sm font-medium mb-2 block">
+                      <Label className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Price Range
                       </Label>
                       <div className="flex gap-2">
@@ -287,6 +314,7 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                           value={filters.priceMin}
                           onChange={(e) => updateFilter('priceMin', e.target.value)}
                           onKeyPress={handleKeyPress}
+                          className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                         />
                         <Input
                           type="number"
@@ -294,12 +322,13 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                           value={filters.priceMax}
                           onChange={(e) => updateFilter('priceMax', e.target.value)}
                           onKeyPress={handleKeyPress}
+                          className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <Label className="text-sm font-medium mb-2 block">
+                      <Label className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Year Range
                       </Label>
                       <div className="flex gap-2">
@@ -309,6 +338,7 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                           value={filters.yearFrom}
                           onChange={(e) => updateFilter('yearFrom', e.target.value)}
                           onKeyPress={handleKeyPress}
+                          className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                         />
                         <Input
                           type="number"
@@ -316,12 +346,13 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                           value={filters.yearTo}
                           onChange={(e) => updateFilter('yearTo', e.target.value)}
                           onKeyPress={handleKeyPress}
+                          className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="mileage" className="text-sm font-medium mb-2 block">
+                      <Label htmlFor="mileage" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Max Mileage (km)
                       </Label>
                       <Input
@@ -331,20 +362,21 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                         value={filters.mileageMax}
                         onChange={(e) => updateFilter('mileageMax', e.target.value)}
                         onKeyPress={handleKeyPress}
+                        className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] placeholder:text-[#9CA3AF] transition-colors"
                       />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     <div>
-                      <Label htmlFor="fuel" className="text-sm font-medium mb-2 block">
+                      <Label htmlFor="fuel" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Fuel Type
                       </Label>
                       <Select 
                         value={filters.fuelType || 'all-fuel'}
                         onValueChange={(value) => updateFilter('fuelType', value === 'all-fuel' ? '' : value)}
                       >
-                        <SelectTrigger id="fuel">
+                        <SelectTrigger id="fuel" className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] transition-colors">
                           <SelectValue placeholder="Any" />
                         </SelectTrigger>
                         <SelectContent>
@@ -357,14 +389,14 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                     </div>
 
                     <div>
-                      <Label htmlFor="transmission" className="text-sm font-medium mb-2 block">
+                      <Label htmlFor="transmission" className="text-xs font-semibold mb-1.5 block text-[#2E2E2E]">
                         Transmission
                       </Label>
                       <Select 
                         value={filters.transmission || 'all-trans'}
                         onValueChange={(value) => updateFilter('transmission', value === 'all-trans' ? '' : value)}
                       >
-                        <SelectTrigger id="transmission">
+                        <SelectTrigger id="transmission" className="h-10 border-[#CBD5E1] bg-white hover:border-[#4F46E5] focus:border-[#7F00FF] focus:ring-[#7F00FF] transition-colors">
                           <SelectValue placeholder="Any" />
                         </SelectTrigger>
                         <SelectContent>
@@ -381,40 +413,22 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
             )}
           </AnimatePresence>
 
-          <div className="flex flex-col sm:flex-row gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row gap-2 pt-2">
             <Button 
               onClick={handleSearch} 
               size="lg" 
-              className="flex-1 gap-2 bg-gradient-to-r from-accent to-purple-600 hover:from-accent/90 hover:to-purple-600/90"
+              className="flex-1 h-11 gap-2 bg-gradient-to-r from-[#7F00FF] to-[#E100FF] hover:from-[#7F00FF]/90 hover:to-[#E100FF]/90 text-white font-semibold shadow-md hover:shadow-lg transition-all"
             >
               <MagnifyingGlass size={20} weight="bold" />
               Search Vehicles
             </Button>
 
-            <Button
-              onClick={() => setShowAdvanced(!showAdvanced)}
-              variant={showAdvanced ? "secondary" : "outline"}
-              size="lg"
-              className="gap-2 relative"
-            >
-              <SlidersHorizontal size={20} />
-              Advanced Filters
-              {activeFiltersCount > 0 && (
-                <Badge 
-                  variant="destructive" 
-                  className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                >
-                  {activeFiltersCount}
-                </Badge>
-              )}
-            </Button>
-
             {activeFiltersCount > 0 && (
               <Button
                 onClick={handleReset}
-                variant="ghost"
+                variant="outline"
                 size="lg"
-                className="gap-2"
+                className="h-11 gap-2 border-[#CBD5E1] hover:border-[#4F46E5] hover:bg-[#4F46E5]/5 transition-colors"
               >
                 <X size={20} />
                 Reset
@@ -440,17 +454,16 @@ export function EnhancedSearchBar({ onSearch, className = '' }: EnhancedSearchBa
                 return (
                   <Badge 
                     key={key} 
-                    variant="secondary" 
-                    className="gap-1 pl-3 pr-2 py-1"
+                    className="gap-1 pl-3 pr-2 py-1.5 bg-[#7F00FF]/10 text-[#7F00FF] border border-[#7F00FF]/20 hover:bg-[#7F00FF]/20 transition-colors"
                   >
-                    <span className="text-xs font-medium capitalize">
+                    <span className="text-xs font-semibold capitalize">
                       {key.replace(/([A-Z])/g, ' $1').trim()}: {displayValue}
                     </span>
                     <button
                       onClick={() => updateFilter(key as keyof EnhancedSearchFilters, null)}
-                      className="ml-1 hover:bg-muted rounded-full p-0.5"
+                      className="ml-1 hover:bg-[#7F00FF]/30 rounded-full p-0.5 transition-colors"
                     >
-                      <X size={12} />
+                      <X size={12} weight="bold" />
                     </button>
                   </Badge>
                 )
