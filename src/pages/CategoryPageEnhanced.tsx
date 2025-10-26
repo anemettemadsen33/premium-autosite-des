@@ -1,37 +1,17 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Slider } from '@/components/ui/slider'
-import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { SAMPLE_LISTINGS, BRANDS_BY_CATEGORY, FUEL_TYPES, TRANSMISSIONS } from '@/lib/data'
+import { SAMPLE_LISTINGS, BRANDS_BY_CATEGORY } from '@/lib/data'
 import { Category, Listing } from '@/lib/types'
 import { useListings } from '@/lib/listings'
 import { useDebounce } from '@/hooks/use-debounce'
 import { useLocalStorage } from '@/hooks/use-local-storage'
-import { VehicleCard } from '@/components/VehicleCard'
-import { AdvancedSearchBar } from '@/components/AdvancedSearchBar'
 import { InfiniteScrollListings } from '@/components/InfiniteScrollListings'
-import { 
-  Funnel, 
-  X, 
-  SortAscending, 
-  Rows, 
-  SquaresFour, 
-  MagnifyingGlass,
-  Faders,
-  Star,
-  Clock
-} from '@phosphor-icons/react'
+import { CategoryPageHeader } from '@/components/CategoryPageHeader'
+import { CategoryFilters } from '@/components/CategoryFilters'
+import { CategoryToolbar } from '@/components/CategoryToolbar'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
 import type { MainCategory, VehicleSubCategoryCode } from '@/lib/vehicleSubCategories'
 import { useVehicleSubCategories } from '@/hooks/use-vehicle-sub-categories'
-import { MAIN_CATEGORIES } from '@/lib/vehicleSubCategories'
 
 interface CategoryPageEnhancedProps {
   category: Category
@@ -62,7 +42,6 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
   const { listings } = useListings()
   const [showFilters, setShowFilters] = useState(true)
   const [viewMode, setViewMode] = useLocalStorage<ViewMode>('view-mode', 'grid')
-  const [useInfiniteScroll, setUseInfiniteScroll] = useLocalStorage<boolean>('use-infinite-scroll', true)
 
   const currentYear = new Date().getFullYear()
   
@@ -253,20 +232,7 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="bg-gradient-to-r from-primary via-accent to-purple-600 text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-5xl font-bold mb-3 capitalize">{category}</h1>
-            <p className="text-white/90 text-lg">
-              {filteredListings.length} {filteredListings.length === 1 ? 'listing' : 'listings'} available
-            </p>
-          </motion.div>
-        </div>
-      </div>
+      <CategoryPageHeader category={category} listingCount={filteredListings.length} />
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
@@ -279,356 +245,88 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
                 transition={{ duration: 0.3 }}
                 className="w-full lg:w-80 flex-shrink-0"
               >
-                <Card className="sticky top-20">
-                  <CardContent className="p-6 space-y-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Faders size={20} weight="duotone" />
-                        <h2 className="font-semibold text-lg">Filters</h2>
-                        {activeFiltersCount > 0 && (
-                          <Badge variant="secondary" className="ml-2">
-                            {activeFiltersCount}
-                          </Badge>
-                        )}
-                      </div>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        onClick={clearAllFilters}
-                        disabled={activeFiltersCount === 0}
-                      >
-                        Clear All
-                      </Button>
-                    </div>
-
-                    <Separator />
-
-                    <div className="space-y-4">
-                      <div>
-                        <Label className="text-sm font-medium mb-2 block">Main Category</Label>
-                        <Select 
-                          value={filters.mainCategory || "all"} 
-                          onValueChange={(value) => handleMainCategoryChange(value === "all" ? null : value as MainCategory)}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="All categories" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="all">All Categories</SelectItem>
-                            {MAIN_CATEGORIES.map((cat) => (
-                              <SelectItem key={cat.code} value={cat.code}>
-                                {cat.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      {filters.mainCategory && subCategories.length > 0 && (
-                        <div>
-                          <Label className="text-sm font-medium mb-2 block">Sub-Category</Label>
-                          <Select 
-                            value={filters.subCategory || "all"} 
-                            onValueChange={(value) => handleSubCategoryChange(value === "all" ? null : value as VehicleSubCategoryCode)}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="All sub-categories" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="all">All Sub-Categories</SelectItem>
-                              {subCategories.map((sub) => (
-                                <SelectItem key={sub.code} value={sub.code}>
-                                  {sub.label}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      )}
-
-                      <div>
-                        <Label className="text-sm font-medium mb-2 flex items-center gap-2">
-                          <MagnifyingGlass size={16} />
-                          Search
-                        </Label>
-                        <AdvancedSearchBar
-                          value={filters.searchQuery}
-                          onChange={(value) => updateFilters({ searchQuery: value })}
-                          suggestions={searchSuggestions}
-                          placeholder="Search listings..."
-                          className="w-full"
-                        />
-                      </div>
-
-                      {brands.length > 0 && (
-                        <div>
-                          <Label className="text-sm font-medium mb-2 block">Brand</Label>
-                          <Select 
-                            value={filters.selectedBrand || "all-brands"} 
-                            onValueChange={(value) => updateFilters({ selectedBrand: value === "all-brands" ? "" : value })}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="All brands" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="all-brands">All brands</SelectItem>
-                              {brands.map((brand) => (
-                                <SelectItem key={brand} value={brand}>
-                                  {brand}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      )}
-
-                      <div>
-                        <Label className="text-sm font-medium mb-3 block">
-                          Price Range: ${filters.priceMin.toLocaleString()} - ${filters.priceMax.toLocaleString()}
-                        </Label>
-                        <Slider
-                          min={0}
-                          max={200000}
-                          step={1000}
-                          value={[filters.priceMin, filters.priceMax]}
-                          onValueChange={([min, max]) => 
-                            updateFilters({ priceMin: min, priceMax: max })
-                          }
-                          className="mb-2"
-                        />
-                      </div>
-
-                      <div>
-                        <Label className="text-sm font-medium mb-3 block">
-                          Year: {filters.yearMin} - {filters.yearMax}
-                        </Label>
-                        <Slider
-                          min={1990}
-                          max={currentYear}
-                          step={1}
-                          value={[filters.yearMin, filters.yearMax]}
-                          onValueChange={([min, max]) => 
-                            updateFilters({ yearMin: min, yearMax: max })
-                          }
-                        />
-                      </div>
-
-                      <div>
-                        <Label className="text-sm font-medium mb-2 block">
-                          Max Mileage: {filters.maxMileage ? `${filters.maxMileage.toLocaleString()} mi` : 'Any'}
-                        </Label>
-                        <Slider
-                          min={0}
-                          max={200000}
-                          step={5000}
-                          value={[filters.maxMileage || 200000]}
-                          onValueChange={([value]) => 
-                            updateFilters({ maxMileage: value === 200000 ? undefined : value })
-                          }
-                        />
-                      </div>
-
-                      {FUEL_TYPES && (
-                        <div>
-                          <Label className="text-sm font-medium mb-2 block">Fuel Type</Label>
-                          <Select 
-                            value={filters.selectedFuel || "all-fuel-types"} 
-                            onValueChange={(value) => updateFilters({ selectedFuel: value === "all-fuel-types" ? "" : value })}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="All types" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="all-fuel-types">All types</SelectItem>
-                              {FUEL_TYPES.map((fuel) => (
-                                <SelectItem key={fuel} value={fuel}>
-                                  {fuel}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      )}
-
-                      {TRANSMISSIONS && (
-                        <div>
-                          <Label className="text-sm font-medium mb-2 block">Transmission</Label>
-                          <Select 
-                            value={filters.selectedTransmission || "all-transmissions"} 
-                            onValueChange={(value) => updateFilters({ selectedTransmission: value === "all-transmissions" ? "" : value })}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="All types" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="all-transmissions">All types</SelectItem>
-                              {TRANSMISSIONS.map((trans) => (
-                                <SelectItem key={trans} value={trans}>
-                                  {trans}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      )}
-
-                      <div>
-                        <Label className="text-sm font-medium mb-3 block">Condition</Label>
-                        <div className="space-y-2">
-                          {(['new', 'used', 'certified'] as const).map((condition) => (
-                            <div key={condition} className="flex items-center gap-2">
-                              <Checkbox
-                                id={condition}
-                                checked={filters.selectedCondition.includes(condition)}
-                                onCheckedChange={(checked) => {
-                                  const newConditions = checked
-                                    ? [...filters.selectedCondition, condition]
-                                    : filters.selectedCondition.filter(c => c !== condition)
-                                  updateFilters({ selectedCondition: newConditions })
-                                }}
-                              />
-                              <Label 
-                                htmlFor={condition} 
-                                className="text-sm capitalize cursor-pointer"
-                              >
-                                {condition}
-                              </Label>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <CategoryFilters
+                  filters={filters}
+                  activeFiltersCount={activeFiltersCount}
+                  brands={brands}
+                  subCategories={subCategories}
+                  searchSuggestions={searchSuggestions}
+                  currentYear={currentYear}
+                  onUpdateFilters={updateFilters}
+                  onMainCategoryChange={handleMainCategoryChange}
+                  onSubCategoryChange={handleSubCategoryChange}
+                  onClearAll={clearAllFilters}
+                />
               </motion.aside>
             )}
           </AnimatePresence>
 
-          <div className="flex-1 space-y-6">
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setShowFilters(!showFilters)}
-                      className="lg:hidden"
-                    >
-                      <Funnel size={18} className="mr-2" />
-                      {showFilters ? 'Hide' : 'Show'} Filters
-                      {activeFiltersCount > 0 && (
-                        <Badge variant="secondary" className="ml-2">
-                          {activeFiltersCount}
-                        </Badge>
-                      )}
-                    </Button>
-
-                    <div className="flex items-center gap-2">
-                      <Button
-                        variant={viewMode === 'grid' ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setViewMode('grid')}
-                      >
-                        <SquaresFour size={18} />
-                      </Button>
-                      <Button
-                        variant={viewMode === 'list' ? 'default' : 'outline'}
-                        size="sm"
-                        onClick={() => setViewMode('list')}
-                      >
-                        <Rows size={18} />
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Label className="text-sm whitespace-nowrap hidden sm:block">Sort by:</Label>
-                    <Select 
-                      value={filters.sortBy} 
-                      onValueChange={(value) => updateFilters({ sortBy: value as SortOption })}
-                    >
-                      <SelectTrigger className="w-[180px]">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="newest">
-                          <div className="flex items-center gap-2">
-                            <Clock size={16} />
-                            Newest First
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="oldest">Oldest First</SelectItem>
-                        <SelectItem value="price-asc">Price: Low to High</SelectItem>
-                        <SelectItem value="price-desc">Price: High to Low</SelectItem>
-                        <SelectItem value="year-desc">Year: Newest</SelectItem>
-                        <SelectItem value="mileage-asc">Mileage: Lowest</SelectItem>
-                        <SelectItem value="popular">
-                          <div className="flex items-center gap-2">
-                            <Star size={16} />
-                            Most Popular
-                          </div>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="flex-1 min-w-0">
+            <CategoryToolbar
+              showFilters={showFilters}
+              viewMode={viewMode}
+              sortBy={filters.sortBy}
+              activeFiltersCount={activeFiltersCount}
+              onToggleFilters={() => setShowFilters(!showFilters)}
+              onViewModeChange={setViewMode}
+              onSortChange={(sortBy) => updateFilters({ sortBy })}
+            />
 
             {filteredListings.length === 0 ? (
-              <Card>
-                <CardContent className="py-16 text-center">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <MagnifyingGlass size={64} className="mx-auto text-muted-foreground mb-4" />
-                    <h3 className="text-xl font-semibold mb-2">No listings found</h3>
-                    <p className="text-muted-foreground mb-6">
-                      Try adjusting your filters or search terms
-                    </p>
-                    <Button onClick={clearAllFilters}>
-                      Clear All Filters
-                    </Button>
-                  </motion.div>
-                </CardContent>
-              </Card>
+              <EmptyState onClearFilters={clearAllFilters} />
             ) : (
-              <>
-                {useInfiniteScroll ? (
-                  <InfiniteScrollListings
-                    listings={filteredListings}
-                    onNavigate={onNavigate}
-                    pageSize={12}
-                    viewMode={viewMode}
-                  />
-                ) : (
-                  <div 
-                    className={
-                      viewMode === 'grid'
-                        ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
-                        : 'flex flex-col gap-6'
-                    }
-                  >
-                    <AnimatePresence mode="popLayout">
-                      {filteredListings.map((listing, index) => (
-                        <VehicleCard
-                          key={listing.id}
-                          listing={listing}
-                          onNavigate={onNavigate}
-                          index={index}
-                        />
-                      ))}
-                    </AnimatePresence>
-                  </div>
-                )}
-              </>
+              <ListingsDisplay
+                listings={filteredListings}
+                viewMode={viewMode}
+                onNavigate={onNavigate}
+              />
             )}
           </div>
         </div>
       </div>
     </div>
+  )
+}
+
+function EmptyState({ onClearFilters }: { onClearFilters: () => void }) {
+  return (
+    <div className="border rounded-lg p-16 text-center">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="text-6xl mb-4">🔍</div>
+        <h3 className="text-xl font-semibold mb-2">No listings found</h3>
+        <p className="text-muted-foreground mb-6">
+          Try adjusting your filters or search terms
+        </p>
+        <button 
+          onClick={onClearFilters}
+          className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+        >
+          Clear All Filters
+        </button>
+      </motion.div>
+    </div>
+  )
+}
+
+function ListingsDisplay({ 
+  listings, 
+  viewMode, 
+  onNavigate 
+}: { 
+  listings: Listing[]
+  viewMode: ViewMode
+  onNavigate: (page: string, params?: Record<string, string>) => void 
+}) {
+  return (
+    <InfiniteScrollListings
+      listings={listings}
+      onNavigate={onNavigate}
+      pageSize={12}
+      viewMode={viewMode}
+    />
   )
 }
