@@ -1,4 +1,4 @@
-import { Vehicle } from './types'
+import { Vehicle, Announcement } from './types'
 
 export const MOCK_VEHICLES: Vehicle[] = [
   {
@@ -222,5 +222,119 @@ export const MOCK_VEHICLES: Vehicle[] = [
       { name: 'Firecracker Red', hex: '#dc2626' },
       { name: 'Bright White', hex: '#fafafa' }
     ]
+  }
+]
+
+export const MOCK_ANNOUNCEMENTS: Announcement[] = [
+  {
+    id: 'ann-1',
+    title: 'Grand Opening of Our New Beverly Hills Showroom',
+    category: 'event',
+    date: '2024-12-15',
+    image: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&q=80',
+    excerpt: 'Join us for the grand opening of our state-of-the-art showroom featuring an exclusive collection of luxury vehicles.',
+    content: 'We are thrilled to announce the grand opening of our new flagship showroom in Beverly Hills. This state-of-the-art facility spans over 25,000 square feet and showcases our most exclusive collection of premium vehicles. Join us on December 15th for champagne, live music, and special unveiling events throughout the day.',
+    isPinned: true
+  },
+  {
+    id: 'ann-2',
+    title: 'New 2024 GT Sport Turbo Now Available',
+    category: 'new-arrival',
+    date: '2024-12-10',
+    image: 'https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=800&q=80',
+    excerpt: 'The highly anticipated GT Sport Turbo has arrived. Experience 450 horsepower of pure automotive excellence.',
+    content: 'The wait is over! The all-new 2024 GT Sport Turbo has arrived at our showroom. Featuring a 3.0L twin-turbo V6 engine producing 450 horsepower, this masterpiece accelerates from 0-60 mph in just 3.8 seconds. Schedule your test drive today and experience the perfect blend of power and refinement.',
+    isPinned: true
+  },
+  {
+    id: 'ann-3',
+    title: 'Holiday Sale - Up to 15% Off Select Models',
+    category: 'promotion',
+    date: '2024-12-01',
+    image: 'https://images.unsplash.com/photo-1607603750916-e102b4f3921b?w=800&q=80',
+    excerpt: 'Celebrate the season with exceptional savings on our premium inventory. Limited time offer on select 2024 models.',
+    content: 'This holiday season, take advantage of our biggest sale of the year! Save up to 15% on select 2024 models, plus enjoy special financing rates as low as 2.9% APR for qualified buyers. Offer valid through December 31st. Visit our showroom or contact our sales team to learn more about eligible vehicles and financing options.',
+    isPinned: true
+  },
+  {
+    id: 'ann-4',
+    title: 'AUTOSITE Wins Luxury Dealer of the Year Award',
+    category: 'news',
+    date: '2024-11-28',
+    image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&q=80',
+    excerpt: 'We are honored to receive the prestigious Luxury Dealer of the Year award from the National Auto Dealers Association.',
+    content: 'AUTOSITE has been recognized as the Luxury Dealer of the Year by the National Auto Dealers Association. This prestigious award acknowledges our commitment to excellence in customer service, quality inventory, and community engagement. Thank you to our valued customers for making this achievement possible.'
+  },
+  {
+    id: 'ann-5',
+    title: 'Extended Service Hours for the Holidays',
+    category: 'service',
+    date: '2024-11-25',
+    image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80',
+    excerpt: 'We are extending our service department hours throughout the holiday season for your convenience.',
+    content: 'To better serve you during the busy holiday season, our service department will be extending its hours. Starting December 1st through January 15th, we will be open Monday through Saturday from 7:00 AM to 9:00 PM, and Sundays from 9:00 AM to 6:00 PM. Schedule your service appointment online or call us directly.'
+  },
+  {
+    id: 'ann-6',
+    title: 'EcoLux Electric Vehicles: The Future is Here',
+    category: 'new-arrival',
+    date: '2024-11-20',
+    image: 'https://images.unsplash.com/photo-1617654112368-307921291f42?w=800&q=80',
+    excerpt: 'Introducing our expanded electric vehicle lineup with cutting-edge technology and zero emissions.',
+    content: 'Join the electric revolution with our new EcoLux Electric lineup. Experience the future of sustainable luxury with up to 405 miles of range, lightning-fast acceleration, and cutting-edge autopilot technology. Plus, take advantage of available federal tax credits up to $7,500. Book your test drive today.'
+  },
+  {
+    id: 'ann-7',
+    title: 'Exclusive VIP Customer Appreciation Event',
+    category: 'event',
+    date: '2024-11-15',
+    image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80',
+    excerpt: 'Join us for an exclusive evening celebrating our valued customers with luxury experiences and special previews.',
+    content: 'You are invited to our exclusive VIP Customer Appreciation Event on November 15th. Enjoy an elegant evening featuring gourmet cuisine, premium cocktails, live entertainment, and the first look at our upcoming 2025 model releases. RSVP required. Limited to 100 guests.'
+  },
+  {
+    id: 'ann-8',
+    title: 'New Trade-In Program Offers Maximum Value',
+    category: 'promotion',
+    date: '2024-11-10',
+    image: 'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&q=80',
+    excerpt: 'Get top dollar for your current vehicle with our enhanced trade-in program and instant online appraisals.',
+    content: 'Our new Enhanced Trade-In Program makes upgrading easier than ever. Get an instant online appraisal, receive competitive offers above market value, and enjoy a streamlined process with same-day approvals. Visit our website to get your free vehicle appraisal in minutes, or bring your vehicle to our showroom for an in-person evaluation.'
+  },
+  {
+    id: 'ann-9',
+    title: 'AUTOSITE Partners with Local Charities',
+    category: 'news',
+    date: '2024-11-05',
+    image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&q=80',
+    excerpt: 'We are proud to announce our partnership with three local charities supporting education and community development.',
+    content: 'As part of our commitment to giving back, AUTOSITE is proud to partner with three outstanding local charities focused on education and community development. For every vehicle sold this quarter, we will donate $500 to support youth education programs, community arts initiatives, and environmental conservation efforts.'
+  },
+  {
+    id: 'ann-10',
+    title: 'Winter Tire Package Special Offer',
+    category: 'service',
+    date: '2024-10-28',
+    image: 'https://images.unsplash.com/photo-1606220838315-056192d5e927?w=800&q=80',
+    excerpt: 'Prepare for winter driving with our complete tire package including installation and seasonal storage.',
+    content: 'Stay safe this winter with our comprehensive winter tire package. Purchase a complete set of premium winter tires and receive free installation, balancing, and seasonal storage. Package includes tire rotation and pressure checks. Offer valid through November 30th. Contact our service department to schedule your appointment.'
+  },
+  {
+    id: 'ann-11',
+    title: 'Introducing Our Online Vehicle Reservation System',
+    category: 'news',
+    date: '2024-10-20',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+    excerpt: 'Reserve your dream vehicle online with our new digital reservation platform. Simple, secure, and convenient.',
+    content: 'Shopping for your next vehicle is now easier than ever with our new online reservation system. Browse our inventory, select your preferred vehicle, and reserve it with a fully refundable deposit—all from the comfort of your home. Your reserved vehicle will be held for 48 hours while you arrange financing and schedule your visit.'
+  },
+  {
+    id: 'ann-12',
+    title: 'Meet Our New General Manager, Sarah Johnson',
+    category: 'news',
+    date: '2024-10-15',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80',
+    excerpt: 'We are excited to welcome Sarah Johnson as our new General Manager, bringing 15 years of luxury automotive experience.',
+    content: 'Please join us in welcoming Sarah Johnson as AUTOSITE\'s new General Manager. Sarah brings 15 years of experience in luxury automotive retail, with a proven track record of excellence in customer satisfaction and team development. "I am thrilled to join the AUTOSITE family and look forward to continuing our tradition of exceptional service," says Sarah.'
   }
 ]

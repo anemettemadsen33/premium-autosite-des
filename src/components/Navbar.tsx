@@ -14,6 +14,7 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'inventory', label: 'Inventory' },
+    { id: 'announcements', label: 'Announcements' },
     { id: 'about', label: 'About' },
     { id: 'services', label: 'Services' },
     { id: 'financing', label: 'Financing' },

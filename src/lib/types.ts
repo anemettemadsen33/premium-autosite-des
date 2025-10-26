@@ -43,3 +43,14 @@ export interface ContactFormData {
   message: string
   vehicleId?: string
 }
+
+export interface Announcement {
+  id: string
+  title: string
+  category: 'new-arrival' | 'promotion' | 'event' | 'news' | 'service'
+  date: string
+  image: string
+  excerpt: string
+  content: string
+  isPinned?: boolean
+}

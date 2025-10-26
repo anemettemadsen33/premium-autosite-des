@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Navbar } from '@/components/Navbar'
 import { Home } from '@/pages/Home'
 import { Inventory } from '@/pages/Inventory'
+import { Announcements } from '@/pages/Announcements'
 import { About } from '@/pages/About'
 import { Services } from '@/pages/Services'
 import { Financing } from '@/pages/Financing'
@@ -17,6 +18,8 @@ function App() {
         return <Home />
       case 'inventory':
         return <Inventory />
+      case 'announcements':
+        return <Announcements />
       case 'about':
         return <About />
       case 'services':
