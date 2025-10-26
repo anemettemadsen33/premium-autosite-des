@@ -27,11 +27,18 @@ Multi-page automotive showcase with vehicle browsing, filtering, detailed views,
 - **Success criteria**: Sidebar filters are sticky and accessible, search is instant, filters update count dynamically, empty states are helpful, view modes switch smoothly, mobile responsive with collapsible filters
 
 ### Vehicle Detail Modal
-- **Functionality**: Full-screen modal with image gallery, comprehensive specifications, features list, color options, and contact CTA
-- **Purpose**: Provide all necessary information for purchase consideration in an immersive format
+- **Functionality**: Full-screen modal with image gallery, comprehensive specifications, features list, color options, Buy Now/Finance buttons, and contact CTAs
+- **Purpose**: Provide all necessary information for purchase consideration in an immersive format with direct purchase/financing options
 - **Trigger**: Clicking on any vehicle card
-- **Progression**: Click vehicle → Modal opens with gallery → Review specs → View features → Contact about vehicle
-- **Success criteria**: Modal animates smoothly, all data displays correctly, images are high quality, easy to close and navigate
+- **Progression**: Click vehicle → Modal opens with gallery → Review specs → View features → Choose Buy Now or Finance → Fill purchase form OR Contact about vehicle
+- **Success criteria**: Modal animates smoothly, all data displays correctly, images are high quality, easy to close and navigate, purchase CTAs are prominent
+
+### Purchase & Finance Forms
+- **Functionality**: Comprehensive modal forms with tabs for Individual/Company buyers, complete with all necessary fields for identity verification, employment/business information, financing terms selection, and terms agreement
+- **Purpose**: Capture complete buyer information for processing purchases and financing applications for both individual and corporate customers
+- **Trigger**: Clicking "Buy Now" or "Finance" buttons in vehicle detail modal
+- **Progression**: Select Buy/Finance → Choose Individual/Company tab → Fill personal/company details → Provide ID information → (Finance only) Select payment term → Accept terms → Submit
+- **Success criteria**: Forms validate all required fields, entity type switching works smoothly, finance calculator shows accurate monthly payments, submission provides clear confirmation, data is properly structured for processing
 
 ### About Page
 - **Functionality**: Company story, team profiles, core values, statistics, and brand messaging
@@ -158,7 +165,8 @@ Key animation patterns:
   - **Hero**: Full-screen hero section with animated gradient text
   - **Navbar**: Fixed navigation with active page indicator and mobile menu
   - **ContactModal**: Specialized modal for vehicle inquiries with pre-filled details
-  - **VehicleDetailModal**: Full-featured modal with gallery and comprehensive specs
+  - **VehicleDetailModal**: Full-featured modal with gallery, comprehensive specs, and Buy Now/Finance CTAs
+  - **PurchaseModal**: Dual-form modal with Individual/Company tabs, complete purchase and financing workflows
   - **StatCard**: Animated statistics with count-up effects
   - **ProcessStep**: Numbered workflow visualization
   
@@ -180,6 +188,10 @@ Key animation patterns:
   - CheckCircle for completed states and features
   - Clock for hours and time-based info
   - ChatCircle for messaging/contact
+  - ShoppingCart for buy now actions
+  - Briefcase for company/business
+  - User for individual person
+  - Calendar for test drives and scheduling
 
 - **Spacing**:
   - Page container: max-w-7xl mx-auto px-6 md:px-12 lg:px-24

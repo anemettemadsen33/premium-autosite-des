@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import { Separator } from './ui/separator'
+import { PurchaseModal } from './PurchaseModal'
 import { 
   X, 
   Engine, 
@@ -13,7 +14,9 @@ import {
   Gear, 
   Calendar,
   CaretLeft,
-  CaretRight
+  CaretRight,
+  CreditCard,
+  ShoppingCart
 } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -26,8 +29,15 @@ interface VehicleDetailModalProps {
 
 export function VehicleDetailModal({ vehicle, open, onOpenChange, onContact }: VehicleDetailModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [purchaseModalOpen, setPurchaseModalOpen] = useState(false)
+  const [purchaseType, setPurchaseType] = useState<'buy' | 'finance'>('buy')
 
   if (!vehicle) return null
+
+  const handleOpenPurchaseModal = (type: 'buy' | 'finance') => {
+    setPurchaseType(type)
+    setPurchaseModalOpen(true)
+  }
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % vehicle.images.length)
@@ -195,10 +205,31 @@ export function VehicleDetailModal({ vehicle, open, onOpenChange, onContact }: V
 
             <Separator className="my-10" />
 
-            <div className="flex flex-col sm:flex-row gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <Button 
                 size="lg" 
-                className="flex-1 bg-gradient-to-r from-accent to-purple-500 hover:from-accent/90 hover:to-purple-600 text-white h-14 text-base rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
+                className="bg-gradient-to-r from-accent to-purple-500 hover:from-accent/90 hover:to-purple-600 text-white h-14 text-base rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
+                onClick={() => handleOpenPurchaseModal('buy')}
+              >
+                <ShoppingCart size={22} weight="bold" className="mr-2" />
+                Buy Now
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="h-14 text-base rounded-xl border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all"
+                onClick={() => handleOpenPurchaseModal('finance')}
+              >
+                <CreditCard size={22} weight="bold" className="mr-2" />
+                Finance
+              </Button>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="flex-1 h-14 text-base rounded-xl border-2 hover:border-accent hover:bg-accent/5 transition-all"
                 onClick={() => onContact(vehicle)}
               >
                 <Calendar size={22} weight="bold" className="mr-2" />
@@ -216,6 +247,13 @@ export function VehicleDetailModal({ vehicle, open, onOpenChange, onContact }: V
           </div>
         </div>
       </DialogContent>
+
+      <PurchaseModal 
+        vehicle={vehicle}
+        open={purchaseModalOpen}
+        onOpenChange={setPurchaseModalOpen}
+        purchaseType={purchaseType}
+      />
     </Dialog>
   )
 }
