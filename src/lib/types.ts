@@ -205,8 +205,27 @@ export interface SearchFilters {
   query?: string
 }
 
-export type Vehicle = any
-export type Announcement = any
+export interface Vehicle {
+  id: string
+  type: string
+  brand: string
+  model: string
+  year: number
+  price: number
+  mileage?: number
+  location: string
+  images: string[]
+  description?: string
+}
+
+export interface Announcement {
+  id: string
+  title: string
+  content: string
+  createdAt: string
+  type: 'info' | 'warning' | 'success'
+  priority?: 'low' | 'medium' | 'high'
+}
 
 export type Currency = 'EUR' | 'USD' | 'GBP' | 'RON'
 

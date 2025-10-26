@@ -1,18 +1,18 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 
-interface UseVirtualScrollOptions {
+interface UseVirtualScrollOptions<T> {
   itemHeight: number
   containerHeight: number
-  items: any[]
+  items: T[]
   overscan?: number
 }
 
-export function useVirtualScroll({
+export function useVirtualScroll<T>({
   itemHeight,
   containerHeight,
   items,
   overscan = 3
-}: UseVirtualScrollOptions) {
+}: UseVirtualScrollOptions<T>) {
   const [scrollTop, setScrollTop] = useState(0)
   const scrollRef = useRef<HTMLDivElement>(null)
 

@@ -9,7 +9,7 @@ import { toast } from 'sonner'
 import { MAIN_CATEGORIES, type MainCategory, type VehicleSubCategoryCode } from '@/lib/vehicleSubCategories'
 import { useVehicleSubCategories } from '@/hooks/use-vehicle-sub-categories'
 import { listingFormSchema } from '@/lib/validationSchema'
-import { Car, CheckCircle, XCircle } from '@phosphor-icons/react'
+import { Car, CheckCircle } from '@phosphor-icons/react'
 
 interface CategorySelectorFormProps {
   onNavigate?: (page: string) => void
@@ -66,7 +66,7 @@ export function CategorySelectorForm({ onNavigate }: CategorySelectorFormProps) 
       description: `Category: ${mainCategory}${subCategory ? ` → ${subCategory}` : ''}`,
     })
 
-    console.log('Valid form data:', result.data)
+    // Form data is valid and ready to submit
   }
 
   return (
