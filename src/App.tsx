@@ -7,6 +7,8 @@ import { About } from '@/pages/About'
 import { Services } from '@/pages/Services'
 import { Financing } from '@/pages/Financing'
 import { Contact } from '@/pages/Contact'
+import { Login } from '@/pages/Login'
+import { Register } from '@/pages/Register'
 import { Toaster } from '@/components/ui/sonner'
 
 function App() {
@@ -28,6 +30,10 @@ function App() {
         return <Financing />
       case 'contact':
         return <Contact />
+      case 'login':
+        return <Login onNavigate={setCurrentPage} />
+      case 'register':
+        return <Register onNavigate={setCurrentPage} />
       default:
         return <Home />
     }

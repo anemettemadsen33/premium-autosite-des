@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { List, X, Phone } from '@phosphor-icons/react'
+import { List, X, Phone, UserCircle, SignIn } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface NavbarProps {
@@ -62,15 +62,33 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-3">
+              <Button
+                size="sm"
+                variant="ghost"
+                className="gap-2"
+                onClick={() => handleNavigate('login')}
+              >
+                <SignIn size={18} weight="duotone" />
+                Login
+              </Button>
               <Button
                 size="sm"
                 variant="outline"
                 className="gap-2"
+                onClick={() => handleNavigate('register')}
+              >
+                <UserCircle size={18} weight="duotone" />
+                Register
+              </Button>
+              <Button
+                size="sm"
+                variant="default"
+                className="gap-2 bg-gradient-to-r from-accent to-purple-600"
                 onClick={() => handleNavigate('contact')}
               >
                 <Phone size={16} weight="duotone" />
-                Contact Us
+                Contact
               </Button>
             </div>
 
@@ -97,7 +115,7 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
             transition={{ duration: 0.2 }}
             className="fixed top-20 left-0 right-0 z-40 md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50"
           >
-            <div className="px-6 py-6 space-y-4">
+            <div className="px-6 py-6 space-y-3">
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -111,14 +129,34 @@ export function Navbar({ currentPage, onNavigate }: NavbarProps) {
                   {item.label}
                 </button>
               ))}
-              <Button
-                size="lg"
-                className="w-full gap-2 bg-gradient-to-r from-accent to-purple-600"
-                onClick={() => handleNavigate('contact')}
-              >
-                <Phone size={20} weight="duotone" />
-                Contact Us
-              </Button>
+              <div className="pt-2 space-y-2">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full gap-2"
+                  onClick={() => handleNavigate('login')}
+                >
+                  <SignIn size={20} weight="duotone" />
+                  Login
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full gap-2"
+                  onClick={() => handleNavigate('register')}
+                >
+                  <UserCircle size={20} weight="duotone" />
+                  Register
+                </Button>
+                <Button
+                  size="lg"
+                  className="w-full gap-2 bg-gradient-to-r from-accent to-purple-600"
+                  onClick={() => handleNavigate('contact')}
+                >
+                  <Phone size={20} weight="duotone" />
+                  Contact Us
+                </Button>
+              </div>
             </div>
           </motion.div>
         )}
