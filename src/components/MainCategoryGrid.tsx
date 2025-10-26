@@ -8,7 +8,7 @@ import {
   Truck, 
   Tractor,
   Wrench,
-  House,
+  Campfire,
   ArrowRight
 } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
@@ -26,7 +26,7 @@ const CATEGORY_ICONS: Record<MainCategory, any> = {
   'ConstructionMachine': Tractor,
   'AgriculturalVehicle': Tractor,
   'Trailer': Truck,
-  'Caravan': House,
+  'Caravan': Campfire,
   'SemiTrailer': Truck,
   'Parts': Wrench,
 }

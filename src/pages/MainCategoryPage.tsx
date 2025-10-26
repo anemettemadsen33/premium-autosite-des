@@ -24,9 +24,8 @@ import {
   SquaresFour,
   Rows,
   SortAscending,
-  FunnelSimple,
   Check,
-  House
+  Campfire
 } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
@@ -48,7 +47,7 @@ const CATEGORY_ICONS: Record<MainCategory, any> = {
   'ConstructionMachine': Tractor,
   'AgriculturalVehicle': Tractor,
   'Trailer': Truck,
-  'Caravan': House,
+  'Caravan': Campfire,
   'SemiTrailer': Truck,
   'Parts': Wrench,
 }
