@@ -275,6 +275,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
               )
             })}
           </div>
+
+          <div className="text-center mt-8">
+            <Button variant="outline" size="lg" onClick={() => onNavigate('categories')}>
+              View All Main Categories
+            </Button>
+          </div>
         </div>
       </section>
 
