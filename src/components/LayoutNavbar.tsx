@@ -4,7 +4,7 @@ import { useAuth } from '@/lib/auth'
 import { useTheme } from '@/lib/theme'
 import { 
   List, X, User, SignIn, SignOut, Moon, Sun, 
-  Heart, ChatCircle, Plus, GridFour, Article
+  Heart, ChatCircle, Plus, GridFour, Article, ChartLine
 } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -27,6 +27,7 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
 
   const navItems = [
     { id: 'home', label: 'Home' },
+    { id: 'market-insights', label: 'Market Insights' },
     { id: 'about', label: 'About' },
   ]
 

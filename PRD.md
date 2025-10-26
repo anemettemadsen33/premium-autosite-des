@@ -75,6 +75,20 @@ Multi-category automotive marketplace with user authentication, listing manageme
 - **Progression**: Select category → Fill details → Upload images → Preview → Submit → View confirmation
 - **Success criteria**: Fields adapt to category, validation prevents errors, images upload successfully, submission creates listing
 
+### Purchase & Financing System
+- **Functionality**: Buy Now and Leasing/Finance options with region-specific forms (US/EU), separate flows for individuals and companies, payment plan selection, full compliance forms
+- **Purpose**: Enable direct vehicle purchases and financing applications through the platform
+- **Trigger**: Clicking "Buy Now" or "Finance" buttons on vehicle details
+- **Progression**: Select purchase type → Choose region (US/EU) → Select entity type (Individual/Company) → Fill comprehensive form → Review terms → Submit application
+- **Success criteria**: Forms adapt to region and entity type, all required compliance fields present, validation prevents errors, submissions are processed
+
+### Market Insights Dashboard
+- **Functionality**: Real-time market trends, popular models, regional pricing data, price distribution charts, category growth metrics
+- **Purpose**: Provide data-driven insights to help buyers and sellers make informed decisions
+- **Trigger**: Clicking "Market Insights" in navigation
+- **Progression**: View overview → Select region/timeframe filters → Browse trends → Explore popular models → Analyze pricing data → Navigate to related actions
+- **Success criteria**: Data visualizations are clear, filters work properly, metrics are relevant, insights are actionable
+
 ### Search Functionality
 - **Functionality**: Global search bar with category filter, keyword matching across listings, instant results
 - **Purpose**: Help users quickly find specific listings across all categories
@@ -112,6 +126,10 @@ Multi-category automotive marketplace with user authentication, listing manageme
 - **Session expiry** - Detect and prompt re-login
 - **Missing required fields** - Prevent submission and highlight fields
 - **Price/number input validation** - Accept only valid numeric input
+- **Region-specific form fields** - Dynamic placeholders and labels based on US/EU selection
+- **Company vs Individual forms** - Show appropriate fields for each entity type
+- **Finance eligibility** - Validate income and employment requirements
+- **Multi-region compliance** - Handle different ID types, tax numbers, and regulatory requirements
 
 ## Design Direction
 
@@ -202,6 +220,9 @@ Key animation patterns:
   - **MessageThread**: Conversation view with messages
   - **ListingForm**: Multi-step dynamic form for adding listings
   - **FavoriteButton**: Toggleable heart with persist
+  - **PurchaseModal**: Comprehensive purchase/finance application with region and entity type selection
+  - **MarketInsightsCharts**: Data visualization for market trends and pricing
+  - **RegionSelector**: US/EU region toggle with localized formatting
   
 - **States**:
   - Buttons: Default, Hover, Active (scale 0.98), Focus (ring), Disabled, Loading
@@ -230,6 +251,12 @@ Key animation patterns:
   - Funnel (filters)
   - Share (share listing)
   - Image/Images (gallery)
+  - ShoppingCart (buy now)
+  - CreditCard (financing)
+  - ChartLine/TrendUp/TrendDown (market insights)
+  - Fire (popular/hot items)
+  - Globe (region selection)
+  - Briefcase (company forms)
   
 - **Spacing**:
   - Page container: max-w-7xl mx-auto px-4 md:px-6 lg:px-8

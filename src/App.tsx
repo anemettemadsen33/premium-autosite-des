@@ -17,6 +17,7 @@ import { AboutPage } from '@/pages/AboutPage'
 import { TermsPage } from '@/pages/TermsPage'
 import { PrivacyPage } from '@/pages/PrivacyPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { MarketInsightsPage } from '@/pages/MarketInsightsPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
 
@@ -37,6 +38,8 @@ function App() {
     switch (route.page) {
       case 'home':
         return <HomePage onNavigate={navigate} />
+      case 'market-insights':
+        return <MarketInsightsPage onNavigate={navigate} />
       case 'category':
         return <CategoryPage category={route.params?.category as Category} onNavigate={navigate} />
       case 'listing':

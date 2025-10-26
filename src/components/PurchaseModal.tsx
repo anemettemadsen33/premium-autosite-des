@@ -10,7 +10,7 @@ import { Separator } from './ui/separator'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
 import { Checkbox } from './ui/checkbox'
 import { toast } from 'sonner'
-import { CreditCard, Briefcase, User, X } from '@phosphor-icons/react'
+import { CreditCard, Briefcase, User, X, Globe } from '@phosphor-icons/react'
 
 interface PurchaseModalProps {
   vehicle: Vehicle | null
@@ -20,9 +20,11 @@ interface PurchaseModalProps {
 }
 
 type EntityType = 'individual' | 'company'
+type Region = 'us' | 'eu'
 
 export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: PurchaseModalProps) {
   const [entityType, setEntityType] = useState<EntityType>('individual')
+  const [region, setRegion] = useState<Region>('us')
   const [paymentPlan, setPaymentPlan] = useState('12')
   const [agreedToTerms, setAgreedToTerms] = useState(false)
 
@@ -73,6 +75,22 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
               {vehicle.name} • ${vehicle.price.toLocaleString()}
             </p>
           </DialogHeader>
+
+          <div className="mt-4">
+            <Label htmlFor="region" className="text-sm font-medium mb-2 flex items-center gap-2">
+              <Globe size={16} weight="duotone" />
+              Select Your Region
+            </Label>
+            <Select value={region} onValueChange={(v) => setRegion(v as Region)}>
+              <SelectTrigger id="region" className="h-12 rounded-xl">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="us">United States</SelectItem>
+                <SelectItem value="eu">European Union / United Kingdom</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         <div className="p-8">
@@ -127,33 +145,61 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" name="email" type="email" placeholder="john.doe@example.com" required />
+                    <Input id="email" name="email" type="email" placeholder={region === 'us' ? 'john.doe@example.com' : 'john.doe@example.co.uk'} required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number *</Label>
-                    <Input id="phone" name="phone" type="tel" placeholder="+1 (555) 123-4567" required />
+                    <Input id="phone" name="phone" type="tel" placeholder={region === 'us' ? '+1 (555) 123-4567' : '+44 20 7123 4567'} required />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="address">Street Address *</Label>
-                  <Input id="address" name="address" placeholder="123 Main Street" required />
+                  <Input id="address" name="address" placeholder={region === 'us' ? '123 Main Street' : '10 Downing Street'} required />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="city">City *</Label>
-                    <Input id="city" name="city" placeholder="Los Angeles" required />
+                    <Input id="city" name="city" placeholder={region === 'us' ? 'Los Angeles' : 'London'} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="state">State *</Label>
-                    <Input id="state" name="state" placeholder="CA" required />
+                    <Label htmlFor="state">{region === 'us' ? 'State' : 'County/Region'} *</Label>
+                    <Input id="state" name="state" placeholder={region === 'us' ? 'CA' : 'Greater London'} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="zipCode">ZIP Code *</Label>
-                    <Input id="zipCode" name="zipCode" placeholder="90210" required />
+                    <Label htmlFor="zipCode">{region === 'us' ? 'ZIP Code' : 'Postcode'} *</Label>
+                    <Input id="zipCode" name="zipCode" placeholder={region === 'us' ? '90210' : 'SW1A 1AA'} required />
                   </div>
                 </div>
+
+                {region === 'eu' && (
+                  <div className="space-y-2">
+                    <Label htmlFor="country">Country *</Label>
+                    <Select name="country" required>
+                      <SelectTrigger id="country">
+                        <SelectValue placeholder="Select country" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="uk">United Kingdom</SelectItem>
+                        <SelectItem value="de">Germany</SelectItem>
+                        <SelectItem value="fr">France</SelectItem>
+                        <SelectItem value="it">Italy</SelectItem>
+                        <SelectItem value="es">Spain</SelectItem>
+                        <SelectItem value="nl">Netherlands</SelectItem>
+                        <SelectItem value="be">Belgium</SelectItem>
+                        <SelectItem value="at">Austria</SelectItem>
+                        <SelectItem value="se">Sweden</SelectItem>
+                        <SelectItem value="no">Norway</SelectItem>
+                        <SelectItem value="dk">Denmark</SelectItem>
+                        <SelectItem value="fi">Finland</SelectItem>
+                        <SelectItem value="ie">Ireland</SelectItem>
+                        <SelectItem value="pt">Portugal</SelectItem>
+                        <SelectItem value="pl">Poland</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
 
                 <Separator className="my-6" />
 
@@ -165,9 +211,19 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
                         <SelectValue placeholder="Select ID type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="drivers-license">Driver's License</SelectItem>
-                        <SelectItem value="passport">Passport</SelectItem>
-                        <SelectItem value="state-id">State ID</SelectItem>
+                        {region === 'us' ? (
+                          <>
+                            <SelectItem value="drivers-license">Driver's License</SelectItem>
+                            <SelectItem value="passport">Passport</SelectItem>
+                            <SelectItem value="state-id">State ID</SelectItem>
+                          </>
+                        ) : (
+                          <>
+                            <SelectItem value="passport">Passport</SelectItem>
+                            <SelectItem value="national-id">National ID Card</SelectItem>
+                            <SelectItem value="driving-licence">Driving Licence</SelectItem>
+                          </>
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
@@ -182,10 +238,17 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
                     <Label htmlFor="dateOfBirth">Date of Birth *</Label>
                     <Input id="dateOfBirth" name="dateOfBirth" type="date" required />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="ssn">Social Security Number *</Label>
-                    <Input id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required />
-                  </div>
+                  {region === 'us' ? (
+                    <div className="space-y-2">
+                      <Label htmlFor="ssn">Social Security Number *</Label>
+                      <Input id="ssn" name="ssn" placeholder="XXX-XX-XXXX" required />
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <Label htmlFor="nationalInsurance">National Insurance / Tax Number *</Label>
+                      <Input id="nationalInsurance" name="nationalInsurance" placeholder={region === 'eu' ? 'XX 00 00 00 X' : 'AB 12 34 56 C'} required />
+                    </div>
+                  )}
                 </div>
 
                 {purchaseType === 'finance' && (
@@ -206,7 +269,7 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="monthlyIncome">Monthly Income *</Label>
+                        <Label htmlFor="monthlyIncome">Monthly Income ({region === 'us' ? '$' : '€'}) *</Label>
                         <Input id="monthlyIncome" name="monthlyIncome" type="number" placeholder="5000" required />
                       </div>
                       <div className="space-y-2">
@@ -235,48 +298,76 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
               <TabsContent value="company" className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="companyName">Company Name *</Label>
-                  <Input id="companyName" name="companyName" placeholder="ABC Corporation Ltd." required />
+                  <Input id="companyName" name="companyName" placeholder={region === 'us' ? 'ABC Corporation Inc.' : 'ABC Corporation Ltd.'} required />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="registrationNumber">Registration Number *</Label>
-                    <Input id="registrationNumber" name="registrationNumber" placeholder="REG123456789" required />
+                    <Label htmlFor="registrationNumber">{region === 'us' ? 'EIN (Employer ID)' : 'Company Registration Number'} *</Label>
+                    <Input id="registrationNumber" name="registrationNumber" placeholder={region === 'us' ? '12-3456789' : '12345678'} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="taxId">Tax ID / VAT Number *</Label>
-                    <Input id="taxId" name="taxId" placeholder="XX-XXXXXXX" required />
+                    <Label htmlFor="taxId">{region === 'us' ? 'Tax ID' : 'VAT Number'} *</Label>
+                    <Input id="taxId" name="taxId" placeholder={region === 'us' ? 'XX-XXXXXXX' : 'GB123456789'} required />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="companyAddress">Company Address *</Label>
-                  <Input id="companyAddress" name="companyAddress" placeholder="456 Business Avenue" required />
+                  <Input id="companyAddress" name="companyAddress" placeholder={region === 'us' ? '456 Business Avenue' : '1 Business Park'} required />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="companyCity">City *</Label>
-                    <Input id="companyCity" name="companyCity" placeholder="Los Angeles" required />
+                    <Input id="companyCity" name="companyCity" placeholder={region === 'us' ? 'Los Angeles' : 'London'} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="companyState">State *</Label>
-                    <Input id="companyState" name="companyState" placeholder="CA" required />
+                    <Label htmlFor="companyState">{region === 'us' ? 'State' : 'County/Region'} *</Label>
+                    <Input id="companyState" name="companyState" placeholder={region === 'us' ? 'CA' : 'Greater London'} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="companyZipCode">ZIP Code *</Label>
-                    <Input id="companyZipCode" name="companyZipCode" placeholder="90210" required />
+                    <Label htmlFor="companyZipCode">{region === 'us' ? 'ZIP Code' : 'Postcode'} *</Label>
+                    <Input id="companyZipCode" name="companyZipCode" placeholder={region === 'us' ? '90210' : 'EC1A 1BB'} required />
                   </div>
                 </div>
+
+                {region === 'eu' && (
+                  <div className="space-y-2">
+                    <Label htmlFor="companyCountry">Country *</Label>
+                    <Select name="companyCountry" required>
+                      <SelectTrigger id="companyCountry">
+                        <SelectValue placeholder="Select country" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="uk">United Kingdom</SelectItem>
+                        <SelectItem value="de">Germany</SelectItem>
+                        <SelectItem value="fr">France</SelectItem>
+                        <SelectItem value="it">Italy</SelectItem>
+                        <SelectItem value="es">Spain</SelectItem>
+                        <SelectItem value="nl">Netherlands</SelectItem>
+                        <SelectItem value="be">Belgium</SelectItem>
+                        <SelectItem value="at">Austria</SelectItem>
+                        <SelectItem value="se">Sweden</SelectItem>
+                        <SelectItem value="no">Norway</SelectItem>
+                        <SelectItem value="dk">Denmark</SelectItem>
+                        <SelectItem value="fi">Finland</SelectItem>
+                        <SelectItem value="ie">Ireland</SelectItem>
+                        <SelectItem value="pt">Portugal</SelectItem>
+                        <SelectItem value="pl">Poland</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="companyEmail">Company Email *</Label>
-                    <Input id="companyEmail" name="companyEmail" type="email" placeholder="contact@company.com" required />
+                    <Input id="companyEmail" name="companyEmail" type="email" placeholder={region === 'us' ? 'contact@company.com' : 'contact@company.co.uk'} required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="companyPhone">Company Phone *</Label>
-                    <Input id="companyPhone" name="companyPhone" type="tel" placeholder="+1 (555) 987-6543" required />
+                    <Input id="companyPhone" name="companyPhone" type="tel" placeholder={region === 'us' ? '+1 (555) 987-6543' : '+44 20 7987 6543'} required />
                   </div>
                 </div>
 
@@ -297,11 +388,11 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="repEmail">Email Address *</Label>
-                    <Input id="repEmail" name="repEmail" type="email" placeholder="jane.smith@company.com" required />
+                    <Input id="repEmail" name="repEmail" type="email" placeholder={region === 'us' ? 'jane.smith@company.com' : 'jane.smith@company.co.uk'} required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="repPhone">Phone Number *</Label>
-                    <Input id="repPhone" name="repPhone" type="tel" placeholder="+1 (555) 123-4567" required />
+                    <Input id="repPhone" name="repPhone" type="tel" placeholder={region === 'us' ? '+1 (555) 123-4567' : '+44 20 7123 4567'} required />
                   </div>
                 </div>
 
@@ -318,9 +409,19 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
                         <SelectValue placeholder="Select ID type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="drivers-license">Driver's License</SelectItem>
-                        <SelectItem value="passport">Passport</SelectItem>
-                        <SelectItem value="state-id">State ID</SelectItem>
+                        {region === 'us' ? (
+                          <>
+                            <SelectItem value="drivers-license">Driver's License</SelectItem>
+                            <SelectItem value="passport">Passport</SelectItem>
+                            <SelectItem value="state-id">State ID</SelectItem>
+                          </>
+                        ) : (
+                          <>
+                            <SelectItem value="passport">Passport</SelectItem>
+                            <SelectItem value="national-id">National ID Card</SelectItem>
+                            <SelectItem value="driving-licence">Driving Licence</SelectItem>
+                          </>
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
@@ -337,7 +438,7 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="annualRevenue">Annual Revenue *</Label>
+                        <Label htmlFor="annualRevenue">Annual Revenue ({region === 'us' ? '$' : '€'}) *</Label>
                         <Input id="annualRevenue" name="annualRevenue" type="number" placeholder="1000000" required />
                       </div>
                       <div className="space-y-2">
@@ -348,7 +449,7 @@ export function PurchaseModal({ vehicle, open, onOpenChange, purchaseType }: Pur
 
                     <div className="space-y-2">
                       <Label htmlFor="bankName">Bank Name *</Label>
-                      <Input id="bankName" name="bankName" placeholder="Bank of America" required />
+                      <Input id="bankName" name="bankName" placeholder={region === 'us' ? 'Bank of America' : 'Barclays Bank'} required />
                     </div>
 
                     <div className="space-y-2">
