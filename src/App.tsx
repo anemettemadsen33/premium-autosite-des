@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Navbar } from '@/components/Navbar'
 import { Home } from '@/pages/Home'
+import { Inventory } from '@/pages/Inventory'
 import { About } from '@/pages/About'
 import { Services } from '@/pages/Services'
 import { Financing } from '@/pages/Financing'
@@ -14,6 +15,8 @@ function App() {
     switch (currentPage) {
       case 'home':
         return <Home />
+      case 'inventory':
+        return <Inventory />
       case 'about':
         return <About />
       case 'services':
@@ -51,6 +54,11 @@ function App() {
                 <li>
                   <button onClick={() => setCurrentPage('home')} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                     Home
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => setCurrentPage('inventory')} className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+                    Inventory
                   </button>
                 </li>
                 <li>

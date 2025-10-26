@@ -19,6 +19,13 @@ Multi-page automotive showcase with vehicle browsing, filtering, detailed views,
 - **Progression**: View hero → Scroll to collection → Apply filters → Browse vehicles → Click for details
 - **Success criteria**: Vehicles load instantly, filters work smoothly, cards are visually appealing, responsive on all devices
 
+### Inventory Listing Page
+- **Functionality**: Dedicated full-page inventory browser with advanced filtering sidebar, search functionality, price range slider, multiple view modes (grid/list), and comprehensive sorting options
+- **Purpose**: Provide powerful browsing and discovery tools for users to find their ideal vehicle from the complete collection
+- **Trigger**: Clicking "Inventory" in navigation or "Browse All" CTAs
+- **Progression**: Navigate to inventory → View all vehicles → Apply filters (type, brand, year, price, new/featured) → Search by keyword → Toggle view mode → Sort results → Click vehicle for details
+- **Success criteria**: Sidebar filters are sticky and accessible, search is instant, filters update count dynamically, empty states are helpful, view modes switch smoothly, mobile responsive with collapsible filters
+
 ### Vehicle Detail Modal
 - **Functionality**: Full-screen modal with image gallery, comprehensive specifications, features list, color options, and contact CTA
 - **Purpose**: Provide all necessary information for purchase consideration in an immersive format
