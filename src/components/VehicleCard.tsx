@@ -7,6 +7,7 @@ import { Listing } from '@/lib/types'
 import { formatPrice } from '@/lib/utils'
 import { useFavorites } from '@/lib/favorites'
 import { useAuth } from '@/lib/auth'
+import { trackEvent, generateSessionId, getDeviceType } from '@/lib/analytics'
 import { LazyImage } from './LazyImage'
 import { motion } from 'framer-motion'
 
@@ -39,6 +40,17 @@ export const VehicleCard = memo(function VehicleCard({
   }
 
   const handleClick = () => {
+    trackEvent({
+      listingId: item.id,
+      userId: user?.id,
+      eventType: 'click',
+      metadata: {
+        sessionId: generateSessionId(),
+        deviceType: getDeviceType(),
+        source: 'listing-card',
+      }
+    })
+    
     if (onClick) {
       onClick()
     } else if (onNavigate) {

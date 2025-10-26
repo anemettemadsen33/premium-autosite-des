@@ -32,6 +32,7 @@ import { PerformanceMonitorPage } from '@/pages/PerformanceMonitorPage'
 import { HelpCenterPage } from '@/pages/HelpCenterPage'
 import { SmartCalculatorPage } from '@/pages/SmartCalculatorPage'
 import { AdvancedToolsPage } from '@/pages/AdvancedToolsPage'
+import { LiveDashboardPage } from '@/pages/LiveDashboardPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
 
@@ -74,6 +75,8 @@ function App() {
         return <SmartCalculatorPage onNavigate={navigate} />
       case 'advanced-tools':
         return <AdvancedToolsPage onNavigate={navigate} />
+      case 'live-dashboard':
+        return <LiveDashboardPage onNavigate={navigate} />
       case 'category':
         return <CategoryPageEnhanced category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':

@@ -147,6 +147,10 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
                         <Gauge size={16} weight="duotone" className="mr-2" />
                         Performance
                       </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleNavigate('live-dashboard')}>
+                        <ChartLine size={16} weight="duotone" className="mr-2" />
+                        Live Analytics
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={handleLogout}>
                         <SignOut size={16} weight="duotone" className="mr-2" />

@@ -54,6 +54,13 @@ Premium automotive marketplace with AI pricing predictions, live auction system,
 - **Progression**: View tools overview → Read feature descriptions → Click tool card → Navigate to relevant page
 - **Success criteria**: All tools clearly presented, engaging design, easy navigation, statistics showcased
 
+### Live Analytics Dashboard (NEW)
+- **Functionality**: Real-time analytics dashboard tracking listing performance with comprehensive metrics including views, clicks, favorites, contacts, shares, phone/email reveals, conversion rates, device breakdown, and time-series charts. Event tracking system captures all user interactions with automatic sessionId and device detection
+- **Purpose**: Provide dealers and sellers with actionable insights to optimize listings and understand buyer behavior
+- **Trigger**: Clicking "Live Analytics" in user dropdown menu or navigating to /live-dashboard route
+- **Progression**: View overview stats → Select timeframe (7/30/90/all days) → Filter by specific listing → Explore tabs (Overview, Engagement, Performance, Devices) → View charts and metrics → Refresh data
+- **Success criteria**: Auto-tracks all listing interactions (views, clicks, favorites, contacts), displays real-time charts with Recharts, calculates conversion rates and click-through rates, shows device breakdown (mobile/tablet/desktop), top performing listings ranked by views, smooth tab navigation, responsive design
+
 ## Essential Features
 
 ### Homepage with Category Selection

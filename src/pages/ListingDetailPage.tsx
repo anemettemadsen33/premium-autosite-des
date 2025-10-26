@@ -9,6 +9,7 @@ import { Listing } from '@/lib/types'
 import { useListings } from '@/lib/listings'
 import { useFavorites } from '@/lib/favorites'
 import { useAuth } from '@/lib/auth'
+import { trackEvent, generateSessionId, getDeviceType } from '@/lib/analytics'
 import {
   ArrowLeft, Heart, Eye, MapPin, Calendar, 
   Gauge, Drop, Gear, Car, EnvelopeSimple, Phone
@@ -34,6 +35,21 @@ export function ListingDetailPage({ listingId, onNavigate }: ListingDetailPagePr
 
   const isFavorite = checkIsFavorite(listingId)
 
+  useEffect(() => {
+    if (listing) {
+      trackEvent({
+        listingId,
+        userId: user?.id,
+        eventType: 'view',
+        metadata: {
+          sessionId: generateSessionId(),
+          deviceType: getDeviceType(),
+          referrer: document.referrer || 'direct',
+        }
+      })
+    }
+  }, [listingId, listing, user?.id])
+
   const handleToggleFavorite = () => {
     if (!isAuthenticated) {
       toast.error('Please login to save favorites')
@@ -42,6 +58,16 @@ export function ListingDetailPage({ listingId, onNavigate }: ListingDetailPagePr
     }
 
     toggleFavorite(listingId)
+    
+    trackEvent({
+      listingId,
+      userId: user?.id,
+      eventType: 'favorite',
+      metadata: {
+        sessionId: generateSessionId(),
+        deviceType: getDeviceType(),
+      }
+    })
     
     if (isFavorite) {
       toast.success('Removed from favorites')
@@ -56,6 +82,17 @@ export function ListingDetailPage({ listingId, onNavigate }: ListingDetailPagePr
       onNavigate('login')
       return
     }
+    
+    trackEvent({
+      listingId,
+      userId: user?.id,
+      eventType: 'contact',
+      metadata: {
+        sessionId: generateSessionId(),
+        deviceType: getDeviceType(),
+      }
+    })
+    
     setShowContactForm(true)
     toast.success('Message sent to seller')
   }
