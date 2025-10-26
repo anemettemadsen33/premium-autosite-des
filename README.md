@@ -7,6 +7,8 @@ A world-class, production-ready automotive marketplace platform built with React
 ### 🎯 Core Marketplace
 - **Advanced Search & Filtering** - 8+ filter types with instant results
 - **Multi-Category Support** - Cars, Motorcycles, Trucks, RVs, Parts & Accessories
+- **Official Category Codes** - mobile.de compatible classification system with 10 main categories and 100+ sub-categories
+- **Dependent Category Dropdowns** - Smart UI with automatic sub-category filtering
 - **Smart Listings** - Detailed specifications, image galleries, location data
 - **User Dashboard** - Complete account management and analytics
 - **Favorites System** - Save and track vehicles of interest
@@ -89,6 +91,7 @@ src/
 ├── components/          # React components
 │   ├── ui/             # Shadcn UI components (45+)
 │   ├── VehicleCard.tsx # Listing preview cards
+│   ├── FilterBar.tsx   # Category & sub-category filters
 │   ├── LiveAuction.tsx # Real-time auction bidding
 │   ├── LiveChatSupport.tsx # AI chat interface
 │   └── ...
@@ -99,14 +102,45 @@ src/
 │   └── ...
 ├── lib/                # Utilities and data
 │   ├── types.ts        # TypeScript definitions
+│   ├── vehicleSubCategories.ts # mobile.de category codes
+│   ├── validationSchema.ts # Zod schemas for validation
 │   ├── data.ts         # Sample listings
 │   ├── auth.tsx        # Authentication context
 │   └── theme.tsx       # Theme management
-└── hooks/              # Custom React hooks
-    ├── use-debounce.ts
-    ├── use-intersection-observer.ts
-    └── ...
+├── hooks/              # Custom React hooks
+│   ├── use-vehicle-sub-categories.ts
+│   ├── use-debounce.ts
+│   ├── use-intersection-observer.ts
+│   └── ...
+└── docs/               # Documentation
+    └── vehicleCategories.md # Complete category reference
 ```
+
+## 🚙 Vehicle Categories
+
+The platform supports the official mobile.de category classification system:
+
+### Main Categories (10)
+- **Car** - Passenger vehicles (10 sub-types: Cabrio, SUV, Sedan, etc.)
+- **Motorbike** - Two-wheelers (12 sub-types: Touring, Sport, Chopper, etc.)
+- **VanUpTo7500** - Light commercial vehicles up to 7.5t
+- **TruckOver7500** - Heavy commercial vehicles over 7.5t
+- **ConstructionMachine** - Construction equipment (12 sub-types: Excavator, Loader, etc.)
+- **AgriculturalVehicle** - Farm machinery (7 sub-types: Tractor, Harvester, etc.)
+- **Trailer** - Towed vehicles (7 sub-types)
+- **Caravan** - Recreational vehicles (4 sub-types)
+- **SemiTrailer** - Commercial trailers (9 sub-types)
+- **Parts** - Vehicle components (10 sub-types)
+
+### Category Features
+- 100+ official sub-category codes compatible with mobile.de
+- Dependent dropdown UX (sub-categories update when main category changes)
+- Full validation ensuring sub-category belongs to main category
+- English and German labels for all categories
+- Filter and search by category and sub-category
+- Persistent category selection across sessions
+
+See [docs/vehicleCategories.md](docs/vehicleCategories.md) for complete category reference.
 
 ## 🎯 Key Pages
 
