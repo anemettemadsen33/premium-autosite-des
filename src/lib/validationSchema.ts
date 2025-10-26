@@ -10,6 +10,10 @@ import {
 const mainCategoryCodes = MAIN_CATEGORIES.map(cat => cat.code) as [MainCategory, ...MainCategory[]]
 const subCategoryCodes = VEHICLE_SUB_CATEGORIES.map(sub => sub.code) as [VehicleSubCategoryCode, ...VehicleSubCategoryCode[]]
 
+/**
+ * Validation schema for vehicle category selection
+ * Ensures that selected sub-category belongs to the selected main category
+ */
 export const vehicleCategorySchema = z.object({
   mainCategory: z.enum(mainCategoryCodes, {
     errorMap: () => ({ message: 'Please select a valid main category' })
@@ -27,6 +31,11 @@ export const vehicleCategorySchema = z.object({
     path: ['subCategory'],
   }
 )
+
+/**
+ * Comprehensive listing form validation schema
+ * Includes all required fields and category validation
+ */
 
 export const listingFormSchema = z.object({
   title: z.string().min(5, 'Title must be at least 5 characters'),

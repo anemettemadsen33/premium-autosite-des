@@ -1,3 +1,7 @@
+/**
+ * Main vehicle categories for classification
+ * Based on mobile.de standard - 10 main categories covering all vehicle types
+ */
 export type MainCategory = 
   | 'Car'
   | 'Motorbike'
@@ -9,6 +13,12 @@ export type MainCategory =
   | 'Caravan'
   | 'SemiTrailer'
   | 'Parts'
+
+/**
+ * Sub-category codes in format: MainCategory.SubType
+ * Over 100 sub-categories providing detailed vehicle classification
+ * Example: 'Car.Sedan', 'Motorbike.Sport', 'Parts.Engine'
+ */
 
 export type VehicleSubCategoryCode = 
   | 'Car.SmallCar'
@@ -226,21 +236,39 @@ export const MAIN_CATEGORIES: { code: MainCategory; label: string; labelDe: stri
   { code: 'Parts', label: 'Parts & Accessories', labelDe: 'Teile & Zubehör' },
 ]
 
+/**
+ * Get all sub-categories that belong to a specific main category
+ * @param mainCategory - The main category to filter by
+ * @returns Array of sub-categories, or empty array if mainCategory is null
+ */
 export function getSubCategoriesByMainCategory(mainCategory: MainCategory | null): VehicleSubCategory[] {
   if (!mainCategory) return []
   return VEHICLE_SUB_CATEGORIES.filter(sub => sub.mainCategory === mainCategory)
 }
 
+/**
+ * Look up main category details by code
+ */
 export function getMainCategoryByCode(code: MainCategory | null): { code: MainCategory; label: string; labelDe: string } | undefined {
   if (!code) return undefined
   return MAIN_CATEGORIES.find(cat => cat.code === code)
 }
 
+/**
+ * Look up sub-category details by code
+ */
 export function getSubCategoryByCode(code: VehicleSubCategoryCode | null): VehicleSubCategory | undefined {
   if (!code) return undefined
   return VEHICLE_SUB_CATEGORIES.find(sub => sub.code === code)
 }
 
+/**
+ * Validates that a sub-category belongs to the specified main category
+ * Used in form validation to prevent invalid category combinations
+ * @example
+ * validateSubCategoryForMainCategory('Car', 'Car.Sedan') // true
+ * validateSubCategoryForMainCategory('Car', 'Motorbike.Sport') // false
+ */
 export function validateSubCategoryForMainCategory(
   mainCategory: MainCategory | null,
   subCategory: VehicleSubCategoryCode | null
