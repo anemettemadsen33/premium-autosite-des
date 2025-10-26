@@ -235,12 +235,12 @@ export function AddListingPage({ onNavigate }: AddListingPageProps) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="brand">Brand</Label>
-                        <Select value={brand} onValueChange={setBrand}>
+                        <Select value={brand || "none"} onValueChange={(val) => setBrand(val === "none" ? "" : val)}>
                           <SelectTrigger id="brand">
                             <SelectValue placeholder="Select brand" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="">None</SelectItem>
+                            <SelectItem value="none">None</SelectItem>
                             {BRANDS_BY_CATEGORY[category]?.map(b => (
                               <SelectItem key={b} value={b}>{b}</SelectItem>
                             ))}
@@ -282,12 +282,12 @@ export function AddListingPage({ onNavigate }: AddListingPageProps) {
 
                       <div className="space-y-2">
                         <Label htmlFor="fuelType">Fuel Type</Label>
-                        <Select value={fuelType} onValueChange={setFuelType}>
+                        <Select value={fuelType || "none"} onValueChange={(val) => setFuelType(val === "none" ? "" : val)}>
                           <SelectTrigger id="fuelType">
                             <SelectValue placeholder="Select fuel type" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="">None</SelectItem>
+                            <SelectItem value="none">None</SelectItem>
                             {FUEL_TYPES.map(fuel => (
                               <SelectItem key={fuel} value={fuel}>{fuel}</SelectItem>
                             ))}
@@ -297,12 +297,12 @@ export function AddListingPage({ onNavigate }: AddListingPageProps) {
 
                       <div className="space-y-2">
                         <Label htmlFor="transmission">Transmission</Label>
-                        <Select value={transmission} onValueChange={setTransmission}>
+                        <Select value={transmission || "none"} onValueChange={(val) => setTransmission(val === "none" ? "" : val)}>
                           <SelectTrigger id="transmission">
                             <SelectValue placeholder="Select transmission" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="">None</SelectItem>
+                            <SelectItem value="none">None</SelectItem>
                             {TRANSMISSIONS.map(trans => (
                               <SelectItem key={trans} value={trans}>{trans}</SelectItem>
                             ))}
@@ -327,12 +327,12 @@ export function AddListingPage({ onNavigate }: AddListingPageProps) {
                       {category === 'cars' && (
                         <div className="space-y-2">
                           <Label htmlFor="bodyType">Body Type</Label>
-                          <Select value={bodyType} onValueChange={setBodyType}>
+                          <Select value={bodyType || "none"} onValueChange={(val) => setBodyType(val === "none" ? "" : val)}>
                             <SelectTrigger id="bodyType">
                               <SelectValue placeholder="Select body type" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="">None</SelectItem>
+                              <SelectItem value="none">None</SelectItem>
                               {BODY_TYPES.map(body => (
                                 <SelectItem key={body} value={body}>{body}</SelectItem>
                               ))}

@@ -287,14 +287,14 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
                         <div>
                           <Label className="text-sm font-medium mb-2 block">Brand</Label>
                           <Select 
-                            value={filters.selectedBrand} 
-                            onValueChange={(value) => updateFilters({ selectedBrand: value })}
+                            value={filters.selectedBrand || "all-brands"} 
+                            onValueChange={(value) => updateFilters({ selectedBrand: value === "all-brands" ? "" : value })}
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="All brands" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="">All brands</SelectItem>
+                              <SelectItem value="all-brands">All brands</SelectItem>
                               {brands.map((brand) => (
                                 <SelectItem key={brand} value={brand}>
                                   {brand}
@@ -355,14 +355,14 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
                         <div>
                           <Label className="text-sm font-medium mb-2 block">Fuel Type</Label>
                           <Select 
-                            value={filters.selectedFuel} 
-                            onValueChange={(value) => updateFilters({ selectedFuel: value })}
+                            value={filters.selectedFuel || "all-fuel-types"} 
+                            onValueChange={(value) => updateFilters({ selectedFuel: value === "all-fuel-types" ? "" : value })}
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="All types" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="">All types</SelectItem>
+                              <SelectItem value="all-fuel-types">All types</SelectItem>
                               {FUEL_TYPES.map((fuel) => (
                                 <SelectItem key={fuel} value={fuel}>
                                   {fuel}
@@ -377,14 +377,14 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
                         <div>
                           <Label className="text-sm font-medium mb-2 block">Transmission</Label>
                           <Select 
-                            value={filters.selectedTransmission} 
-                            onValueChange={(value) => updateFilters({ selectedTransmission: value })}
+                            value={filters.selectedTransmission || "all-transmissions"} 
+                            onValueChange={(value) => updateFilters({ selectedTransmission: value === "all-transmissions" ? "" : value })}
                           >
                             <SelectTrigger>
                               <SelectValue placeholder="All types" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="">All types</SelectItem>
+                              <SelectItem value="all-transmissions">All types</SelectItem>
                               {TRANSMISSIONS.map((trans) => (
                                 <SelectItem key={trans} value={trans}>
                                   {trans}
