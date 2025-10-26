@@ -115,12 +115,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                   <div className="space-y-2">
                     <Label htmlFor="brand" className="text-foreground">Brand</Label>
-                    <Select value={filters.brand} onValueChange={(value) => setFilters({ ...filters, brand: value })}>
+                    <Select value={filters.brand || 'all-brands'} onValueChange={(value) => setFilters({ ...filters, brand: value === 'all-brands' ? '' : value })}>
                       <SelectTrigger id="brand">
                         <SelectValue placeholder="Select brand" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Brands</SelectItem>
+                        <SelectItem value="all-brands">All Brands</SelectItem>
                         {BRANDS.map(brand => (
                           <SelectItem key={brand} value={brand}>{brand}</SelectItem>
                         ))}
@@ -144,12 +144,12 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
                   <div className="space-y-2">
                     <Label htmlFor="fuel" className="text-foreground">Fuel Type</Label>
-                    <Select value={filters.fuelType} onValueChange={(value) => setFilters({ ...filters, fuelType: value })}>
+                    <Select value={filters.fuelType || 'all-fuel-types'} onValueChange={(value) => setFilters({ ...filters, fuelType: value === 'all-fuel-types' ? '' : value })}>
                       <SelectTrigger id="fuel">
                         <SelectValue placeholder="Select fuel type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">All Types</SelectItem>
+                        <SelectItem value="all-fuel-types">All Types</SelectItem>
                         {FUEL_TYPES.map(fuel => (
                           <SelectItem key={fuel} value={fuel}>{fuel}</SelectItem>
                         ))}
