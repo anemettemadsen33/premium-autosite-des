@@ -2,6 +2,10 @@ export type Category = 'cars' | 'motorcycles' | 'trucks' | 'rvs' | 'parts'
 
 export type ListingStatus = 'draft' | 'active' | 'pending' | 'sold'
 
+export type SellerTier = 'bronze' | 'silver' | 'gold' | 'platinum'
+
+export type AuctionStatus = 'upcoming' | 'live' | 'ending-soon' | 'ended'
+
 export interface User {
   id: string
   email: string
@@ -9,6 +13,12 @@ export interface User {
   phone?: string
   avatar?: string
   createdAt: string
+  isVerified?: boolean
+  sellerRating?: number
+  totalSales?: number
+  sellerTier?: SellerTier
+  businessName?: string
+  businessLicense?: string
 }
 
 export interface Listing {
@@ -40,6 +50,115 @@ export interface Listing {
   partType?: string
   partCondition?: 'new' | 'used' | 'refurbished'
   compatibility?: string
+  
+  aiPredictedPrice?: number
+  priceConfidence?: number
+  has360View?: boolean
+  hasARView?: boolean
+  hasVideoWalkthrough?: boolean
+  historyReportAvailable?: boolean
+  warrantyIncluded?: boolean
+  inspectionCertified?: boolean
+  deliveryAvailable?: boolean
+  tradeInAccepted?: boolean
+  isAuction?: boolean
+  auctionData?: AuctionData
+}
+
+export interface AuctionData {
+  id: string
+  listingId: string
+  startTime: string
+  endTime: string
+  startingBid: number
+  currentBid: number
+  reservePrice?: number
+  bidIncrement: number
+  totalBids: number
+  leadingBidderId?: string
+  status: AuctionStatus
+  bids: Bid[]
+}
+
+export interface Bid {
+  id: string
+  auctionId: string
+  bidderId: string
+  amount: number
+  timestamp: string
+  isAutoBid: boolean
+}
+
+export interface VehicleHistoryReport {
+  listingId: string
+  vin: string
+  reportDate: string
+  accidents: HistoryAccident[]
+  owners: number
+  serviceMaintenance: ServiceRecord[]
+  titleStatus: 'clean' | 'salvage' | 'rebuilt' | 'lemon'
+  odometer: OdometerReading[]
+  recalls: RecallInfo[]
+  theftRecord: boolean
+  floodDamage: boolean
+  frameDamage: boolean
+  airbagDeployment: boolean
+}
+
+export interface HistoryAccident {
+  date: string
+  severity: 'minor' | 'moderate' | 'severe'
+  damage: string
+  repaired: boolean
+}
+
+export interface ServiceRecord {
+  date: string
+  mileage: number
+  type: string
+  facility: string
+  cost?: number
+}
+
+export interface OdometerReading {
+  date: string
+  mileage: number
+  source: string
+}
+
+export interface RecallInfo {
+  date: string
+  component: string
+  description: string
+  repaired: boolean
+}
+
+export interface SellerReview {
+  id: string
+  sellerId: string
+  reviewerId: string
+  listingId: string
+  rating: number
+  comment: string
+  createdAt: string
+  verifiedPurchase: boolean
+}
+
+export interface TestDriveRequest {
+  id: string
+  listingId: string
+  requesterId: string
+  preferredDate: string
+  preferredTime: string
+  status: 'pending' | 'approved' | 'rejected' | 'completed'
+  message?: string
+  createdAt: string
+}
+
+export interface VehicleRecommendation {
+  listingId: string
+  score: number
+  reasons: string[]
 }
 
 export interface Message {

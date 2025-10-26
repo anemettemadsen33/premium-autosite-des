@@ -22,6 +22,9 @@ import { MarketInsightsPage } from '@/pages/MarketInsightsPage'
 import { ComparisonPage } from '@/pages/ComparisonPage'
 import { CalculatorsPage } from '@/pages/CalculatorsPage'
 import { SavedSearchesPage } from '@/pages/SavedSearchesPage'
+import { AuctionsPage } from '@/pages/AuctionsPage'
+import { AnalyticsDashboardPage } from '@/pages/AnalyticsDashboardPage'
+import { WatchlistPage } from '@/pages/WatchlistPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
 
@@ -50,6 +53,12 @@ function App() {
         return <CalculatorsPage onNavigate={navigate} />
       case 'saved-searches':
         return <SavedSearchesPage onNavigate={navigate} />
+      case 'auctions':
+        return <AuctionsPage onNavigate={navigate} />
+      case 'analytics':
+        return <AnalyticsDashboardPage onNavigate={navigate} />
+      case 'watchlist':
+        return <WatchlistPage onNavigate={navigate} />
       case 'category':
         return <CategoryPageEnhanced category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':

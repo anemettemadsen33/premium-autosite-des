@@ -1,14 +1,14 @@
-# AUTOSITE - Automotive Marketplace Platform (Super Performance Edition)
+# AUTOSITE - Automotive Marketplace Platform (Super Performance Edition with AI & Advanced Features)
 
-A high-performance, feature-rich automotive marketplace platform with advanced filtering, real-time search, lazy loading, caching, infinite scroll, and comprehensive listing management across multiple categories.
+A cutting-edge, high-performance automotive marketplace platform with AI-powered pricing, live auctions, vehicle history reports, seller verification, test drive scheduling, advanced analytics, and comprehensive listing management across multiple categories.
 
 **Experience Qualities**:
 1. **Lightning Fast** - Optimized with debounced search, lazy image loading, virtual scrolling, smart caching, and infinite scroll for instant performance
-2. **Empowering** - Advanced filtering with URL state sync, saved searches, comparison tools, and intelligent autocomplete
-3. **Professional** - Enterprise-grade features including performance monitoring, optimistic updates, and error boundaries
+2. **Intelligent** - AI-powered price predictions, personalized recommendations, smart search, and data-driven insights
+3. **Professional** - Enterprise-grade features including auction system, seller verification, vehicle history reports, and advanced analytics
 
-**Complexity Level**: Complex Application (advanced functionality, performance optimizations, enterprise features)
-High-performance automotive marketplace with advanced search, lazy loading, infinite scroll, smart caching, debounced inputs, URL state management, virtual scrolling, image optimization, performance monitoring, and comprehensive CRUD operations.
+**Complexity Level**: Complex Application (advanced functionality, AI integration, real-time features, enterprise capabilities)
+Premium automotive marketplace with AI pricing predictions, live auction system, vehicle history reports, seller verification and ratings, test drive scheduling, personalized recommendations, advanced analytics dashboard, and comprehensive CRUD operations.
 
 ## Essential Features
 
@@ -110,6 +110,81 @@ High-performance automotive marketplace with advanced search, lazy loading, infi
 - **Progression**: Configure filters → Save search with name → Enable alerts → Receive notifications for new matches → Run saved search anytime
 - **Success criteria**: Searches persist across sessions, alerts can be toggled, easy to manage and delete searches
 
+## AI-Powered Features
+
+### AI Price Prediction
+- **Functionality**: Machine learning-powered vehicle valuation based on brand, model, year, mileage, condition, location, and market trends. Provides predicted price with confidence score and key factors affecting valuation
+- **Purpose**: Help sellers price competitively and buyers identify good deals
+- **Trigger**: Clicking "Get AI Price Prediction" on listing detail page
+- **Progression**: View listing → Click AI analysis → System analyzes vehicle → Display predicted price with confidence level → Show price comparison (above/below market) → List key factors (positive/negative/neutral impacts)
+- **Success criteria**: Predictions complete within 5 seconds, confidence scores are accurate, factors are relevant and actionable, UI updates smoothly
+
+### AI-Powered Recommendations
+- **Functionality**: Personalized vehicle recommendations based on browsing history, favorites, current listing, and user preferences. Intelligently suggests similar vehicles, better deals, or alternative options
+- **Purpose**: Increase engagement and help users discover relevant vehicles
+- **Trigger**: Viewing listing detail, browsing categories, or on homepage
+- **Progression**: System analyzes context → Generates top 3 recommendations → Displays with reasoning → User can refresh for new suggestions
+- **Success criteria**: Recommendations are relevant, update based on user behavior, refresh generates different appropriate options
+
+## Live Auction System
+
+### Live Vehicle Auctions
+- **Functionality**: Real-time auction system with countdown timers, live bidding, auto-bidding capability, bid history, reserve prices, and status indicators (live/ending soon/ended)
+- **Purpose**: Enable dynamic pricing and create urgency for high-value vehicles
+- **Trigger**: Viewing auction listing or accessing auctions page
+- **Progression**: Browse auctions → Filter by status (live/ending soon/upcoming/ended) → View auction details → Place manual bid OR set auto-bid limit → Monitor countdown → Receive notifications → Win confirmation
+- **Success criteria**: Real-time countdown updates every second, bids process instantly, auto-bidding works correctly, winners are notified, auction status updates accurately
+
+### Auctions Page
+- **Functionality**: Dedicated page showing all auction listings with filters (live/ending soon/upcoming/ended), sorting options (ending soon/most bids/highest bid), live statistics, and auction cards with bid counts
+- **Purpose**: Centralized hub for auction discovery and participation
+- **Trigger**: Clicking "Auctions" in navigation
+- **Progression**: View auction overview stats → Filter by status → Sort listings → Browse auction cards → Click to view details
+- **Success criteria**: Stats update in real-time, filters work instantly, auction badges display correctly (LIVE/Ending Soon), countdown timers are synchronized
+
+## Seller Trust & Verification
+
+### Seller Verification & Ratings
+- **Functionality**: Seller profile cards with verification badges, tier system (Bronze/Silver/Gold/Platinum), ratings (1-5 stars), review system, total sales count, and verified purchase badges
+- **Purpose**: Build trust, encourage quality service, reward high-performing sellers
+- **Trigger**: Viewing listing detail or seller profile
+- **Progression**: View seller card → See verification status and tier → Read reviews and ratings → Submit own review (if eligible) → Rate seller 1-5 stars → Write review comment → Submit
+- **Success criteria**: Verification badges are prominent, tier colors are distinct, reviews persist, average ratings calculate correctly, verified purchase badges show appropriately
+
+### Seller Reviews & Reputation
+- **Functionality**: 5-star rating system with written reviews, verified purchase badges, review history, seller response capability
+- **Purpose**: Provide transparency and accountability in transactions
+- **Trigger**: After viewing or purchasing from a listing
+- **Progression**: Write review → Select star rating → Add comment → Mark as verified purchase (if applicable) → Submit → Review appears on seller profile
+- **Success criteria**: Reviews are time-stamped, ratings average correctly, verified purchases are marked, seller can view all reviews
+
+## Vehicle History & Inspection
+
+### Vehicle History Reports
+- **Functionality**: Comprehensive AI-generated history reports including VIN, accident history, service records, odometer readings, ownership count, title status, recalls, and critical checks (theft/flood/frame damage)
+- **Purpose**: Provide transparency and build buyer confidence
+- **Trigger**: Clicking "Purchase Report" on listing detail
+- **Progression**: View report summary → See purchase option (€29.99) → Click purchase → Generate report → Display full history → View accidents, service records, odometer history, recalls
+- **Success criteria**: Reports generate quickly, data is comprehensive and realistic, critical checks are highlighted, pricing is clear, report is downloadable
+
+## Test Drive Management
+
+### Test Drive Scheduling
+- **Functionality**: Calendar-based scheduling system with date/time selection, preferred time slots, optional message, request status tracking (pending/approved/rejected/completed), and request history
+- **Purpose**: Facilitate in-person vehicle inspections
+- **Trigger**: Clicking "Schedule Test Drive" on listing detail
+- **Progression**: Click schedule → Select date from calendar → Choose time slot → Add optional message → Submit request → Track status → Receive approval notification
+- **Success criteria**: Calendar disables past dates, time slots are clear (9AM-6PM), requests track properly, status updates work, sellers can approve/reject
+
+## Advanced Analytics
+
+### Analytics Dashboard
+- **Functionality**: Comprehensive seller dashboard with timeframe filters (7d/30d/90d/all time), per-listing analytics, key metrics (total views, active listings, conversion rate, average price), top performers, category breakdown, and recent activity feed
+- **Purpose**: Help sellers optimize listings and track performance
+- **Trigger**: Clicking "Analytics" in user menu
+- **Progression**: View overview stats → Select timeframe → Filter by listing → View top performers → Analyze category breakdown → Review recent activity → Navigate to specific listings
+- **Success criteria**: Metrics calculate accurately, charts update smoothly, filters work instantly, data visualizations are clear, insights are actionable
+
 ### Search Functionality
 - **Functionality**: Global search bar with category filter, keyword matching across listings, instant results
 - **Purpose**: Help users quickly find specific listings across all categories
@@ -182,6 +257,27 @@ High-performance automotive marketplace with advanced search, lazy loading, infi
 - **Trade-in value ranges** - Display estimated ranges rather than exact values
 - **Saved search with no results** - Indicate no current matches but alerts are active
 - **Duplicate saved searches** - Prevent identical filter combinations or allow with warning
+- **AI prediction timeout** - Show graceful error with retry option
+- **AI prediction fails** - Fallback to market average with disclaimer
+- **Auction ended during bid** - Prevent bid and show auction ended message
+- **Bid below minimum** - Highlight minimum bid requirement and prevent submission
+- **Auto-bid exceeds max** - Stop auto-bidding and notify user
+- **Concurrent bids** - Handle race conditions, last valid bid wins
+- **Test drive date in past** - Disable past dates in calendar
+- **Double-booked test drive** - Show time slot as unavailable
+- **Test drive without login** - Redirect to login with return URL
+- **History report generation fails** - Show error and offer refund/retry
+- **Seller with no reviews** - Show "No reviews yet" with invitation to be first
+- **Self-review attempt** - Prevent sellers from reviewing themselves
+- **Review without purchase** - Allow but don't mark as verified purchase
+- **Analytics with no data** - Show empty states with helpful messages
+- **Timeframe with zero activity** - Display "No activity in this period"
+- **Recommendation engine timeout** - Fallback to popular/recent listings
+- **No similar vehicles** - Recommend from same category or price range
+- **Unverified seller warnings** - Show appropriate trust indicators
+- **Expired verification** - Prompt seller to re-verify
+- **Missing VIN for history** - Generate realistic placeholder or request from seller
+- **Report already purchased** - Show cached report without re-charging
 
 ## Design Direction
 
@@ -262,7 +358,7 @@ Key animation patterns:
   - **Scroll Area**: Long content lists
   
 - **Custom Components**:
-  - **VehicleCard**: Optimized listing preview with lazy-loaded image, React.memo for performance, favorite button, hover animations
+  - **VehicleCard**: Optimized listing preview with lazy-loaded image, React.memo for performance, favorite button, hover animations, auction badge support
   - **LazyImage**: Progressive image component with Intersection Observer, skeleton placeholder, error fallback
   - **AdvancedSearchBar**: Autocomplete search with recent searches (localStorage), debounced input, keyboard navigation
   - **InfiniteScrollListings**: Auto-loading list with Intersection Observer, skeleton states, view mode support
@@ -281,6 +377,12 @@ Key animation patterns:
   - **FinancingCalculator**: Interactive loan payment calculator with breakdown
   - **TradeInEstimator**: Vehicle value estimator based on condition and mileage
   - **SavedSearchCard**: Display saved search with filter summary and alert toggle
+  - **AIPricePrediction**: AI-powered price analysis with confidence scores and factor breakdown
+  - **AIRecommendations**: Personalized vehicle recommendations with reasoning
+  - **LiveAuction**: Real-time auction component with countdown, bidding, auto-bid, and bid history
+  - **VehicleHistoryReport**: Comprehensive history report with accidents, service, odometer, recalls
+  - **SellerProfileCard**: Seller verification, ratings, reviews, tier badges, and contact
+  - **TestDriveScheduler**: Calendar-based scheduling with time slots and request tracking
   
 - **States**:
   - Buttons: Default, Hover, Active (scale 0.98), Focus (ring), Disabled, Loading
@@ -311,14 +413,25 @@ Key animation patterns:
   - Image/Images (gallery)
   - ShoppingCart (buy now)
   - CreditCard (financing)
-  - ChartLine/TrendUp/TrendDown (market insights)
-  - Fire (popular/hot items)
+  - ChartLine/TrendUp/TrendDown (market insights & analytics)
+  - Fire (popular/hot items & live auctions)
   - Globe (region selection)
-  - Briefcase (company forms)
+  - Briefcase (company forms & business sellers)
   - ChartBar (comparison)
   - Calculator (financial tools)
   - MagnifyingGlass (saved searches)
   - Bell/BellSlash (alerts)
+  - Sparkle (AI features)
+  - Gavel (auctions)
+  - Clock (time/countdown)
+  - ShieldCheck (verification & trust)
+  - Star (ratings)
+  - Certificate (seller tiers)
+  - FileText (reports)
+  - Warning (issues/alerts)
+  - CheckCircle (verified/approved)
+  - Wrench (service/maintenance)
+  - Phone (contact)
   
 - **Spacing**:
   - Page container: max-w-7xl mx-auto px-4 md:px-6 lg:px-8
