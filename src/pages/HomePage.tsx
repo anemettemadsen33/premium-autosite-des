@@ -1,15 +1,14 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Label } from '@/components/ui/label'
 import { CATEGORIES, SAMPLE_LISTINGS } from '@/lib/data'
-import { Category, Listing, SearchFilters } from '@/lib/types'
+import { Listing } from '@/lib/types'
 import { useListings } from '@/lib/listings'
-import { Car, Motorcycle, Truck, Van, Wrench, MagnifyingGlass, TrendUp, Calculator, ChartBar, Bell, Sparkle } from '@phosphor-icons/react'
+import { Car, Motorcycle, Truck, Van, Wrench, TrendUp, Calculator, ChartBar, Bell, Sparkle } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
+import { EnhancedSearchBar } from '@/components/EnhancedSearchBar'
+import type { MainCategory, VehicleSubCategoryCode } from '@/lib/vehicleSubCategories'
 import {
   Carousel,
   CarouselContent,
@@ -22,8 +21,22 @@ interface HomePageProps {
   onNavigate: (page: string, params?: Record<string, string>) => void
 }
 
-const BRANDS = ['Tesla', 'BMW', 'Mercedes-Benz', 'Audi', 'Toyota', 'Honda', 'Ford', 'Chevrolet', 'Ducati', 'Harley-Davidson']
-const FUEL_TYPES = ['Gasoline', 'Diesel', 'Electric', 'Hybrid', 'Plug-in Hybrid']
+interface EnhancedSearchFilters {
+  mainCategory: MainCategory | null
+  subCategory: VehicleSubCategoryCode | null
+  query: string
+  brand: string
+  model: string
+  yearFrom: string
+  yearTo: string
+  priceMin: string
+  priceMax: string
+  mileageMax: string
+  fuelType: string
+  transmission: string
+  condition: string
+  location: string
+}
 
 const PROMO_SLIDES = [
   {
@@ -47,17 +60,6 @@ const PROMO_SLIDES = [
 ]
 
 export function HomePage({ onNavigate }: HomePageProps) {
-  const [filters, setFilters] = useState<SearchFilters>({
-    category: 'cars',
-    brand: '',
-    fuelType: '',
-    minPrice: undefined,
-    maxPrice: undefined,
-    mileageMax: undefined,
-    yearFrom: undefined,
-    yearTo: undefined
-  })
-  
   const { listings } = useListings()
   const allListings = [...SAMPLE_LISTINGS, ...listings]
   const featuredListings = allListings.filter(l => l.isFeatured).slice(0, 6)
@@ -70,20 +72,25 @@ export function HomePage({ onNavigate }: HomePageProps) {
     parts: Wrench
   }
 
-  const handleSearch = () => {
-    const params: Record<string, string> = {
-      category: filters.category || 'cars'
-    }
+  const handleSearch = (filters: EnhancedSearchFilters) => {
+    const params: Record<string, string> = {}
     
+    if (filters.mainCategory) params.mainCategory = filters.mainCategory
+    if (filters.subCategory) params.subCategory = filters.subCategory
+    if (filters.query) params.query = filters.query
     if (filters.brand) params.brand = filters.brand
+    if (filters.model) params.model = filters.model
+    if (filters.yearFrom) params.yearFrom = filters.yearFrom
+    if (filters.yearTo) params.yearTo = filters.yearTo
+    if (filters.priceMin) params.priceMin = filters.priceMin
+    if (filters.priceMax) params.priceMax = filters.priceMax
+    if (filters.mileageMax) params.mileageMax = filters.mileageMax
     if (filters.fuelType) params.fuelType = filters.fuelType
-    if (filters.minPrice) params.minPrice = filters.minPrice.toString()
-    if (filters.maxPrice) params.maxPrice = filters.maxPrice.toString()
-    if (filters.mileageMax) params.mileageMax = filters.mileageMax.toString()
-    if (filters.yearFrom) params.yearFrom = filters.yearFrom.toString()
-    if (filters.yearTo) params.yearTo = filters.yearTo.toString()
+    if (filters.transmission) params.transmission = filters.transmission
+    if (filters.condition) params.condition = filters.condition
+    if (filters.location) params.location = filters.location
     
-    onNavigate('category', params)
+    onNavigate('main-category', params)
   }
 
   return (
@@ -110,109 +117,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <Card className="bg-white/95 backdrop-blur">
-              <CardContent className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="brand" className="text-foreground">Brand</Label>
-                    <Select value={filters.brand || 'all-brands'} onValueChange={(value) => setFilters({ ...filters, brand: value === 'all-brands' ? '' : value })}>
-                      <SelectTrigger id="brand">
-                        <SelectValue placeholder="Select brand" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all-brands">All Brands</SelectItem>
-                        {BRANDS.map(brand => (
-                          <SelectItem key={brand} value={brand}>{brand}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="category" className="text-foreground">Category</Label>
-                    <Select value={filters.category} onValueChange={(value) => setFilters({ ...filters, category: value as Category })}>
-                      <SelectTrigger id="category">
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {CATEGORIES.map(cat => (
-                          <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="fuel" className="text-foreground">Fuel Type</Label>
-                    <Select value={filters.fuelType || 'all-fuel-types'} onValueChange={(value) => setFilters({ ...filters, fuelType: value === 'all-fuel-types' ? '' : value })}>
-                      <SelectTrigger id="fuel">
-                        <SelectValue placeholder="Select fuel type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all-fuel-types">All Types</SelectItem>
-                        {FUEL_TYPES.map(fuel => (
-                          <SelectItem key={fuel} value={fuel}>{fuel}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <div className="space-y-2">
-                    <Label className="text-foreground">Price Range</Label>
-                    <div className="flex gap-2">
-                      <Input
-                        type="number"
-                        placeholder="Min"
-                        value={filters.minPrice || ''}
-                        onChange={(e) => setFilters({ ...filters, minPrice: e.target.value ? Number(e.target.value) : undefined })}
-                      />
-                      <Input
-                        type="number"
-                        placeholder="Max"
-                        value={filters.maxPrice || ''}
-                        onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value ? Number(e.target.value) : undefined })}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="mileage" className="text-foreground">Max Mileage (km)</Label>
-                    <Input
-                      id="mileage"
-                      type="number"
-                      placeholder="e.g. 50000"
-                      value={filters.mileageMax || ''}
-                      onChange={(e) => setFilters({ ...filters, mileageMax: e.target.value ? Number(e.target.value) : undefined })}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label className="text-foreground">Year Range</Label>
-                    <div className="flex gap-2">
-                      <Input
-                        type="number"
-                        placeholder="From"
-                        value={filters.yearFrom || ''}
-                        onChange={(e) => setFilters({ ...filters, yearFrom: e.target.value ? Number(e.target.value) : undefined })}
-                      />
-                      <Input
-                        type="number"
-                        placeholder="To"
-                        value={filters.yearTo || ''}
-                        onChange={(e) => setFilters({ ...filters, yearTo: e.target.value ? Number(e.target.value) : undefined })}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <Button onClick={handleSearch} size="lg" className="w-full gap-2">
-                  <MagnifyingGlass size={20} weight="bold" />
-                  Search Vehicles
-                </Button>
-              </CardContent>
-            </Card>
+            <EnhancedSearchBar onSearch={handleSearch} />
           </motion.div>
         </div>
       </section>
