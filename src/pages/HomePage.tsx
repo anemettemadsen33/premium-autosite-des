@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label'
 import { CATEGORIES, SAMPLE_LISTINGS } from '@/lib/data'
 import { Category, Listing, SearchFilters } from '@/lib/types'
 import { useListings } from '@/lib/listings'
-import { Car, Motorcycle, Truck, Van, Wrench, MagnifyingGlass, TrendUp, Calculator, ChartBar, Bell } from '@phosphor-icons/react'
+import { Car, Motorcycle, Truck, Van, Wrench, MagnifyingGlass, TrendUp, Calculator, ChartBar, Bell, Sparkle } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import {
   Carousel,
@@ -275,6 +275,23 @@ export function HomePage({ onNavigate }: HomePageProps) {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 md:px-6 lg:px-8 bg-gradient-to-r from-accent/10 via-purple-500/10 to-blue-500/10">
+        <div className="max-w-7xl mx-auto text-center">
+          <Badge className="mb-4" variant="secondary">
+            <Sparkle className="mr-1" weight="fill" size={16} />
+            New Features
+          </Badge>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Advanced AI-Powered Tools</h2>
+          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+            Discover our cutting-edge features including VIN scanning, video uploads, smart cost calculator, and AI-powered auto-tagging
+          </p>
+          <Button size="lg" onClick={() => onNavigate('advanced-tools')} className="gap-2">
+            <Sparkle weight="fill" />
+            Explore Advanced Tools
+          </Button>
         </div>
       </section>
 

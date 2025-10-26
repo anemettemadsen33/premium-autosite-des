@@ -95,6 +95,17 @@ export function QuickActionsPanel({ onNavigate }: QuickActionsPanelProps) {
       }
     },
     {
+      id: 'advanced-tools',
+      label: 'Advanced Tools',
+      icon: <Sparkle className="h-5 w-5" weight="fill" />,
+      badge: 'AI',
+      color: 'bg-gradient-to-br from-yellow-500 to-amber-600',
+      action: () => {
+        onNavigate('advanced-tools')
+        setIsOpen(false)
+      }
+    },
+    {
       id: 'insights',
       label: 'Market Insights',
       icon: <ChartLine className="h-5 w-5" weight="duotone" />,

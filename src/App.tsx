@@ -30,6 +30,8 @@ import { AnalyticsDashboardPage } from '@/pages/AnalyticsDashboardPage'
 import { WatchlistPage } from '@/pages/WatchlistPage'
 import { PerformanceMonitorPage } from '@/pages/PerformanceMonitorPage'
 import { HelpCenterPage } from '@/pages/HelpCenterPage'
+import { SmartCalculatorPage } from '@/pages/SmartCalculatorPage'
+import { AdvancedToolsPage } from '@/pages/AdvancedToolsPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
 
@@ -68,6 +70,10 @@ function App() {
         return <PerformanceMonitorPage onNavigate={navigate} />
       case 'help-center':
         return <HelpCenterPage onNavigate={navigate} />
+      case 'smart-calculator':
+        return <SmartCalculatorPage onNavigate={navigate} />
+      case 'advanced-tools':
+        return <AdvancedToolsPage onNavigate={navigate} />
       case 'category':
         return <CategoryPageEnhanced category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':

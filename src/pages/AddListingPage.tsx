@@ -9,8 +9,13 @@ import { useAuth } from '@/lib/auth'
 import { useListings } from '@/lib/listings'
 import { CATEGORIES, BRANDS_BY_CATEGORY, FUEL_TYPES, TRANSMISSIONS, CONDITIONS, BODY_TYPES } from '@/lib/data'
 import { Category } from '@/lib/types'
-import { Plus, Images } from '@phosphor-icons/react'
+import { Plus, Images, Sparkle } from '@phosphor-icons/react'
 import { toast } from 'sonner'
+import { VINScanner } from '@/components/VINScanner'
+import { VideoUploader } from '@/components/VideoUploader'
+import { AutoTagging } from '@/components/AutoTagging'
+import { Separator } from '@/components/ui/separator'
+import { Badge } from '@/components/ui/badge'
 
 interface AddListingPageProps {
   onNavigate: (page: string, params?: Record<string, string>) => void
@@ -37,6 +42,22 @@ export function AddListingPage({ onNavigate }: AddListingPageProps) {
   const [condition, setCondition] = useState<'new' | 'used' | 'certified'>('used')
   const [bodyType, setBodyType] = useState('')
   const [color, setColor] = useState('')
+  const [videoUrl, setVideoUrl] = useState('')
+  const [featureTags, setFeatureTags] = useState<string[]>([])
+  const [engineSize, setEngineSize] = useState('')
+
+  const handleVINDataExtracted = (data: any) => {
+    if (data.make) setBrand(data.make)
+    if (data.model) setModel(data.model)
+    if (data.year) setYear(data.year.toString())
+    if (data.engineSize) setEngineSize(data.engineSize)
+    if (data.color) setColor(data.color)
+    if (data.mileage) setMileage(data.mileage.toString())
+    
+    if (data.make && data.model && data.year) {
+      setTitle(`${data.year} ${data.make} ${data.model}`)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -100,6 +121,22 @@ export function AddListingPage({ onNavigate }: AddListingPageProps) {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 py-8">
+        <div className="mb-6 p-4 bg-gradient-to-r from-accent/10 to-purple-500/10 rounded-lg border border-accent/30">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkle className="text-accent" weight="fill" />
+            <h2 className="font-semibold">AI-Powered Tools Available</h2>
+            <Badge variant="secondary" className="ml-auto">New</Badge>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            Use our advanced tools to speed up listing creation and improve accuracy
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 mb-6">
+          <VINScanner onDataExtracted={handleVINDataExtracted} />
+          <VideoUploader onVideoUploaded={setVideoUrl} />
+        </div>
+
         <Card>
           <CardContent className="p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -141,6 +178,14 @@ export function AddListingPage({ onNavigate }: AddListingPageProps) {
                   required
                 />
               </div>
+
+              {description && description.length > 20 && (
+                <AutoTagging 
+                  description={description} 
+                  onTagsGenerated={setFeatureTags}
+                  existingTags={featureTags}
+                />
+              )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">

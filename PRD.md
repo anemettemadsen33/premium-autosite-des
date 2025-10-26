@@ -8,7 +8,51 @@ A cutting-edge, ultra-high-performance automotive marketplace platform with AI-p
 3. **Professional** - Enterprise-grade features including auction system, seller verification, vehicle history reports, advanced analytics, notifications, and help center
 
 **Complexity Level**: Complex Application (advanced functionality, AI integration, real-time features, enterprise capabilities, live support)
-Premium automotive marketplace with AI pricing predictions, live auction system, vehicle history reports, seller verification and ratings, test drive scheduling, personalized recommendations, advanced analytics dashboard, live chat support with AI, real-time notifications system, quick actions panel, performance monitoring, comprehensive help center, keyboard shortcuts, and comprehensive CRUD operations.
+Premium automotive marketplace with AI pricing predictions, live auction system, vehicle history reports, seller verification and ratings, test drive scheduling, personalized recommendations, advanced analytics dashboard, live chat support with AI, real-time notifications system, quick actions panel, performance monitoring, comprehensive help center, keyboard shortcuts, VIN/OCR document scanning, video listings, PDF generation, smart cost calculator, and auto-tagging features.
+
+## Advanced AI-Powered Features (NEW)
+
+### VIN & Document Scanner (OCR)
+- **Functionality**: Upload photos of vehicle registration documents or title papers to automatically extract vehicle details using AI-powered OCR. Extracts VIN, make, model, year, engine size, color, registration number, owner name, and mileage
+- **Purpose**: Save time on manual data entry and reduce errors when creating listings
+- **Trigger**: Clicking VIN Scanner card on Add Listing page or uploading document image
+- **Progression**: Upload document photo → AI analyzes image → Extract vehicle data → Preview extracted fields → Apply to form with one click
+- **Success criteria**: Supports images up to 10MB, processes in under 10 seconds, extracts 5+ fields on average, graceful error handling
+
+### PDF Listing Generator
+- **Functionality**: Generate professional PDF documents for any vehicle listing with complete specifications, images, QR code for online viewing, and branded layout
+- **Purpose**: Enable offline sharing, printing, and professional presentation of listings
+- **Trigger**: Clicking "Download PDF" button on listing detail page
+- **Progression**: Click download → Generate PDF with QR code → Open print dialog → Save or print
+- **Success criteria**: Generates in under 3 seconds, includes all listing data, QR code links to online listing, professional layout, print-ready format
+
+### Video Walkthroughs
+- **Functionality**: Upload video tours (up to 50MB) to vehicle listings showing exterior, interior, features, and condition. Supports MP4, MOV, AVI formats with in-browser preview
+- **Purpose**: Provide buyers with dynamic, detailed views of vehicles to increase confidence and engagement
+- **Trigger**: Uploading video file via Video Uploader component on Add Listing page
+- **Progression**: Select video file → Upload with progress bar → Preview video → Apply to listing → Video displays on listing detail
+- **Success criteria**: Supports common video formats, shows upload progress, allows preview before publishing, video plays inline on listing pages
+
+### Smart Cost Calculator (Romania)
+- **Functionality**: Calculate total vehicle ownership costs specific to Romania including RCA insurance (mandatory liability), road tax (impozit auto), registration fees, technical inspection (ITP), and environmental taxes. Provides 1-year and 3-year cost projections
+- **Purpose**: Help buyers understand complete cost of ownership beyond purchase price
+- **Trigger**: Navigating to Smart Calculator page from Calculators section or dedicated link
+- **Progression**: Enter vehicle details (price, engine, fuel, age, location) → View real-time cost breakdown → See annual and 3-year totals → Calculate monthly average
+- **Success criteria**: Accurate Romanian tax/fee calculations, updates in real-time, shows clear breakdown, mobile responsive, includes explanatory notes
+
+### AI Auto-Tagging & Feature Detection
+- **Functionality**: Analyze vehicle description text using AI to automatically detect and tag features like "Navigation", "LED Headlights", "Leather Seats", "Panoramic Roof", etc. Supports 50+ common vehicle features
+- **Purpose**: Improve listing visibility, save time tagging features manually, ensure consistent feature naming
+- **Trigger**: Clicking "Auto-Detect Features" after entering listing description
+- **Progression**: Write description → Click auto-detect → AI analyzes text → Display detected features as tags → Remove unwanted tags → Apply to listing
+- **Success criteria**: Detects 3-10 features from typical descriptions, processes in under 5 seconds, allows manual editing, tags display on listing cards
+
+### Advanced Tools Hub Page
+- **Functionality**: Dedicated showcase page displaying all 6 advanced AI tools with descriptions, features, benefits, and direct access links
+- **Purpose**: Centralize discovery of premium features and drive adoption
+- **Trigger**: Clicking "Advanced Tools" in main navigation or promotional banners
+- **Progression**: View tools overview → Read feature descriptions → Click tool card → Navigate to relevant page
+- **Success criteria**: All tools clearly presented, engaging design, easy navigation, statistics showcased
 
 ## Essential Features
 

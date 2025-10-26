@@ -91,6 +91,22 @@ export function CalculatorsPage({ onNavigate }: CalculatorsPageProps) {
           </p>
         </div>
 
+        <Card className="mb-6 bg-gradient-to-r from-accent/10 to-purple-500/10 border-accent/30">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold text-lg mb-1">New: Smart Cost Calculator</h3>
+                <p className="text-sm text-muted-foreground">
+                  Calculate total ownership costs including RCA, road tax, registration fees for Romania
+                </p>
+              </div>
+              <Button onClick={() => onNavigate('smart-calculator')} variant="default">
+                Try Now
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         <Tabs defaultValue="financing" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="financing" className="flex items-center gap-2">

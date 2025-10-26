@@ -15,6 +15,7 @@ import {
 } from '@phosphor-icons/react'
 import { toast } from 'sonner'
 import { motion } from 'framer-motion'
+import { PDFGenerator } from '@/components/PDFGenerator'
 
 interface ListingDetailPageProps {
   listingId: string
@@ -260,6 +261,7 @@ export function ListingDetailPage({ listingId, onNavigate }: ListingDetailPagePr
                     <Phone size={20} weight="duotone" />
                     Call Seller
                   </Button>
+                  <PDFGenerator listing={listing} />
                 </div>
 
                 <Separator className="my-6" />
