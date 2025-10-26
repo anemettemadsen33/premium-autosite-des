@@ -203,3 +203,146 @@ export interface SearchFilters {
 
 export type Vehicle = any
 export type Announcement = any
+
+export type Currency = 'EUR' | 'USD' | 'GBP' | 'RON'
+
+export type KYCStatus = 'unverified' | 'pending' | 'in-progress' | 'verified' | 'rejected'
+
+export type BadgeType = 'expert-poster' | 'top-seller' | 'early-adopter' | 'verified-dealer' | 'community-helper'
+
+export interface SponsoredListing {
+  listingId: string
+  dealerId: string
+  startDate: string
+  endDate: string
+  budget: number
+  impressions: number
+  clicks: number
+  ctr: number
+  position: 'top' | 'featured' | 'sidebar'
+}
+
+export interface ImportFeed {
+  id: string
+  userId: string
+  name: string
+  type: 'csv' | 'xml' | 'json' | 'url'
+  source: string
+  fieldMapping: Record<string, string>
+  schedule?: 'manual' | 'hourly' | 'daily' | 'weekly'
+  lastSync?: string
+  status: 'active' | 'paused' | 'error'
+  itemsImported: number
+  createdAt: string
+}
+
+export interface PricePrediction {
+  listingId: string
+  predictedPrice: number
+  confidence: number
+  factors: Array<{
+    factor: string
+    impact: 'positive' | 'negative' | 'neutral'
+    weight: number
+  }>
+  marketComparison: {
+    averagePrice: number
+    similarListings: number
+    pricePercentile: number
+  }
+}
+
+export interface KYCVerification {
+  userId: string
+  status: KYCStatus
+  documentType?: 'passport' | 'id-card' | 'drivers-license'
+  documentImages?: string[]
+  selfieImage?: string
+  submittedAt?: string
+  reviewedAt?: string
+  reviewedBy?: string
+  rejectionReason?: string
+}
+
+export interface UserGamification {
+  userId: string
+  xp: number
+  level: number
+  badges: BadgeType[]
+  missions: Mission[]
+  leaderboardRank?: number
+}
+
+export interface Mission {
+  id: string
+  type: 'daily' | 'weekly' | 'achievement'
+  title: string
+  description: string
+  xpReward: number
+  progress: number
+  target: number
+  completed: boolean
+  expiresAt?: string
+}
+
+export interface DealerWhiteLabel {
+  dealerId: string
+  customDomain?: string
+  logo?: string
+  primaryColor: string
+  secondaryColor: string
+  accentColor: string
+  theme: 'light' | 'dark' | 'classic' | 'modern'
+  headline?: string
+  tagline?: string
+  customCSS?: string
+}
+
+export interface ChatMessage {
+  id: string
+  conversationId: string
+  senderId: string
+  content: string
+  type: 'text' | 'image' | 'video-request' | 'video-link'
+  timestamp: string
+  read: boolean
+}
+
+export interface VideoPreview {
+  id: string
+  listingId: string
+  dealerId: string
+  requesterId: string
+  scheduledAt?: string
+  duration: number
+  status: 'pending' | 'scheduled' | 'live' | 'completed' | 'cancelled'
+  meetingLink?: string
+}
+
+export interface APIKey {
+  id: string
+  userId: string
+  name: string
+  key: string
+  permissions: string[]
+  createdAt: string
+  lastUsed?: string
+  expiresAt?: string
+  active: boolean
+}
+
+export interface DealerKPI {
+  dealerId: string
+  period: string
+  views: number
+  clicks: number
+  saves: number
+  leads: number
+  conversions: number
+  revenue: number
+  topListings: Array<{
+    listingId: string
+    title: string
+    metric: number
+  }>
+}

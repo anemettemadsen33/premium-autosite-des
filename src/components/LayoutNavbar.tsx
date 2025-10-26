@@ -151,6 +151,10 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
                         <ChartLine size={16} weight="duotone" className="mr-2" />
                         Live Analytics
                       </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleNavigate('dealer-hub')}>
+                        <GridFour size={16} weight="duotone" className="mr-2" />
+                        Dealer Hub
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={handleLogout}>
                         <SignOut size={16} weight="duotone" className="mr-2" />

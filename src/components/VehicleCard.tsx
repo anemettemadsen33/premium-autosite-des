@@ -9,6 +9,7 @@ import { useFavorites } from '@/lib/favorites'
 import { useAuth } from '@/lib/auth'
 import { trackEvent, generateSessionId, getDeviceType } from '@/lib/analytics'
 import { LazyImage } from './LazyImage'
+import { SponsoredBadge } from './SponsoredBadge'
 import { motion } from 'framer-motion'
 
 interface VehicleCardProps {
@@ -17,6 +18,8 @@ interface VehicleCardProps {
   onNavigate?: (page: string, params?: Record<string, string>) => void
   onClick?: () => void
   index?: number
+  isSponsored?: boolean
+  sponsorName?: string
 }
 
 export const VehicleCard = memo(function VehicleCard({ 
@@ -24,7 +27,9 @@ export const VehicleCard = memo(function VehicleCard({
   vehicle,
   onNavigate,
   onClick,
-  index = 0 
+  index = 0,
+  isSponsored = false,
+  sponsorName
 }: VehicleCardProps) {
   const item = listing || vehicle
   const { user } = useAuth()
@@ -67,10 +72,17 @@ export const VehicleCard = memo(function VehicleCard({
       transition={{ duration: 0.4, delay: index * 0.05, ease: [0.23, 1, 0.32, 1] }}
     >
       <Card 
-        className="group cursor-pointer hover-lift hover-glow overflow-hidden border border-border/50 bg-card"
+        className={`group cursor-pointer hover-lift overflow-hidden border bg-card ${
+          isSponsored 
+            ? 'border-amber-300 dark:border-amber-600 shadow-lg shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/20' 
+            : 'border-border/50 hover-glow'
+        }`}
         onClick={handleClick}
       >
         <div className="relative overflow-hidden">
+          {isSponsored && (
+            <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-yellow-500/5 to-orange-500/5 pointer-events-none z-10" />
+          )}
           <LazyImage
             src={imageUrl}
             alt={item.title || item.name}
@@ -80,7 +92,8 @@ export const VehicleCard = memo(function VehicleCard({
           
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
-          <div className="absolute top-3 right-3 flex gap-2">
+          <div className="absolute top-3 right-3 flex gap-2 flex-col items-end">
+            {isSponsored && <SponsoredBadge dealerName={sponsorName} />}
             {item.isFeatured && (
               <Badge className="bg-accent text-accent-foreground shadow-lg font-semibold">
                 Featured

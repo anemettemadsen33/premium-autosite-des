@@ -33,6 +33,7 @@ import { HelpCenterPage } from '@/pages/HelpCenterPage'
 import { SmartCalculatorPage } from '@/pages/SmartCalculatorPage'
 import { AdvancedToolsPage } from '@/pages/AdvancedToolsPage'
 import { LiveDashboardPage } from '@/pages/LiveDashboardPage'
+import { DealerHubPage } from '@/pages/DealerHubPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
 
@@ -77,6 +78,8 @@ function App() {
         return <AdvancedToolsPage onNavigate={navigate} />
       case 'live-dashboard':
         return <LiveDashboardPage onNavigate={navigate} />
+      case 'dealer-hub':
+        return <DealerHubPage onNavigate={navigate} />
       case 'category':
         return <CategoryPageEnhanced category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':

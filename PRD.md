@@ -1,16 +1,86 @@
-# AUTOSITE - Automotive Marketplace Platform (Maximum Performance & Premium Features Edition)
+# AUTOSITE - Premium Automotive Marketplace Platform (Full-Featured Dealer Edition)
 
-A cutting-edge, ultra-high-performance automotive marketplace platform with AI-powered pricing, live auctions, vehicle history reports, seller verification, test drive scheduling, advanced analytics, comprehensive listing management, live chat support, real-time notifications, quick actions panel, performance monitoring, help center, and keyboard shortcuts across multiple categories.
+A cutting-edge, ultra-high-performance automotive marketplace platform with AI-powered pricing, live auctions, vehicle history reports, seller verification, test drive scheduling, advanced analytics, comprehensive listing management, live chat support, real-time notifications, quick actions panel, performance monitoring, help center, keyboard shortcuts, sponsored listings, import feeds, KYC verification, multi-currency support, gamification, white-label customization, video previews, and API console across multiple categories.
 
 **Experience Qualities**:
 1. **Lightning Fast** - Optimized with debounced search, lazy image loading, virtual scrolling, smart caching, infinite scroll, and real-time performance monitoring
-2. **Intelligent** - AI-powered price predictions, personalized recommendations, smart search, live chat support, and data-driven insights
-3. **Professional** - Enterprise-grade features including auction system, seller verification, vehicle history reports, advanced analytics, notifications, and help center
+2. **Intelligent** - AI-powered price predictions, personalized recommendations, smart search, live chat support, automated imports, and data-driven insights
+3. **Professional** - Enterprise-grade features including sponsored listings, KYC verification, white-label customization, API access, multi-currency support, and comprehensive dealer tools
 
-**Complexity Level**: Complex Application (advanced functionality, AI integration, real-time features, enterprise capabilities, live support)
-Premium automotive marketplace with AI pricing predictions, live auction system, vehicle history reports, seller verification and ratings, test drive scheduling, personalized recommendations, advanced analytics dashboard, live chat support with AI, real-time notifications system, quick actions panel, performance monitoring, comprehensive help center, keyboard shortcuts, VIN/OCR document scanning, video listings, PDF generation, smart cost calculator, and auto-tagging features.
+**Complexity Level**: Complex Application (advanced functionality, AI integration, real-time features, enterprise capabilities, dealer-focused tools)
+Premium automotive marketplace with AI pricing predictions, sponsored listing management, automated import feeds (CSV/XML/JSON/URL), ML price predictions, KYC identity verification, multi-currency support with tax calculators, comprehensive KPI dashboards, gamification system with badges and missions, white-label dealer customization, live chat with video preview scheduling, API console for developers, live auction system, vehicle history reports, seller verification and ratings, test drive scheduling, personalized recommendations, advanced analytics dashboard, live chat support with AI, real-time notifications system, quick actions panel, performance monitoring, comprehensive help center, keyboard shortcuts, VIN/OCR document scanning, video listings, PDF generation, smart cost calculator, and auto-tagging features.
 
-## Advanced AI-Powered Features (NEW)
+## Dealer-Focused Premium Features (NEW)
+
+### Sponsored Listings & Visual Promotions
+- **Functionality**: Dealers can sponsor listings with premium placement, golden "Sponsored" badge with star icon, subtle glow effect, larger cards, and differentiated hover states. Tooltip explains sponsorship
+- **Purpose**: Generate revenue, provide dealers with enhanced visibility, distinguish premium content
+- **Trigger**: Dealer marks listing as sponsored in campaign manager
+- **Progression**: Create/select listing → Set sponsored budget → Choose placement (top/featured/sidebar) → Monitor impressions & clicks → View CTR analytics
+- **Success criteria**: Sponsored cards visually distinct but not intrusive, badge clearly visible, tracking accurate, ROI metrics available
+
+### Import Feed Wizard (CSV/XML/JSON/URL)
+- **Functionality**: 3-step wizard for importing bulk vehicle listings from various sources. Upload files or connect URL feeds. Drag-and-drop field mapping interface maps source fields to platform fields. Preview before import with validation
+- **Purpose**: Save hours manually creating listings, enable integration with dealer management systems, automate inventory sync
+- **Trigger**: Navigate to Import tab in Dealer Hub, click "New Feed"
+- **Progression**: Choose feed type (CSV/XML/JSON/URL) → Upload or connect → Map fields (auto-detected) → Preview & validate → Confirm import → View imported listings
+- **Success criteria**: Supports common formats, auto-detects fields when possible, validates data, handles errors gracefully, supports scheduled sync
+
+### ML Price Prediction & Smart Suggestions
+- **Functionality**: Machine learning analyzes market data to predict optimal listing price. Shows confidence level (%), factors impacting price (positive/negative), market comparison (average, percentile), and recommendations (raise/lower price)
+- **Purpose**: Help dealers price competitively, increase conversion rates, provide data-driven insights
+- **Trigger**: Automatically shown when creating/editing listing, or click "AI Price Suggestion"
+- **Progression**: AI analyzes vehicle specs + market → Display predicted price with confidence bar → Show factors (mileage, age, features) → Compare to market average → Suggest adjustments
+- **Success criteria**: Predictions within 10% of actual market value, clear confidence indicator, actionable insights, factors explained
+
+### KYC Identity Verification
+- **Functionality**: 3-step verification process: upload ID document (passport/ID card/license with front+back), take selfie with document, submit for review. Status tracking (unverified → pending → in-progress → verified/rejected). Verified badge on profile
+- **Purpose**: Build trust, prevent fraud, enable premium dealer features, comply with regulations
+- **Trigger**: Click "Verify Account" in Dealer Hub or prompted when accessing dealer tools
+- **Progression**: Select document type → Upload document images → Take selfie → Submit → Wait 24-48h → Receive verification status → Get verified badge
+- **Success criteria**: Clear requirements listed, image quality validation, secure storage, 24-48h turnaround, status notifications, visible badge
+
+### Multi-Currency & Tax Calculator
+- **Functionality**: Currency selector in navbar (EUR/USD/GBP/RON) with real-time conversion. Price calculator shows base price + VAT (19%) + registration tax (5%) + total. All prices automatically converted and formatted per locale
+- **Purpose**: Support international buyers, show complete cost transparency, localize experience
+- **Trigger**: Select currency from navbar dropdown, or view calculator in listing details
+- **Progression**: Choose currency → Prices auto-convert across site → View detailed cost breakdown with taxes → See monthly payment estimates
+- **Success criteria**: Accurate exchange rates, proper locale formatting, tax calculations correct for region, persistent selection
+
+### Dealer KPI Dashboard
+- **Functionality**: Comprehensive analytics dashboard with 4 key metrics (Views, Clicks, Saves, Leads) showing weekly trends, percent changes, charts (line & bar), top 3 performing listings, conversion rate, revenue tracking, and CTR
+- **Purpose**: Data-driven decision making, performance tracking, ROI measurement, identify successful listings
+- **Trigger**: Navigate to Dashboard tab in Dealer Hub
+- **Progression**: View at-a-glance KPIs → Analyze trends in charts → Review top listings → Export reports → Optimize strategy
+- **Success criteria**: Real-time data, clear visualizations, actionable insights, export capability, mobile responsive
+
+### Gamification & Community
+- **Functionality**: XP system with levels, 5 badge types (Expert Poster, Top Seller, Early Adopter, Verified Dealer, Community Helper), daily/weekly missions (post listings, respond to messages), achievement tracking, weekly leaderboard
+- **Purpose**: Increase engagement, reward active users, build community, encourage quality content
+- **Trigger**: Automatic background tracking, view progress in Gamification tab
+- **Progression**: Complete actions → Earn XP → Level up → Unlock badges → Complete missions → Climb leaderboard → Claim rewards
+- **Success criteria**: Fair XP distribution, meaningful badges, achievable missions, competitive leaderboard, visible progress
+
+### White-Label Dealer Customization
+- **Functionality**: Dealers customize their storefront with logo upload, custom colors (primary/secondary/accent), 4 preset themes (Light/Dark/Classic/Modern), headline/tagline text, custom domain, advanced CSS. Live preview shows changes instantly
+- **Purpose**: Brand consistency, professional appearance, unique dealer identity, custom domains
+- **Trigger**: Navigate to White Label tab in Dealer Hub
+- **Progression**: Upload logo → Choose theme or custom colors → Set headline/tagline → Add custom CSS → View live preview → Save & publish
+- **Success criteria**: Easy customization, instant preview, preset themes accelerate setup, supports custom domains, no coding required
+
+### Live Chat & Video Preview
+- **Functionality**: WhatsApp/Messenger-style chat interface with online status indicators, typing indicators, read receipts. Dealers can offer instant or scheduled video calls. Floating button pulses when dealer online. 1-click to join video preview
+- **Purpose**: Real-time buyer-seller communication, virtual vehicle tours, increase trust, reduce visit friction
+- **Trigger**: Click chat button on listing, or request video preview
+- **Progression**: Open chat → See dealer online status → Send message → Request video preview → Schedule time or join now → Video call in browser → End call
+- **Success criteria**: Low-latency messaging, reliable video, clear online indicators, easy scheduling, mobile compatible
+
+### API Console & Developer Tools
+- **Functionality**: Dark-themed developer console with API key management (create/delete/permissions), interactive documentation (Swagger-style), playground to test endpoints, code examples (request/response), rate limit tracking
+- **Purpose**: Enable integrations, third-party tools, custom dashboards, automation, developer ecosystem
+- **Trigger**: Navigate to API tab in Dealer Hub
+- **Progression**: Create API key with permissions → Read endpoint docs → Test in playground → Copy code examples → Integrate with external systems
+- **Success criteria**: Clear documentation, working playground, secure key management, rate limiting, versioned API
 
 ### VIN & Document Scanner (OCR)
 - **Functionality**: Upload photos of vehicle registration documents or title papers to automatically extract vehicle details using AI-powered OCR. Extracts VIN, make, model, year, engine size, color, registration number, owner name, and mileage
