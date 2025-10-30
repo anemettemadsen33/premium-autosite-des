@@ -29,6 +29,7 @@ export function LayoutNavbar({ currentPage, onNavigate }: LayoutNavbarProps) {
 
   const navItems = [
     { id: 'home', label: 'Home' },
+    { id: 'categories', label: 'Categories' },
     { id: 'advanced-tools', label: 'Advanced Tools' },
     { id: 'market-insights', label: 'Market Insights' },
     { id: 'calculators', label: 'Calculators' },

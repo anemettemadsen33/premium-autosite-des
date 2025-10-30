@@ -29,6 +29,9 @@ import {
 } from '@phosphor-icons/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
+import type { MainCategory, VehicleSubCategoryCode } from '@/lib/vehicleSubCategories'
+import { useVehicleSubCategories } from '@/hooks/use-vehicle-sub-categories'
+import { MAIN_CATEGORIES } from '@/lib/vehicleSubCategories'
 
 interface CategoryPageEnhancedProps {
   category: Category
@@ -51,6 +54,8 @@ interface FilterState {
   selectedTransmission: string
   selectedCondition: string[]
   sortBy: SortOption
+  mainCategory?: MainCategory | null
+  subCategory?: VehicleSubCategoryCode | null
 }
 
 export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryPageEnhancedProps) {
@@ -72,8 +77,12 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
     selectedFuel: '',
     selectedTransmission: '',
     selectedCondition: [],
-    sortBy: 'newest'
+    sortBy: 'newest',
+    mainCategory: null,
+    subCategory: null,
   })
+
+  const subCategories = useVehicleSubCategories(filters.mainCategory || null)
 
   const debouncedSearch = useDebounce(filters.searchQuery, 300)
 
@@ -89,6 +98,8 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
         ...(params.yearFrom && { yearMin: Number(params.yearFrom) }),
         ...(params.yearTo && { yearMax: Number(params.yearTo) }),
         ...(params.mileageMax && { maxMileage: Number(params.mileageMax) }),
+        ...(params.mainCategory && { mainCategory: params.mainCategory as MainCategory }),
+        ...(params.subCategory && { subCategory: params.subCategory as VehicleSubCategoryCode }),
       }))
     }
   }, [params])
@@ -97,12 +108,32 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
     setFilters(prev => ({ ...prev, ...updates }))
   }, [])
 
+  const handleMainCategoryChange = useCallback((mainCategory: MainCategory | null) => {
+    setFilters(prev => ({
+      ...prev,
+      mainCategory,
+      subCategory: null,
+    }))
+  }, [])
+
+  const handleSubCategoryChange = useCallback((subCategory: VehicleSubCategoryCode | null) => {
+    setFilters(prev => ({ ...prev, subCategory }))
+  }, [])
+
   const allListings = useMemo(() => {
     return [...SAMPLE_LISTINGS, ...listings]
   }, [listings])
   
   const filteredListings = useMemo(() => {
     let filtered = allListings.filter(l => l.category === category && l.status === 'active')
+
+    if (filters.mainCategory) {
+      filtered = filtered.filter(l => l.mainCategory === filters.mainCategory)
+    }
+
+    if (filters.subCategory) {
+      filtered = filtered.filter(l => l.subCategory === filters.subCategory)
+    }
 
     if (debouncedSearch) {
       const query = debouncedSearch.toLowerCase()
@@ -197,13 +228,17 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
       selectedFuel: '',
       selectedTransmission: '',
       selectedCondition: [],
-      sortBy: 'newest'
+      sortBy: 'newest',
+      mainCategory: null,
+      subCategory: null,
     })
     toast.success('Filters cleared')
   }
 
   const activeFiltersCount = useMemo(() => {
     let count = 0
+    if (filters.mainCategory) count++
+    if (filters.subCategory) count++
     if (filters.selectedBrand) count++
     if (filters.selectedFuel) count++
     if (filters.selectedTransmission) count++
@@ -269,6 +304,48 @@ export function CategoryPageEnhanced({ category, params, onNavigate }: CategoryP
                     <Separator />
 
                     <div className="space-y-4">
+                      <div>
+                        <Label className="text-sm font-medium mb-2 block">Main Category</Label>
+                        <Select 
+                          value={filters.mainCategory || "all"} 
+                          onValueChange={(value) => handleMainCategoryChange(value === "all" ? null : value as MainCategory)}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="All categories" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="all">All Categories</SelectItem>
+                            {MAIN_CATEGORIES.map((cat) => (
+                              <SelectItem key={cat.code} value={cat.code}>
+                                {cat.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {filters.mainCategory && subCategories.length > 0 && (
+                        <div>
+                          <Label className="text-sm font-medium mb-2 block">Sub-Category</Label>
+                          <Select 
+                            value={filters.subCategory || "all"} 
+                            onValueChange={(value) => handleSubCategoryChange(value === "all" ? null : value as VehicleSubCategoryCode)}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="All sub-categories" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="all">All Sub-Categories</SelectItem>
+                              {subCategories.map((sub) => (
+                                <SelectItem key={sub.code} value={sub.code}>
+                                  {sub.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+
                       <div>
                         <Label className="text-sm font-medium mb-2 flex items-center gap-2">
                           <MagnifyingGlass size={16} />

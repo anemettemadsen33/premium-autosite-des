@@ -69,7 +69,7 @@ export function InfiniteScrollListings({
       </div>
 
       {hasMore && (
-        <div ref={sentinelRef as any} className="py-8">
+        <div ref={sentinelRef} className="py-8">
           {isLoadingMore && (
             <div 
               className={
@@ -79,7 +79,7 @@ export function InfiniteScrollListings({
               }
             >
               {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="space-y-4">
+                <div key={`skeleton-${i}`} className="space-y-4">
                   <Skeleton className="w-full h-64 rounded-lg" />
                   <Skeleton className="w-3/4 h-6" />
                   <Skeleton className="w-1/2 h-4" />

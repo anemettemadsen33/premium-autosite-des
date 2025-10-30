@@ -1,6 +1,6 @@
 # AUTOSITE - Premium Automotive Marketplace Platform (Full-Featured Dealer Edition)
 
-A cutting-edge, ultra-high-performance automotive marketplace platform with AI-powered pricing, live auctions, vehicle history reports, seller verification, test drive scheduling, advanced analytics, comprehensive listing management, live chat support, real-time notifications, quick actions panel, performance monitoring, help center, keyboard shortcuts, sponsored listings, import feeds, KYC verification, multi-currency support, gamification, white-label customization, video previews, and API console across multiple categories.
+A cutting-edge, ultra-high-performance automotive marketplace platform with AI-powered pricing, live auctions, vehicle history reports, seller verification, test drive scheduling, advanced analytics, comprehensive listing management, live chat support, real-time notifications, quick actions panel, performance monitoring, help center, keyboard shortcuts, sponsored listings, import feeds, KYC verification, multi-currency support, gamification, white-label customization, video previews, API console, and comprehensive sub-category system across multiple vehicle categories.
 
 **Experience Qualities**:
 1. **Lightning Fast** - Optimized with debounced search, lazy image loading, virtual scrolling, smart caching, infinite scroll, and real-time performance monitoring
@@ -8,9 +8,39 @@ A cutting-edge, ultra-high-performance automotive marketplace platform with AI-p
 3. **Professional** - Enterprise-grade features including sponsored listings, KYC verification, white-label customization, API access, multi-currency support, and comprehensive dealer tools
 
 **Complexity Level**: Complex Application (advanced functionality, AI integration, real-time features, enterprise capabilities, dealer-focused tools)
-Premium automotive marketplace with AI pricing predictions, sponsored listing management, automated import feeds (CSV/XML/JSON/URL), ML price predictions, KYC identity verification, multi-currency support with tax calculators, comprehensive KPI dashboards, gamification system with badges and missions, white-label dealer customization, live chat with video preview scheduling, API console for developers, live auction system, vehicle history reports, seller verification and ratings, test drive scheduling, personalized recommendations, advanced analytics dashboard, live chat support with AI, real-time notifications system, quick actions panel, performance monitoring, comprehensive help center, keyboard shortcuts, VIN/OCR document scanning, video listings, PDF generation, smart cost calculator, and auto-tagging features.
+Premium automotive marketplace with AI pricing predictions, sponsored listing management, automated import feeds (CSV/XML/JSON/URL), ML price predictions, KYC identity verification, multi-currency support with tax calculators, comprehensive KPI dashboards, gamification system with badges and missions, white-label dealer customization, live chat with video preview scheduling, API console for developers, live auction system, vehicle history reports, seller verification and ratings, test drive scheduling, personalized recommendations, advanced analytics dashboard, live chat support with AI, real-time notifications system, quick actions panel, performance monitoring, comprehensive help center, keyboard shortcuts, VIN/OCR document scanning, video listings, PDF generation, smart cost calculator, auto-tagging features, and multi-level vehicle category system with sub-categories.
 
-## Dealer-Focused Premium Features (NEW)
+## Vehicle Category & Sub-Category System (NEW)
+
+### Main Category Navigation
+- **Functionality**: Dedicated pages for each main vehicle category (Cars, Motorcycles, Vans up to 7.5t, Trucks over 7.5t, Construction Machinery, Agricultural Vehicles, Trailers, Caravans & Motorhomes, Semi-Trailers, Parts & Accessories). Each category page displays total listings, sub-category filters, sorting options, and grid/list view toggle
+- **Purpose**: Organize vast inventory into logical groups, enable specialized browsing, match industry standards
+- **Trigger**: Click category from homepage grid, navbar Categories menu, or breadcrumb navigation
+- **Progression**: View all categories → Select main category → See category page with sub-category grid → Filter by sub-category → Browse filtered listings
+- **Success criteria**: All 10 main categories accessible, clear visual hierarchy, instant filtering, mobile-optimized grid
+
+### Sub-Category Filtering
+- **Functionality**: Granular sub-categories for each main category (e.g., Motorcycles include Sport, Touring, Naked, Enduro, Scooter, Chopper/Cruiser, Quad/ATV, Trike, Classic, Trial, Motocross; Vans include Box Body, Chassis, Closed Box, Flatbed/Dropside, Refrigerated, Tipper, Window Van). Interactive sub-category grid shows listing count per sub-category
+- **Purpose**: Help buyers find exact vehicle type, reduce search time, professional categorization
+- **Trigger**: Viewing main category page, creating new listing
+- **Progression**: Select main category → View sub-category grid → Click specific sub-category → See filtered results → Click "All" to clear filter
+- **Success criteria**: 8-12 sub-categories per main category, visible listing counts, single-click filtering, breadcrumb navigation
+
+### Category-Aware Listing Creation
+- **Functionality**: Two-step category selection when creating listings: first choose main category (required), then select specific sub-category (optional). Form validates sub-category belongs to selected main category. Real-time validation feedback
+- **Purpose**: Ensure correct categorization, prevent errors, maintain data quality
+- **Trigger**: Creating or editing a vehicle listing
+- **Progression**: Select main category dropdown → Sub-category dropdown activates → Choose specific type → Validation confirms match → Continue with listing details
+- **Success criteria**: Dependent dropdown behavior, clear validation, helpful error messages, sub-category optional but recommended
+
+### Visual Category System
+- **Functionality**: Each main category has unique gradient color scheme and icon (Cars: blue/cyan, Motorcycles: orange/red, Vans: green/emerald, Trucks: indigo/purple, Construction: yellow/amber, Agricultural: lime/green, Trailers: teal/cyan, Caravans: pink/rose, Semi-Trailers: violet/purple, Parts: gray/slate). Consistent visual identity across platform
+- **Purpose**: Quick visual recognition, professional appearance, improve navigation UX
+- **Trigger**: Viewing any category-related page
+- **Progression**: See color-coded category cards → Recognize category at a glance → Navigate faster
+- **Success criteria**: Distinct colors, appropriate icons, consistent usage, accessibility-compliant contrast
+
+## Dealer-Focused Premium Features
 
 ### Sponsored Listings & Visual Promotions
 - **Functionality**: Dealers can sponsor listings with premium placement, golden "Sponsored" badge with star icon, subtle glow effect, larger cards, and differentiated hover states. Tooltip explains sponsorship

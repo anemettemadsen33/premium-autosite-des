@@ -45,9 +45,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const register = async (email: string, password: string, name: string): Promise<boolean> => {
-    if (!users || !passwords) return false
+    const currentUsers = users || {}
+    const currentPasswords = passwords || {}
     
-    const existingUser = Object.values(users).find(u => u.email === email)
+    const existingUser = Object.values(currentUsers).find(u => u.email === email)
     
     if (existingUser) {
       return false

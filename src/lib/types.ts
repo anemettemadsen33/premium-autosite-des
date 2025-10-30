@@ -1,3 +1,5 @@
+import type { MainCategory, VehicleSubCategoryCode } from './vehicleSubCategories'
+
 export type Category = 'cars' | 'motorcycles' | 'trucks' | 'rvs' | 'parts'
 
 export type ListingStatus = 'draft' | 'active' | 'pending' | 'sold'
@@ -25,6 +27,8 @@ export interface Listing {
   id: string
   userId: string
   category: Category
+  mainCategory?: MainCategory
+  subCategory?: VehicleSubCategoryCode
   status: ListingStatus
   title: string
   description: string

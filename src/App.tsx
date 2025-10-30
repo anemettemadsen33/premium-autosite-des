@@ -34,8 +34,11 @@ import { SmartCalculatorPage } from '@/pages/SmartCalculatorPage'
 import { AdvancedToolsPage } from '@/pages/AdvancedToolsPage'
 import { LiveDashboardPage } from '@/pages/LiveDashboardPage'
 import { DealerHubPage } from '@/pages/DealerHubPage'
+import { CategoriesPage } from '@/pages/CategoriesPage'
+import { MainCategoryPage } from '@/pages/MainCategoryPage'
 import { Toaster } from '@/components/ui/sonner'
 import type { Category } from '@/lib/types'
+import type { MainCategory, VehicleSubCategoryCode } from '@/lib/vehicleSubCategories'
 
 type Route = {
   page: string
@@ -80,6 +83,14 @@ function App() {
         return <LiveDashboardPage onNavigate={navigate} />
       case 'dealer-hub':
         return <DealerHubPage onNavigate={navigate} />
+      case 'categories':
+        return <CategoriesPage onNavigate={navigate} />
+      case 'main-category':
+        return <MainCategoryPage 
+          mainCategoryCode={route.params?.mainCategory as MainCategory}
+          subCategoryCode={route.params?.subCategory as VehicleSubCategoryCode | undefined}
+          onNavigate={navigate} 
+        />
       case 'category':
         return <CategoryPageEnhanced category={route.params?.category as Category} params={route.params} onNavigate={navigate} />
       case 'listing':
